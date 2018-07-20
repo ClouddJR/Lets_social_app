@@ -8,18 +8,17 @@ ext {
     versionCode = 1
     versionName = "1.0"
 
-    supportLibraryVersion = "27.1.1"
-    materialComponentsVersion = "1.0.0-beta01"
-    constraintLayoutVersion = "1.1.2"
+    supportLibraryVersion = "1.0.0-beta01"
+    constraintLayoutVersion = "2.0.0-alpha1"
 
     //Testing
-    espressoCoreVersion = "3.0.2"
-    testRunnerVersion = "1.0.2"
+    espressoCoreVersion = "3.1.0-alpha4"
+    testRunnerVersion = "1.1.0-alpha4"
     jUnitVersion = "4.12"
     mockitoVersion = "1.10.19"
 
     //Additional
-    architectureComponentsVersion = "1.1.1"
+    architectureComponentsVersion = "2.0.0-beta01"
     rxJavaVersion = "2.1.16"
     rxAndroidVersion = "2.0.2"
     glideVersion = "4.7.1"
