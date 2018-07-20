@@ -11,7 +11,6 @@ ext {
     supportLibraryVersion = "27.1.1"
     constraintLayoutVersion = "1.1.2"
 
-
     //Testing
     espressoCoreVersion = "3.0.2"
     testRunnerVersion = "1.0.2"
@@ -22,6 +21,7 @@ ext {
     architectureComponentsVersion = "1.1.1"
     rxJavaVersion = "2.1.16"
     rxAndroidVersion = "2.0.2"
+    glideVersion = "4.7.1"
 
 
 }
