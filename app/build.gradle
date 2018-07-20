@@ -41,6 +41,8 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:${rootProject.ext.espressoCoreVersion}"
 
     implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.ext.architectureComponentsVersion}"
+    implementation "android.arch.navigation:navigation-fragment:${rootProject.ext.navigationComponentVersion}"
+
     implementation "io.reactivex.rxjava2:rxjava:${rootProject.ext.rxJavaVersion}"
     implementation "io.reactivex.rxjava2:rxandroid:${rootProject.ext.rxAndroidVersion}"
 
