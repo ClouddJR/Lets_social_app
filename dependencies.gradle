@@ -1,14 +1,15 @@
 ext {
 
     //Android and project
-    androidCompileSdkVersion = 27
+    androidCompileSdkVersion = 28
     androidMinSdkVersion = 21
-    androidTargetSdkVersion = 27
+    androidTargetSdkVersion = 28
 
     versionCode = 1
     versionName = "1.0"
 
     supportLibraryVersion = "27.1.1"
+    materialComponentsVersion = "1.0.0-beta01"
     constraintLayoutVersion = "1.1.2"
 
     //Testing
