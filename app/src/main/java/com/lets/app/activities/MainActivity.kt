@@ -1,7 +1,8 @@
-package com.lets.app
+package com.lets.app.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.lets.app.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
