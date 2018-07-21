@@ -34,14 +34,18 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:${rootProject.ext.supportLibraryVersion}"
     implementation "androidx.cardview:cardview:${rootProject.ext.supportLibraryVersion}"
 
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
     testImplementation "junit:junit:${rootProject.ext.jUnitVersion}"
     testImplementation "org.mockito:mockito-core:${rootProject.ext.mockitoVersion}"
+    testImplementation "android.arch.core:core-testing:${rootProject.ext.architectureComponentsVersion}"
 
     androidTestImplementation "androidx.test:runner:${rootProject.ext.testRunnerVersion}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${rootProject.ext.espressoCoreVersion}"
 
     implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.ext.architectureComponentsVersion}"
-    implementation "android.arch.navigation:navigation-fragment:${rootProject.ext.navigationComponentVersion}"
+
+    implementation "android.arch.navigation:navigation-fragment-ktx:${rootProject.ext.navigationComponentVersion}"
+    implementation "android.arch.navigation:navigation-ui-ktx:${rootProject.ext.navigationComponentVersion}"
 
     implementation "io.reactivex.rxjava2:rxjava:${rootProject.ext.rxJavaVersion}"
     implementation "io.reactivex.rxjava2:rxandroid:${rootProject.ext.rxAndroidVersion}"

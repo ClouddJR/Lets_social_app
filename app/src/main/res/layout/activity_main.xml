@@ -1,35 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:background="@android:color/white"
-  tools:context=".activities.MainActivity">
+  xmlns:tools="http://schemas.android.com/tools">
 
-  <fragment
-    android:id="@+id/navHostFragment"
+  <data>
+    <variable
+      name="vm"
+      type="com.lets.app.model.MainActivityViewModel"/>
+  </data>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="androidx.navigation.fragment.NavHostFragment"
-    app:defaultNavHost="true"
-    app:layout_constraintBottom_toTopOf="@id/menuBottomNav"
-    app:navGraph="@navigation/nav_graph"/>
+    android:background="@android:color/white"
+    tools:context=".activities.MainActivity">
 
-  <View
-    android:layout_width="match_parent"
-    android:layout_height="1dp"
-    android:foreground="@drawable/botton_nav_top"
-    app:layout_anchor="@id/menuBottomNav"
-    app:layout_constraintBottom_toTopOf="@id/menuBottomNav"/>
+    <FrameLayout
+      android:id="@+id/fragmentPlaceHolder"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_constraintBottom_toBottomOf="@id/menuBottomNav"/>
 
-  <com.google.android.material.bottomnavigation.BottomNavigationView
-    android:id="@+id/menuBottomNav"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/botton_nav_bg"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:menu="@menu/main_nav_menu"/>
+    <View
+      android:id="@+id/shadowLine"
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:foreground="@drawable/botton_nav_top"
+      app:layout_constraintBottom_toTopOf="@id/menuBottomNav"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+      android:id="@+id/menuBottomNav"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@drawable/botton_nav_bg"
+      app:itemIconTint="@drawable/bottom_nav_icon_bg"
+      app:itemTextColor="@drawable/bottom_nav_icon_bg"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:menu="@menu/main_nav_menu"
+      app:onNavigationItemSelectedListener="@{vm::onNavigationItemSelected}"/>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

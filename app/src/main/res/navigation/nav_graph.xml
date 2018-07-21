@@ -8,8 +8,8 @@
   <fragment
     android:id="@+id/homeFragment"
     android:label="HomeFragment"
-    android:name="com.lets.app.fragments.HomeFragment">
-  </fragment>
+    android:name="com.lets.app.fragments.HomeFragment"
+    tools:layout="@layout/fragment_home"/>
 
 
 </navigation>

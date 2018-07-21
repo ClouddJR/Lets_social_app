@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#4CAF50</color>
-  <color name="colorPrimaryDark">#388E3C</color>
+  <color name="colorPrimary">#2E8CEC</color>
+  <color name="colorPrimaryDark">#2E8CEC</color>
   <color name="colorAccent">#FFC107</color>
 
   <color name="primaryText">#212121</color>
   <color name="secondaryText">#757575</color>
   <color name="dividerColor">#BDBDBD</color>
+
+  <color name="bottomNavIconColorSelected">#2E8CEC</color>
 
 </resources>
