@@ -10,6 +10,16 @@
     android:label="HomeFragment"
     android:name="com.lets.app.fragments.HomeFragment"
     tools:layout="@layout/fragment_home"/>
+  <fragment
+    android:id="@+id/profileFragment"
+    android:label="ProfileFragment"
+    android:name="com.lets.app.fragments.ProfileFragment"
+    tools:layout="@layout/fragment_profile"/>
+  <fragment
+    android:id="@+id/mapFragment"
+    android:label="MapFragment"
+    android:name="com.lets.app.fragments.MapFragment"
+    tools:layout="@layout/fragment_map"/>
 
 
 </navigation>

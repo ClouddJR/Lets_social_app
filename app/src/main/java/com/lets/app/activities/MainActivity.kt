@@ -10,6 +10,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.lets.app.R
 import com.lets.app.databinding.ActivityMainBinding
 import com.lets.app.model.MainActivityViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +25,10 @@ class MainActivity : AppCompatActivity() {
         initDataBinding()
         initNavigation()
         observeBottomViewClicks()
+
+        Log.d("NAV home id", R.id.homeFragment.toString())
+        Log.d("NAV map id", R.id.mapFragment.toString())
+        Log.d("NAV profile id", R.id.profileFragment.toString())
     }
 
     private fun initDataBinding() {
@@ -43,21 +48,36 @@ class MainActivity : AppCompatActivity() {
     private fun observeBottomViewClicks() {
         viewModel.homeButtonClick.observe(this, Observer {
             it.get()?.let {
-                finalHost.navController.navigate(R.id.homeFragment)
+                navigateTo(R.id.homeFragment)
             }
         })
 
         viewModel.mapButtonClick.observe(this, Observer {
             it.get()?.let {
-                Log.d(tag, "MAP CLICK")
+                navigateTo(R.id.mapFragment)
             }
         })
 
         viewModel.profileButtonClick.observe(this, Observer {
             it.get()?.let {
-                Log.d(tag, "PROFILE CLICK")
+                navigateTo(R.id.profileFragment)
             }
         })
+    }
+
+    private fun navigateTo(resourceId: Int) {
+        finalHost.navController.addOnNavigatedListener { _, destination ->
+            when (destination.id) {
+                R.id.homeFragment -> menuBottomNav.menu.findItem(R.id.homeButton).isChecked = true
+                R.id.mapFragment -> menuBottomNav.menu.findItem(R.id.mapButton).isChecked = true
+                R.id.profileFragment -> menuBottomNav.menu.findItem(R.id.profileButton).isChecked = true
+            }
+        }
+
+        if (!finalHost.navController.popBackStack(resourceId, false) && finalHost.navController.currentDestination.id != resourceId) {
+            finalHost.navController.navigate(resourceId)
+        }
+
     }
 
 
