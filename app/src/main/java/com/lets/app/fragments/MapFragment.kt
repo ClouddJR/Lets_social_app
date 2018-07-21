@@ -13,4 +13,8 @@ class MapFragment : BaseFragment() {
     override fun getToolbar(): Toolbar {
         return toolbar
     }
+
+    override fun getToolbarTitle(): String {
+        return context?.getString(R.string.title_fragment_map) ?: ""
+    }
 }

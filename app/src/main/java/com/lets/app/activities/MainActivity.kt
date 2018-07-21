@@ -1,7 +1,6 @@
 package com.lets.app.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -25,10 +24,6 @@ class MainActivity : AppCompatActivity() {
         initDataBinding()
         initNavigation()
         observeBottomViewClicks()
-
-        Log.d("NAV home id", R.id.homeFragment.toString())
-        Log.d("NAV map id", R.id.mapFragment.toString())
-        Log.d("NAV profile id", R.id.profileFragment.toString())
     }
 
     private fun initDataBinding() {

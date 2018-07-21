@@ -2,31 +2,54 @@
 <androidx.constraintlayout.widget.ConstraintLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
   <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/appBarLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:theme="@style/AppTheme.AppBarOverlay">
+    android:theme="@style/AppTheme.AppBarOverlay"
+    app:elevation="0dp">
 
     <androidx.appcompat.widget.Toolbar
       android:id="@+id/toolbar"
       android:layout_width="match_parent"
       android:layout_height="?attr/actionBarSize"
-      android:background="?attr/colorPrimary"
-      app:popupTheme="@style/AppTheme.PopupOverlay"/>
+      android:background="@android:color/white"
+      app:elevation="0dp"
+      app:popupTheme="@style/AppTheme.PopupOverlay"
+      app:titleTextColor="#565656"/>
 
   </com.google.android.material.appbar.AppBarLayout>
 
-
   <TextView
+    android:id="@+id/textView2"
+    android:textStyle="bold"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="HOME"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginTop="32dp"
+    android:layout_marginStart="16dp"
+    android:text="Your events"
+    android:textSize="16sp"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"/>
+    app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+    tools:text="Your events"/>
+
+  <Button
+    style="@style/Widget.AppCompat.Button.Borderless"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="32dp"
+    android:layout_marginEnd="16dp"
+    android:text="manage"
+    android:textColor="@color/colorPrimary"
+    android:textSize="12sp"
+    app:layout_constraintBottom_toBottomOf="@+id/textView2"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+    tools:text="manage"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,10 +18,13 @@ abstract class BaseFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         (activity as? AppCompatActivity)?.setSupportActionBar(getToolbar())
+        (activity as? AppCompatActivity)?.supportActionBar?.title = getToolbarTitle()
     }
 
     abstract fun getLayoutId(): Int
 
     abstract fun getToolbar(): Toolbar
+
+    abstract fun getToolbarTitle(): String
 
 }
