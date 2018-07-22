@@ -23,6 +23,7 @@ ext {
     rxJavaVersion = "2.1.16"
     rxAndroidVersion = "2.0.2"
     glideVersion = "4.7.1"
+    circularImageViewVersion ="2.2.0"
 
 
 }

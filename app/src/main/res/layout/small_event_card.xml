@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="210dp"
+  android:layout_height="210dp"
+  android:layout_margin="16dp"
+  android:elevation="8dp"
+  android:orientation="vertical"
+  app:cardCornerRadius="1dp">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+      android:id="@+id/background"
+      android:layout_width="match_parent"
+      android:layout_height="160dp"
+      android:background="#FF7D7D"/>
+
+    <ImageView
+      android:id="@+id/categoryIcon"
+      android:layout_width="48dp"
+      android:layout_height="48dp"
+      android:src="@drawable/ic_map_search_white_48dp"
+      app:layout_constraintBottom_toBottomOf="@id/background"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+      android:id="@+id/clockIcon"
+      android:layout_width="30dp"
+      android:layout_height="30dp"
+      android:layout_margin="6dp"
+      android:src="@drawable/ic_action_clock"
+      app:layout_constraintBottom_toBottomOf="@id/background"
+      app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+      android:id="@+id/timeRemaining"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="6dp"
+      android:layout_marginBottom="8dp"
+      android:layout_marginStart="8dp"
+      android:textColor="@android:color/white"
+      android:textSize="14sp"
+      app:layout_constraintBottom_toBottomOf="@+id/clockIcon"
+      app:layout_constraintStart_toEndOf="@+id/clockIcon"
+      app:layout_constraintTop_toTopOf="@+id/clockIcon"
+      tools:text="in 20 min"/>
+
+    <ImageView
+      android:id="@+id/groupIcon"
+      android:layout_width="30dp"
+      android:layout_height="30dp"
+      android:layout_margin="6dp"
+      android:src="@drawable/ic_group"
+      app:layout_constraintBottom_toBottomOf="@+id/clockIcon"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/clockIcon"/>
+
+    <TextView
+      android:id="@+id/eventTitle"
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="8dp"
+      android:textSize="16sp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/background"
+      tools:text="Cycling around Black Sea"/>
+
+    <TextView
+      android:id="@+id/peopleRemaining"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="6dp"
+      android:textColor="@android:color/white"
+      android:textSize="14sp"
+      app:layout_constraintBottom_toBottomOf="@+id/groupIcon"
+      app:layout_constraintEnd_toStartOf="@+id/groupIcon"
+      app:layout_constraintTop_toTopOf="@+id/groupIcon"
+      tools:text="3/15"/>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
