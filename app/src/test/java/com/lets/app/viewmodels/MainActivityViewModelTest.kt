@@ -1,7 +1,6 @@
 package com.lets.app.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.lets.app.model.MainActivityViewModel
 import junit.framework.Assert.assertNull
 import junit.framework.Assert.assertTrue
 import org.junit.Before

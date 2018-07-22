@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
 import com.lets.app.R
 import com.lets.app.databinding.ActivityMainBinding
-import com.lets.app.model.MainActivityViewModel
+import com.lets.app.viewmodels.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

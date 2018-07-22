@@ -6,7 +6,7 @@
   <data>
     <variable
       name="vm"
-      type="com.lets.app.model.MainActivityViewModel"/>
+      type="com.lets.app.viewmodels.MainActivityViewModel"/>
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,4 +1,4 @@
-package com.lets.app.model
+package com.lets.app.viewmodels
 
 import android.view.MenuItem
 import androidx.lifecycle.MutableLiveData
