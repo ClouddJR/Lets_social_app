@@ -16,7 +16,7 @@ class MainActivityViewModel : ViewModel() {
     fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.profileButton -> profileButtonClicked()
-            R.id.mapButton -> mapButtonClicked()
+            R.id.exploreButton -> mapButtonClicked()
             R.id.homeButton -> homeButtonClicked()
         }
         return true

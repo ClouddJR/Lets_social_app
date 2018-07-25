@@ -16,9 +16,9 @@
     android:name="com.lets.app.fragments.ProfileFragment"
     tools:layout="@layout/fragment_profile"/>
   <fragment
-    android:id="@+id/mapFragment"
-    android:label="MapFragment"
-    android:name="com.lets.app.fragments.MapFragment"
+    android:id="@+id/exploreFragment"
+    android:label="ExploreFragment"
+    android:name="com.lets.app.fragments.ExploreFragment"
     tools:layout="@layout/fragment_map"/>
 
 

@@ -18,14 +18,18 @@
       android:id="@+id/fragmentPlaceHolder"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      app:layout_constraintBottom_toBottomOf="@id/menuBottomNav"/>
+      app:layout_constraintBottom_toBottomOf="@id/menuBottomNav"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"/>
 
     <View
       android:id="@+id/shadowLine"
       android:layout_width="match_parent"
       android:layout_height="1dp"
       android:foreground="@drawable/botton_nav_top"
-      app:layout_constraintBottom_toTopOf="@id/menuBottomNav"/>
+      app:layout_constraintBottom_toTopOf="@id/menuBottomNav"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
       android:id="@+id/menuBottomNav"
@@ -35,6 +39,8 @@
       app:itemIconTint="@drawable/bottom_nav_icon_bg"
       app:itemTextColor="@drawable/bottom_nav_icon_bg"
       app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
       app:menu="@menu/main_nav_menu"
       app:onNavigationItemSelectedListener="@{vm::onNavigationItemSelected}"/>
 

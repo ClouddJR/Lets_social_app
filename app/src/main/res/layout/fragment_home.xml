@@ -16,7 +16,10 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:theme="@style/AppTheme.AppBarOverlay"
-      app:elevation="0dp">
+      app:elevation="0dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
 
       <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -63,8 +66,77 @@
       android:layout_margin="16dp"
       android:orientation="horizontal"
       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/yourEventsHeader"
       tools:listitem="@layout/small_event_card"/>
+
+    <TextView
+      android:id="@+id/createdEventsHeader"
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="32dp"
+      android:layout_marginStart="16dp"
+      android:text="Your events"
+      android:textSize="16sp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/yourEventsRV"
+      tools:text="Your events"/>
+
+    <Button
+      style="@style/Widget.AppCompat.Button.Borderless"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="32dp"
+      android:layout_marginEnd="16dp"
+      android:text="manage"
+      android:textColor="@color/colorPrimary"
+      android:textSize="12sp"
+      app:layout_constraintBottom_toBottomOf="@+id/yourEventsRV"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/createdEventsHeader"
+      tools:text="manage"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/createEventLayout"
+      android:layout_width="match_parent"
+      android:layout_height="100dp"
+      android:layout_marginTop="16dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      android:background="@drawable/create_event_background_layout"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/createdEventsHeader">
+
+      <ImageView
+        android:id="@+id/plusIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_action_add"
+        app:layout_constraintBottom_toTopOf="@id/newEventText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+      <TextView
+        android:id="@+id/newEventText"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="create new event"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/plusIcon"
+        tools:text="create new event"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
       android:id="@+id/joinedEventsHeader"
@@ -76,21 +148,20 @@
       android:text="Events you joined"
       android:textSize="16sp"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/yourEventsRV"
+      app:layout_constraintTop_toBottomOf="@id/createEventLayout"
       tools:text="Events you joined"/>
 
     <Button
       style="@style/Widget.AppCompat.Button.Borderless"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="32dp"
       android:layout_marginEnd="16dp"
       android:text="see all"
       android:textColor="@color/colorPrimary"
       android:textSize="12sp"
-      app:layout_constraintBottom_toBottomOf="@+id/yourEventsRV"
+      app:layout_constraintBottom_toTopOf="@+id/joinedEventsHeader"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/joinedEventsHeader"
+      app:layout_constraintTop_toBottomOf="@+id/joinedEventsHeader"
       tools:text="see all"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -98,6 +169,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_margin="16dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/joinedEventsHeader"
       tools:listitem="@layout/big_event_card"/>
 

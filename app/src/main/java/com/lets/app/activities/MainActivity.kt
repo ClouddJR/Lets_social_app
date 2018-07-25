@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.mapButtonClick.observe(this, Observer {
             it.get()?.let {
-                navigateTo(R.id.mapFragment)
+                navigateTo(R.id.exploreFragment)
             }
         })
 
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         finalHost.navController.addOnNavigatedListener { _, destination ->
             when (destination.id) {
                 R.id.homeFragment -> menuBottomNav.menu.findItem(R.id.homeButton).isChecked = true
-                R.id.mapFragment -> menuBottomNav.menu.findItem(R.id.mapButton).isChecked = true
+                R.id.exploreFragment -> menuBottomNav.menu.findItem(R.id.exploreButton).isChecked = true
                 R.id.profileFragment -> menuBottomNav.menu.findItem(R.id.profileButton).isChecked = true
             }
         }

@@ -4,7 +4,7 @@ import androidx.appcompat.widget.Toolbar
 import com.lets.app.R
 import kotlinx.android.synthetic.main.fragment_map.*
 
-class MapFragment : BaseFragment() {
+class ExploreFragment : BaseFragment() {
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_map

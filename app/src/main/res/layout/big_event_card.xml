@@ -3,11 +3,15 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="170dp"
+  android:layout_height="150dp"
   android:layout_marginTop="16dp"
   android:layout_marginBottom="16dp"
   android:layout_marginStart="24dp"
-  android:layout_marginEnd="24dp">
+  android:layout_marginEnd="24dp"
+  android:elevation="4dp"
+  app:cardBackgroundColor="@android:color/white"
+  app:cardCornerRadius="1dp"
+  app:cardUseCompatPadding="true">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -15,18 +19,17 @@
 
     <ImageView
       android:id="@+id/categoryIcon"
-      android:layout_width="50dp"
-      android:layout_height="50dp"
+      android:layout_width="30dp"
+      android:layout_height="30dp"
       android:layout_margin="16dp"
-      android:contentDescription="TODO"
       android:src="@drawable/ic_action_bike"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
       android:id="@+id/groupIcon"
-      android:layout_width="30dp"
-      android:layout_height="30dp"
+      android:layout_width="20dp"
+      android:layout_height="20dp"
       android:layout_marginBottom="16dp"
       android:layout_marginStart="16dp"
       android:src="@drawable/account_multiple"
@@ -35,8 +38,8 @@
 
     <ImageView
       android:id="@+id/clockIcon"
-      android:layout_width="30dp"
-      android:layout_height="30dp"
+      android:layout_width="20dp"
+      android:layout_height="20dp"
       android:layout_marginBottom="8dp"
       android:layout_marginStart="16dp"
       android:src="@drawable/ic_action_cloc_grey"
@@ -50,7 +53,7 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
       android:textColor="#565656"
-      android:textSize="18sp"
+      android:textSize="15sp"
       app:layout_constraintBottom_toBottomOf="@+id/categoryIcon"
       app:layout_constraintStart_toEndOf="@+id/categoryIcon"
       app:layout_constraintTop_toTopOf="@+id/categoryIcon"
@@ -62,6 +65,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
+      android:textSize="12sp"
       app:layout_constraintBottom_toBottomOf="@+id/clockIcon"
       app:layout_constraintStart_toEndOf="@+id/clockIcon"
       app:layout_constraintTop_toTopOf="@+id/clockIcon"
@@ -74,6 +78,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
+      android:textSize="12sp"
       app:layout_constraintBottom_toBottomOf="@+id/groupIcon"
       app:layout_constraintStart_toEndOf="@+id/groupIcon"
       app:layout_constraintTop_toTopOf="@+id/groupIcon"
@@ -142,8 +147,8 @@
     <de.hdodenhof.circleimageview.CircleImageView
       xmlns:app="http://schemas.android.com/apk/res-auto"
       android:id="@+id/profile_image"
-      android:layout_width="65dp"
-      android:layout_height="65dp"
+      android:layout_width="55dp"
+      android:layout_height="55dp"
       android:layout_margin="16dp"
       android:src="@drawable/profile"
       app:layout_constraintBottom_toBottomOf="parent"
