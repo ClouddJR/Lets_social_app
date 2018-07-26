@@ -2,12 +2,12 @@ package com.lets.app.fragments
 
 import androidx.appcompat.widget.Toolbar
 import com.lets.app.R
-import kotlinx.android.synthetic.main.fragment_explore.*
+import kotlinx.android.synthetic.main.fragment_messages.*
 
-class ExploreFragment : BaseFragment() {
+class MessagesFragment : BaseFragment() {
 
     override fun getLayoutId(): Int {
-        return R.layout.fragment_explore
+        return R.layout.fragment_messages
     }
 
     override fun getToolbar(): Toolbar {
@@ -15,6 +15,6 @@ class ExploreFragment : BaseFragment() {
     }
 
     override fun getToolbarTitle(): String {
-        return context?.getString(R.string.title_fragment_explore) ?: ""
+        return context?.getString(R.string.title_fragment_messages) ?: ""
     }
 }

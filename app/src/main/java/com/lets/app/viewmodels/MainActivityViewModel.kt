@@ -10,14 +10,16 @@ import com.lets.app.utils.MessageWrapper
 class MainActivityViewModel : ViewModel() {
 
     val homeButtonClick = MutableLiveData<MessageWrapper<Boolean>>()
-    val mapButtonClick = MutableLiveData<MessageWrapper<Boolean>>()
+    val exploreButtonClick = MutableLiveData<MessageWrapper<Boolean>>()
     val profileButtonClick = MutableLiveData<MessageWrapper<Boolean>>()
+    val messagesButtonClick = MutableLiveData<MessageWrapper<Boolean>>()
 
     fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.profileButton -> profileButtonClicked()
-            R.id.exploreButton -> mapButtonClicked()
+            R.id.exploreButton -> exploreButtonClicked()
             R.id.homeButton -> homeButtonClicked()
+            R.id.messagesButton -> messagesButtonClick()
         }
         return true
     }
@@ -26,11 +28,15 @@ class MainActivityViewModel : ViewModel() {
         homeButtonClick.value = MessageWrapper(true)
     }
 
-    fun mapButtonClicked() {
-        mapButtonClick.value = MessageWrapper(true)
+    fun exploreButtonClicked() {
+        exploreButtonClick.value = MessageWrapper(true)
     }
 
     fun profileButtonClicked() {
         profileButtonClick.value = MessageWrapper(true)
+    }
+
+    fun messagesButtonClick() {
+        messagesButtonClick.value = MessageWrapper(true)
     }
 }

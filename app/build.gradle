@@ -15,9 +15,27 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+
+        debug {
             minifyEnabled false
+        }
+
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+    flavorDimensions "dataProvider"
+
+    productFlavors {
+        mock {
+            dimension "dataProvider"
+        }
+
+        prod {
+            dimension "dataProvider"
         }
     }
 

@@ -38,8 +38,8 @@ class MainActivityViewModelTest {
 
     @Test
     fun `should fire event after map button click`() {
-        viewModel.mapButtonClicked()
-        viewModel.mapButtonClick.observeForever {
+        viewModel.exploreButtonClicked()
+        viewModel.exploreButtonClick.observeForever {
             it.get()?.let {
                 assertTrue(it)
             }
@@ -55,5 +55,16 @@ class MainActivityViewModelTest {
             }
         }
     }
+
+    @Test
+    fun `should fire event after messages button click`() {
+        viewModel.messagesButtonClick()
+        viewModel.messagesButtonClick.observeForever {
+            it.get()?.let {
+                assertTrue(it)
+            }
+        }
+    }
+
 
 }

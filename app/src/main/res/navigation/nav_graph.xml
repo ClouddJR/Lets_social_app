@@ -19,7 +19,12 @@
     android:id="@+id/exploreFragment"
     android:label="ExploreFragment"
     android:name="com.lets.app.fragments.ExploreFragment"
-    tools:layout="@layout/fragment_map"/>
+    tools:layout="@layout/fragment_explore"/>
+  <fragment
+    android:id="@+id/messagesFragment"
+    android:label="MessagesFragment"
+    android:name="com.lets.app.fragments.MessagesFragment"
+    tools:layout="@layout/fragment_messages"/>
 
 
 </navigation>
