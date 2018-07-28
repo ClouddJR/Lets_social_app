@@ -46,6 +46,21 @@
       app:layout_constraintTop_toBottomOf="@id/appBarLayout"
       tools:text="Your events"/>
 
+    <TextView
+      android:layout_width="26dp"
+      android:layout_height="19dp"
+      android:layout_margin="8dp"
+      android:padding="1dp"
+      android:background="@drawable/number_tile"
+      android:gravity="center"
+      android:text="3"
+      android:textColor="@android:color/white"
+      android:textSize="12sp"
+      app:layout_constraintBottom_toTopOf="@id/yourEventsHeader"
+      app:layout_constraintStart_toEndOf="@id/yourEventsHeader"
+      app:layout_constraintTop_toBottomOf="@id/yourEventsHeader"
+      tools:text="3"/>
+
     <Button
       style="@style/Widget.AppCompat.Button.Borderless"
       android:layout_width="wrap_content"
@@ -152,6 +167,22 @@
       app:layout_constraintTop_toBottomOf="@id/createEventLayout"
       tools:text="Events you joined"/>
 
+    <TextView
+      android:layout_width="26dp"
+      android:layout_height="19dp"
+      android:layout_margin="8dp"
+      android:padding="1dp"
+      android:background="@drawable/number_tile"
+      android:backgroundTint="#45D84F"
+      android:gravity="center"
+      android:text="2"
+      android:textColor="@android:color/white"
+      android:textSize="12sp"
+      app:layout_constraintBottom_toTopOf="@id/joinedEventsHeader"
+      app:layout_constraintStart_toEndOf="@id/joinedEventsHeader"
+      app:layout_constraintTop_toBottomOf="@id/joinedEventsHeader"
+      tools:text="2"/>
+
     <Button
       style="@style/Widget.AppCompat.Button.Borderless"
       android:layout_width="wrap_content"
@@ -189,6 +220,22 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/joinedEventsRV"
       tools:text="Events nearby"/>
+
+    <TextView
+      android:layout_width="26dp"
+      android:layout_height="19dp"
+      android:layout_margin="8dp"
+      android:padding="1dp"
+      android:background="@drawable/number_tile"
+      android:backgroundTint="#FF5E5E"
+      android:gravity="center"
+      android:text="5"
+      android:textColor="@android:color/white"
+      android:textSize="12sp"
+      app:layout_constraintBottom_toTopOf="@id/nearbyEventsHeader"
+      app:layout_constraintStart_toEndOf="@id/nearbyEventsHeader"
+      app:layout_constraintTop_toBottomOf="@id/nearbyEventsHeader"
+      tools:text="5"/>
 
     <Button
       style="@style/Widget.AppCompat.Button.Borderless"
