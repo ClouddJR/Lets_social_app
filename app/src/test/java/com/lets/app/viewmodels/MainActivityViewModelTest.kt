@@ -1,8 +1,8 @@
 package com.lets.app.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import junit.framework.Assert.assertNull
-import junit.framework.Assert.assertTrue
+import junit.framework.TestCase.assertNull
+import junit.framework.TestCase.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
