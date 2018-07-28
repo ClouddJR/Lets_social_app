@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.lets.app.R
 import com.lets.app.databinding.ActivityMainBinding
 import com.lets.app.viewmodels.MainActivityViewModel
@@ -15,16 +17,17 @@ class MainActivity : AppCompatActivity() {
 
     val tag: String = MainActivity::class.java.simpleName
 
-    private lateinit var finalHost: NavHostFragment
     private lateinit var viewModel: MainActivityViewModel
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         initDataBinding()
-        initNavigation()
+        initNavController()
         observeBottomViewClicks()
     }
+
+    override fun onSupportNavigateUp() = findNavController(R.id.fragmentPlaceHolder).navigateUp()
 
     private fun initDataBinding() {
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -32,12 +35,17 @@ class MainActivity : AppCompatActivity() {
         binding.vm = viewModel
     }
 
-    private fun initNavigation() {
-        finalHost = NavHostFragment.create(R.navigation.nav_graph)
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentPlaceHolder, finalHost)
-                .setPrimaryNavigationFragment(finalHost)
-                .commit()
+    private fun initNavController() {
+        navController = Navigation.findNavController(this, R.id.fragmentPlaceHolder)
+
+        navController.addOnNavigatedListener { _, destination ->
+            when (destination.id) {
+                R.id.homeFragment -> menuBottomNav.menu.findItem(R.id.homeButton).isChecked = true
+                R.id.exploreFragment -> menuBottomNav.menu.findItem(R.id.exploreButton).isChecked = true
+                R.id.profileFragment -> menuBottomNav.menu.findItem(R.id.profileButton).isChecked = true
+                R.id.messagesFragment -> menuBottomNav.menu.findItem(R.id.messagesButton).isChecked = true
+            }
+        }
     }
 
     private fun observeBottomViewClicks() {
@@ -67,20 +75,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateTo(resourceId: Int) {
-        finalHost.navController.addOnNavigatedListener { _, destination ->
-            when (destination.id) {
-                R.id.homeFragment -> menuBottomNav.menu.findItem(R.id.homeButton).isChecked = true
-                R.id.exploreFragment -> menuBottomNav.menu.findItem(R.id.exploreButton).isChecked = true
-                R.id.profileFragment -> menuBottomNav.menu.findItem(R.id.profileButton).isChecked = true
-                R.id.messagesFragment -> menuBottomNav.menu.findItem(R.id.messagesButton).isChecked = true
-            }
-        }
 
-        if (!finalHost.navController.popBackStack(resourceId, false) && finalHost.navController.currentDestination.id != resourceId) {
-            finalHost.navController.navigate(resourceId)
+        if (!navController.popBackStack(resourceId, false) && navController.currentDestination.id != resourceId) {
+            navController.navigate(resourceId)
         }
 
     }
-
 
 }

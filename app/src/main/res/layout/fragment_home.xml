@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+<androidx.core.widget.NestedScrollView
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/nestedScroll"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
@@ -169,10 +170,51 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_margin="16dp"
+      android:orientation="horizontal"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/joinedEventsHeader"
+      tools:listitem="@layout/small_event_card"/>
+
+    <TextView
+      android:id="@+id/nearbyEventsHeader"
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="32dp"
+      android:layout_marginStart="16dp"
+      android:text="Events nearby"
+      android:textSize="16sp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/joinedEventsRV"
+      tools:text="Events nearby"/>
+
+    <Button
+      style="@style/Widget.AppCompat.Button.Borderless"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:text="explore"
+      android:textColor="@color/colorPrimary"
+      android:textSize="12sp"
+      app:layout_constraintBottom_toTopOf="@+id/nearbyEventsHeader"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/nearbyEventsHeader"
+      tools:text="explore"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/nearbyEventsRV"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="16dp"
+      android:orientation="vertical"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/nearbyEventsHeader"
+      tools:itemCount="5"
       tools:listitem="@layout/big_event_card"/>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

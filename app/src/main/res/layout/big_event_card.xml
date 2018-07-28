@@ -3,11 +3,11 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="150dp"
+  android:layout_height="145dp"
   android:layout_marginTop="16dp"
   android:layout_marginBottom="16dp"
-  android:layout_marginStart="24dp"
-  android:layout_marginEnd="24dp"
+  android:layout_marginStart="8dp"
+  android:layout_marginEnd="8dp"
   android:elevation="4dp"
   app:cardBackgroundColor="@android:color/white"
   app:cardCornerRadius="1dp"
@@ -19,8 +19,8 @@
 
     <ImageView
       android:id="@+id/categoryIcon"
-      android:layout_width="30dp"
-      android:layout_height="30dp"
+      android:layout_width="35dp"
+      android:layout_height="35dp"
       android:layout_margin="16dp"
       android:src="@drawable/ic_action_bike"
       app:layout_constraintStart_toStartOf="parent"
@@ -28,9 +28,9 @@
 
     <ImageView
       android:id="@+id/groupIcon"
-      android:layout_width="20dp"
-      android:layout_height="20dp"
-      android:layout_marginBottom="16dp"
+      android:layout_width="25dp"
+      android:layout_height="25dp"
+      android:layout_marginBottom="12dp"
       android:layout_marginStart="16dp"
       android:src="@drawable/account_multiple"
       app:layout_constraintBottom_toBottomOf="parent"
@@ -38,8 +38,8 @@
 
     <ImageView
       android:id="@+id/clockIcon"
-      android:layout_width="20dp"
-      android:layout_height="20dp"
+      android:layout_width="25dp"
+      android:layout_height="25dp"
       android:layout_marginBottom="8dp"
       android:layout_marginStart="16dp"
       android:src="@drawable/ic_action_cloc_grey"
@@ -53,7 +53,7 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
       android:textColor="#565656"
-      android:textSize="15sp"
+      android:textSize="16sp"
       app:layout_constraintBottom_toBottomOf="@+id/categoryIcon"
       app:layout_constraintStart_toEndOf="@+id/categoryIcon"
       app:layout_constraintTop_toTopOf="@+id/categoryIcon"
@@ -65,7 +65,8 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
-      android:textSize="12sp"
+      android:text="in 20 min"
+      android:textSize="13sp"
       app:layout_constraintBottom_toBottomOf="@+id/clockIcon"
       app:layout_constraintStart_toEndOf="@+id/clockIcon"
       app:layout_constraintTop_toTopOf="@+id/clockIcon"
@@ -78,7 +79,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
-      android:textSize="12sp"
+      android:textSize="13sp"
       app:layout_constraintBottom_toBottomOf="@+id/groupIcon"
       app:layout_constraintStart_toEndOf="@+id/groupIcon"
       app:layout_constraintTop_toTopOf="@+id/groupIcon"
@@ -87,72 +88,79 @@
     <TextView
       android:id="@+id/hostName"
       android:textStyle="bold"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="8dp"
+      android:paddingStart="2dp"
+      android:paddingEnd="2dp"
+      android:gravity="start"
+      app:layout_constraintBottom_toTopOf="@id/linearLayout"
       app:layout_constraintEnd_toStartOf="@+id/profile_image"
-      app:layout_constraintTop_toTopOf="@+id/profile_image"
-      tools:text="Marcin Górski"/>
+      app:layout_constraintStart_toStartOf="@+id/guideline"
+      app:layout_constraintTop_toTopOf="@id/profile_image"
+      tools:text="Marcin"/>
 
-    <ImageView
-      android:id="@+id/starIcon5"
-      android:layout_width="15dp"
-      android:layout_height="15dp"
-      android:layout_marginTop="8dp"
-      android:layout_marginStart="1dp"
-      android:src="@drawable/ic_action_star"
-      app:layout_constraintStart_toEndOf="@+id/starIcon4"
-      app:layout_constraintTop_toBottomOf="@+id/hostName"/>
+    <LinearLayout
+      android:id="@+id/linearLayout"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="8dp"
+      android:layout_marginEnd="8dp"
+      android:orientation="horizontal"
+      app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+      app:layout_constraintEnd_toStartOf="@+id/profile_image"
+      app:layout_constraintStart_toStartOf="@id/guideline"
+      app:layout_constraintTop_toBottomOf="@+id/hostName">
 
-    <ImageView
-      android:id="@+id/starIcon4"
-      android:layout_width="15dp"
-      android:layout_height="15dp"
-      android:layout_marginTop="8dp"
-      android:layout_marginStart="1dp"
-      android:src="@drawable/ic_action_star"
-      app:layout_constraintStart_toEndOf="@+id/starIcon3"
-      app:layout_constraintTop_toBottomOf="@+id/hostName"/>
+      <ImageView
+        android:id="@+id/starIcon5"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/ic_action_star"/>
 
-    <ImageView
-      android:id="@+id/starIcon3"
-      android:layout_width="15dp"
-      android:layout_height="15dp"
-      android:layout_marginTop="8dp"
-      android:layout_marginStart="1dp"
-      android:src="@drawable/ic_action_star"
-      app:layout_constraintStart_toEndOf="@+id/starIcon2"
-      app:layout_constraintTop_toBottomOf="@+id/hostName"/>
+      <ImageView
+        android:id="@+id/starIcon4"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/ic_action_star"/>
 
-    <ImageView
-      android:id="@+id/starIcon2"
-      android:layout_width="15dp"
-      android:layout_height="15dp"
-      android:layout_marginTop="8dp"
-      android:layout_marginStart="1dp"
-      android:src="@drawable/ic_action_star"
-      app:layout_constraintStart_toEndOf="@+id/starIcon"
-      app:layout_constraintTop_toBottomOf="@+id/hostName"/>
+      <ImageView
+        android:id="@+id/starIcon3"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/ic_action_star"/>
 
-    <ImageView
-      android:id="@+id/starIcon"
-      android:layout_width="15dp"
-      android:layout_height="15dp"
-      android:layout_marginTop="8dp"
-      android:src="@drawable/ic_action_star"
-      app:layout_constraintStart_toStartOf="@+id/hostName"
-      app:layout_constraintTop_toBottomOf="@+id/hostName"/>
+      <ImageView
+        android:id="@+id/starIcon2"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/ic_action_star"/>
+
+      <ImageView
+        android:id="@+id/starIcon"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/ic_action_star"/>
+
+    </LinearLayout>
 
 
     <de.hdodenhof.circleimageview.CircleImageView
       xmlns:app="http://schemas.android.com/apk/res-auto"
       android:id="@+id/profile_image"
-      android:layout_width="55dp"
-      android:layout_height="55dp"
-      android:layout_margin="16dp"
+      android:layout_width="60dp"
+      android:layout_height="60dp"
+      android:layout_marginBottom="12dp"
+      android:layout_marginEnd="12dp"
       android:src="@drawable/profile"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent="0.55"/>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -14,13 +14,17 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
-    <FrameLayout
+    <fragment
       android:id="@+id/fragmentPlaceHolder"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      app:layout_constraintBottom_toBottomOf="@id/menuBottomNav"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:name="androidx.navigation.fragment.NavHostFragment"
+      app:defaultNavHost="true"
+      app:layout_constraintBottom_toTopOf="@id/shadowLine"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"/>
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:navGraph="@navigation/nav_graph"/>
 
     <View
       android:id="@+id/shadowLine"
