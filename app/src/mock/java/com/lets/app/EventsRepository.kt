@@ -17,7 +17,7 @@ class EventsRepository {
 
             Event(
                     owner = "Arkadiusz",
-                    title = "Preparing for Marathon",
+                    title = "Preparing for half Marathon in Poznan",
                     description = "I am looking for a person to train with. " +
                             "I'm planning to run 10 km per day and increase that distance by 2 km every week",
                     dateTime = Date(1532642400000),

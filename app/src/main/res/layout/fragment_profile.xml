@@ -1,37 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:orientation="vertical">
+  android:layout_height="wrap_content">
 
-  <com.google.android.material.appbar.AppBarLayout
+  <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:theme="@style/AppTheme.AppBarOverlay"
-    app:elevation="0dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-      android:id="@+id/toolbar"
+
+    <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/appBarLayout"
       android:layout_width="match_parent"
-      android:layout_height="?attr/actionBarSize"
-      android:background="@android:color/white"
+      android:layout_height="wrap_content"
+      android:theme="@style/AppTheme.AppBarOverlay"
       app:elevation="0dp"
-      app:popupTheme="@style/AppTheme.PopupOverlay"
-      app:titleTextColor="#565656"/>
-  </com.google.android.material.appbar.AppBarLayout>
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
 
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="PROFILE"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"/>
+      <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        app:elevation="0dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:titleTextColor="#565656"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+      android:id="@+id/profileImage"
+      android:layout_width="105dp"
+      android:layout_height="105dp"
+      android:src="@drawable/profile"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/appBarLayout"/>
+
+    <TextView
+      android:id="@+id/nameTextView"
+      android:textStyle="bold"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="24dp"
+      android:gravity="center"
+      android:text="Marcin Górski"
+      android:textSize="22sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/profileImage"/>
+
+    <TextView
+      android:id="@+id/eventsNumberTextView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="8dp"
+      android:gravity="center"
+      android:text="9 events attended"
+      android:textSize="14sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/nameTextView"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+      android:id="@+id/linearLayout"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_margin="4dp"
+      android:gravity="center"
+      android:orientation="horizontal"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/eventsNumberTextView">
+
+      <ImageView
+        android:id="@+id/starIcon5"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/ic_action_star"/>
+
+      <ImageView
+        android:id="@+id/starIcon4"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/ic_action_star"/>
+
+      <ImageView
+        android:id="@+id/starIcon3"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/ic_action_star"/>
+
+      <ImageView
+        android:id="@+id/starIcon2"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/ic_action_star"/>
+
+      <ImageView
+        android:id="@+id/starIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_action_star"/>
+
+    </LinearLayout>
+
+    <Button
+      android:id="@+id/messageButton"
+      android:layout_width="100dp"
+      android:layout_height="40dp"
+      android:layout_marginTop="12dp"
+      android:layout_marginEnd="16dp"
+      android:background="@drawable/profile_button"
+      android:text="MESSAGE"
+      android:textColor="#2E8CEC"
+      app:layout_constraintEnd_toStartOf="@id/inviteButton"
+      app:layout_constraintStart_toStartOf="@id/profileImage"
+      app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
+
+
+    <Button
+      android:id="@+id/inviteButton"
+      android:layout_width="100dp"
+      android:layout_height="40dp"
+      android:layout_marginTop="12dp"
+      android:layout_marginStart="16dp"
+      android:background="@drawable/profile_button"
+      android:backgroundTint="#45D84F"
+      android:text="INVITE"
+      android:textColor="#45D84F"
+      app:layout_constraintEnd_toEndOf="@id/profileImage"
+      app:layout_constraintStart_toEndOf="@id/messageButton"
+      app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
+
+
+    <TextView
+      android:id="@+id/aboutHeader"
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="32dp"
+      android:layout_marginStart="16dp"
+      android:text="About"
+      android:textSize="17sp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/inviteButton"/>
+
+
+    <TextView
+      android:id="@+id/aboutSectionTextView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="16dp"
+      android:maxLines="4"
+      android:text="@string/lorem"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/aboutHeader"/>
+
+
+    <TextView
+      android:id="@+id/organizedHeader"
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="32dp"
+      android:layout_marginStart="16dp"
+      android:text="Events organized"
+      android:textSize="17sp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/aboutSectionTextView"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/organizedRV"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="16dp"
+      android:orientation="horizontal"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/organizedHeader"
+      tools:listitem="@layout/big_event_card">
+
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

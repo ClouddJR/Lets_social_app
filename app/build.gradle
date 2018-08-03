@@ -57,6 +57,7 @@ dependencies {
     implementation "androidx.cardview:cardview:$supportLibraryVersion"
 
     implementation "com.google.firebase:firebase-firestore:$firebaseVersion"
+    implementation "com.google.firebase:firebase-auth:$firebaseAuthentication"
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
     testImplementation "junit:junit:$jUnitVersion"

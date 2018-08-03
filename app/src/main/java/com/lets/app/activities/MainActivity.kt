@@ -77,9 +77,19 @@ class MainActivity : AppCompatActivity() {
     private fun navigateTo(resourceId: Int) {
 
         if (!navController.popBackStack(resourceId, false) && navController.currentDestination.id != resourceId) {
-            navController.navigate(resourceId)
+            navController.navigate(getActionId(resourceId))
         }
 
+    }
+
+    private fun getActionId(resourceId: Int): Int {
+        return when (resourceId) {
+            R.id.homeFragment -> R.id.homeAction
+            R.id.exploreFragment -> R.id.exploreAction
+            R.id.profileFragment -> R.id.profileAction
+            R.id.messagesFragment -> R.id.messagesAction
+            else -> 0
+        }
     }
 
 }

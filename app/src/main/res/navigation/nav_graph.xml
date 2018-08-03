@@ -5,21 +5,51 @@
   android:id="@+id/nav_graph"
   app:startDestination="@id/homeFragment">
 
+  <action
+    android:id="@+id/homeAction"
+    app:destination="@id/homeFragment"
+    app:enterAnim="@anim/fade_in"
+    app:popEnterAnim="@anim/fade_in"
+    />
+
+  <action
+    android:id="@+id/exploreAction"
+    app:destination="@id/exploreFragment"
+    app:enterAnim="@anim/fade_in"
+    app:popEnterAnim="@anim/fade_in"/>
+
+  <action
+    android:id="@+id/profileAction"
+    app:destination="@id/profileFragment"
+    app:enterAnim="@anim/fade_in"
+    app:popEnterAnim="@anim/fade_in"
+    />
+
+  <action
+    android:id="@+id/messagesAction"
+    app:destination="@id/messagesFragment"
+    app:enterAnim="@anim/fade_in"
+    app:popEnterAnim="@anim/fade_in"
+    />
+
   <fragment
     android:id="@+id/homeFragment"
     android:label="HomeFragment"
     android:name="com.lets.app.fragments.HomeFragment"
     tools:layout="@layout/fragment_home"/>
+
   <fragment
     android:id="@+id/profileFragment"
     android:label="ProfileFragment"
     android:name="com.lets.app.fragments.ProfileFragment"
     tools:layout="@layout/fragment_profile"/>
+
   <fragment
     android:id="@+id/exploreFragment"
     android:label="ExploreFragment"
     android:name="com.lets.app.fragments.ExploreFragment"
     tools:layout="@layout/fragment_explore"/>
+
   <fragment
     android:id="@+id/messagesFragment"
     android:label="MessagesFragment"

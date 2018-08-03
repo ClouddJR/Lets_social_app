@@ -27,7 +27,8 @@ class RVSmallEventAdapter(private val eventsList: List<Event>) : RecyclerView.Ad
 
         fun bind(event: Event) {
             itemView.findViewById<TextView>(R.id.eventTitle).text = event.title
-            itemView.findViewById<TextView>(R.id.peopleRemaining).text = event.maxPeople.toString()
+            itemView.findViewById<TextView>(R.id.timeRemaining).text = "in 20 min"
+            itemView.findViewById<TextView>(R.id.peopleRemaining).text = "2/${event.maxPeople}"
         }
 
     }

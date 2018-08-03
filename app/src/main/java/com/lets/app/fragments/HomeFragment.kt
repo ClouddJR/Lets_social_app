@@ -1,32 +1,40 @@
 package com.lets.app.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
-import com.lets.app.EventsRepository
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.lets.app.R
 import com.lets.app.adapters.RVBigEventAdapter
 import com.lets.app.adapters.RVSmallEventAdapter
 import com.lets.app.model.Event
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import com.lets.app.viewmodels.EventsViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : BaseFragment() {
 
-    val TAG = javaClass.simpleName
+    private lateinit var viewModel: EventsViewModel
 
-    private lateinit var disposable: Disposable
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        initViewModel()
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        disposable = EventsRepository().getEventsNearby()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    setRV(it)
-                }
+        observeData()
+    }
 
+    private fun initViewModel() {
+        viewModel = ViewModelProviders.of(activity!!).get(EventsViewModel::class.java)
+        viewModel.init()
+    }
+
+    private fun observeData() {
+        viewModel.nearbyEventsList.observe(this, Observer {
+            setRV(it)
+        })
     }
 
     private fun setRV(list: List<Event>) {
@@ -35,12 +43,6 @@ class HomeFragment : BaseFragment() {
         nearbyEventsRV.adapter = RVBigEventAdapter(list)
     }
 
-    override fun onPause() {
-        super.onPause()
-        if (!disposable.isDisposed) {
-          disposable.dispose()
-        }
-    }
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_home

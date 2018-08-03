@@ -8,4 +8,6 @@
   <string name="title_fragment_profile">Profile</string>
   <string name="title_fragment_messages">Messages</string>
 
+  <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eleifend vel lacus sodales porta. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut dapibus sapien eget ligula maximus, at efficitur nulla volutpat. Pellentesque blandit at metus ac pharetra. Nullam diam diam, laoreet ac metus vitae, ullamcorper euismod risus. Proin pretium porta tristique. In egestas accumsan neque, et accumsan dolor tristique vitae.</string>
+
 </resources>

@@ -4,8 +4,8 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="145dp"
-  android:layout_marginTop="16dp"
-  android:layout_marginBottom="16dp"
+  android:layout_marginTop="8dp"
+  android:layout_marginBottom="8dp"
   android:layout_marginStart="8dp"
   android:layout_marginEnd="8dp"
   android:elevation="4dp"
@@ -49,12 +49,16 @@
     <TextView
       android:id="@+id/eventTitle"
       android:textStyle="bold"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
+      android:layout_marginEnd="16dp"
+      android:ellipsize="end"
+      android:maxLines="1"
       android:textColor="#565656"
-      android:textSize="16sp"
+      android:textSize="18sp"
       app:layout_constraintBottom_toBottomOf="@+id/categoryIcon"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="@+id/categoryIcon"
       app:layout_constraintTop_toTopOf="@+id/categoryIcon"
       tools:text="Preparing for Tour de France"/>
@@ -104,7 +108,7 @@
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginBottom="8dp"
-      android:layout_marginEnd="8dp"
+      android:layout_marginEnd="2dp"
       android:orientation="horizontal"
       app:layout_constraintBottom_toBottomOf="@+id/profile_image"
       app:layout_constraintEnd_toStartOf="@+id/profile_image"
@@ -160,7 +164,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="vertical"
-      app:layout_constraintGuide_percent="0.55"/>
+      app:layout_constraintGuide_percent="0.54"/>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

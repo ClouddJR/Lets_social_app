@@ -8,6 +8,11 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="exploreAction">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="exploreFragment">
                     <value>
                       <LayoutPositions>
@@ -18,6 +23,11 @@
                           </Point>
                         </option>
                       </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="homeAction">
+                    <value>
+                      <LayoutPositions />
                     </value>
                   </entry>
                   <entry key="homeFragment">
@@ -32,6 +42,11 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="messagesAction">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="messagesFragment">
                     <value>
                       <LayoutPositions>
@@ -42,6 +57,11 @@
                           </Point>
                         </option>
                       </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="profileAction">
+                    <value>
+                      <LayoutPositions />
                     </value>
                   </entry>
                   <entry key="profileFragment">

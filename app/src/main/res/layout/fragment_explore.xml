@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical">
 
   <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/appBarLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:theme="@style/AppTheme.AppBarOverlay"
@@ -25,14 +27,29 @@
   </com.google.android.material.appbar.AppBarLayout>
 
 
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="EXPLORE"
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/nearbyEventsRV"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_margin="8dp"
+    android:orientation="vertical"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"/>
+    app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+    tools:itemCount="5"
+    tools:listitem="@layout/big_event_card"/>
 
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/switchFAB"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:backgroundTint="#45D84F"
+    android:src="@drawable/ic_map_search_white_24dp"
+    android:visibility="invisible"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
