@@ -2,6 +2,7 @@ package com.lets.app.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigateToLogin() {
         if (FirebaseAuth.getInstance().currentUser == null) {
+            Log.d("ArekAuth","navigating")
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
