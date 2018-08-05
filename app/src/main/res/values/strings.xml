@@ -3,6 +3,10 @@
   <string name="app_name">Lets</string>
   <string name="title_activity_main">MainActivity</string>
 
+  <!--facebook login-->
+  <string name="facebook_app_id">2151734165073419</string>
+  <string name="fb_login_protocol_scheme">fb2151734165073419</string>
+
   <string name="title_fragment_home">Home</string>
   <string name="title_fragment_explore">Explore</string>
   <string name="title_fragment_profile">Profile</string>

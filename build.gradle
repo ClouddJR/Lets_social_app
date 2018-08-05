@@ -29,6 +29,7 @@ buildscript {
         rxAndroidVersion = "2.0.2"
         firebaseVersion = "17.0.4"
         firebaseAuthentication = "16.0.2"
+        facebookLogin = "[4,5)"
         glideVersion = "4.7.1"
         circularImageViewVersion ="2.2.0"
     }

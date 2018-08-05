@@ -1,5 +1,6 @@
 package com.lets.app.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.lets.app.R
 import com.lets.app.databinding.ActivityMainBinding
 import com.lets.app.viewmodels.MainActivityViewModel
@@ -22,12 +24,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        navigateToLogin()
         initDataBinding()
         initNavController()
         observeBottomViewClicks()
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.fragmentPlaceHolder).navigateUp()
+
+
+    private fun navigateToLogin() {
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+    }
 
     private fun initDataBinding() {
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
