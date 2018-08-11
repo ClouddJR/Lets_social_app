@@ -10,12 +10,9 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.lets.app.repositories.UserRepository
 import com.lets.app.utils.MessageWrapper
 
-class LoginViewModel : ViewModel() {
-
-    private val userRepository = UserRepository()
+class LoginViewModel(private val userRepository: UserRepository = UserRepository()) : ViewModel() {
 
     val userAlreadyLoggedIn = MutableLiveData<MessageWrapper<Boolean>>()
-
     val loginSucceed = MutableLiveData<MessageWrapper<Boolean>>()
     val loginProcess = MutableLiveData<MessageWrapper<Boolean>>()
     val loginError = MutableLiveData<MessageWrapper<Boolean>>()
@@ -44,13 +41,23 @@ class LoginViewModel : ViewModel() {
 
     fun handleAccessToken(token: AccessToken?) {
         token?.let {
-            userRepository.login(token, OnCompleteListener {
+            userRepository.login(it, OnCompleteListener {
                 if (it.isSuccessful) {
-                    loginSucceed.value = MessageWrapper(true)
+                    loginWasSuccessful()
                 } else {
-                    loginError.value = MessageWrapper(true)
+                    loginFailed()
                 }
             })
         }
     }
+
+
+    fun loginWasSuccessful() {
+        loginSucceed.value = MessageWrapper(true)
+    }
+
+    fun loginFailed() {
+        loginError.value = MessageWrapper(true)
+    }
+
 }
