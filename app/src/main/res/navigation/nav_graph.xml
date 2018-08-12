@@ -35,6 +35,11 @@
     app:enterAnim="@anim/fade_in"
     app:popEnterAnim="@anim/fade_in"/>
 
+  <action
+    android:id="@+id/mapAction"
+    app:destination="@id/mapFragment"
+    app:enterAnim="@anim/fade_in"
+    app:popEnterAnim="@anim/fade_in"/>
 
   <fragment
     android:id="@+id/homeFragment"
@@ -66,5 +71,10 @@
     android:name="com.lets.app.fragments.AddEventFragment"
     tools:layout="@layout/fragment_add_event"/>
 
+  <fragment
+    android:id="@+id/mapFragment"
+    android:label="MapFragment"
+    android:name="com.lets.app.fragments.MapFragment"
+    tools:layout="@layout/fragment_map"/>
 
 </navigation>

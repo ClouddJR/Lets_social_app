@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.lets.app.R
 import com.lets.app.adapters.RVBigEventAdapter
 import com.lets.app.model.Event
@@ -43,6 +44,9 @@ class ExploreFragment : BaseFragment() {
 
     private fun showFAB() {
         switchFAB.show()
+        switchFAB.setOnClickListener {
+            it.findNavController().navigate(R.id.mapAction)
+        }
     }
 
     private fun setRV(list: List<Event>) {

@@ -32,6 +32,7 @@ buildscript {
         facebookLogin = "[4,5)"
         glideVersion = "4.7.1"
         circularImageViewVersion ="2.2.0"
+        mapBoxVersion = "6.3.0"
     }
 
     repositories {
