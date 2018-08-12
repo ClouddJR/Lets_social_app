@@ -51,4 +51,8 @@ class ProfileFragment : BaseFragment() {
     override fun getToolbarTitle(): String {
         return context?.getString(R.string.title_fragment_profile) ?: ""
     }
+
+    override fun shouldBottomNavBeVisible(): Boolean {
+        return true
+    }
 }

@@ -2,7 +2,7 @@ package com.lets.app.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigateToLogin() {
         if (FirebaseAuth.getInstance().currentUser == null) {
-            Log.d("ArekAuth","navigating")
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
@@ -102,6 +101,14 @@ class MainActivity : AppCompatActivity() {
             R.id.profileFragment -> R.id.profileAction
             R.id.messagesFragment -> R.id.messagesAction
             else -> 0
+        }
+    }
+
+    fun toggleBottomNavBar(shouldBeVisible: Boolean) {
+        menuBottomNav.visibility = if (shouldBeVisible) {
+            View.VISIBLE
+        } else {
+            View.GONE
         }
     }
 

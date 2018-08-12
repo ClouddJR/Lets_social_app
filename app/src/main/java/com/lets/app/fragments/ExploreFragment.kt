@@ -60,4 +60,8 @@ class ExploreFragment : BaseFragment() {
     override fun getToolbarTitle(): String {
         return context?.getString(R.string.title_fragment_explore) ?: ""
     }
+
+    override fun shouldBottomNavBeVisible(): Boolean {
+        return true
+    }
 }

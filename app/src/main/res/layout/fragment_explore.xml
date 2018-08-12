@@ -46,9 +46,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    android:backgroundTint="#45D84F"
     android:src="@drawable/ic_map_search_white_24dp"
     android:visibility="invisible"
+    app:backgroundTint="#45D84F"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"/>
 

@@ -17,4 +17,8 @@ class MessagesFragment : BaseFragment() {
     override fun getToolbarTitle(): String {
         return context?.getString(R.string.title_fragment_messages) ?: ""
     }
+
+    override fun shouldBottomNavBeVisible(): Boolean {
+        return true
+    }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.lets.app.R
 import com.lets.app.adapters.RVBigEventAdapter
 import com.lets.app.adapters.RVSmallEventAdapter
@@ -24,6 +25,9 @@ class HomeFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         observeData()
+        plusIcon.setOnClickListener {
+            it.findNavController().navigate(R.id.addEventAction)
+        }
     }
 
     private fun initViewModel() {
@@ -54,5 +58,9 @@ class HomeFragment : BaseFragment() {
 
     override fun getToolbarTitle(): String {
         return context?.getString(R.string.title_fragment_home) ?: ""
+    }
+
+    override fun shouldBottomNavBeVisible(): Boolean {
+        return true
     }
 }

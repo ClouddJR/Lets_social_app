@@ -9,8 +9,7 @@
     android:id="@+id/homeAction"
     app:destination="@id/homeFragment"
     app:enterAnim="@anim/fade_in"
-    app:popEnterAnim="@anim/fade_in"
-    />
+    app:popEnterAnim="@anim/fade_in"/>
 
   <action
     android:id="@+id/exploreAction"
@@ -22,15 +21,20 @@
     android:id="@+id/profileAction"
     app:destination="@id/profileFragment"
     app:enterAnim="@anim/fade_in"
-    app:popEnterAnim="@anim/fade_in"
-    />
+    app:popEnterAnim="@anim/fade_in"/>
 
   <action
     android:id="@+id/messagesAction"
     app:destination="@id/messagesFragment"
     app:enterAnim="@anim/fade_in"
-    app:popEnterAnim="@anim/fade_in"
-    />
+    app:popEnterAnim="@anim/fade_in"/>
+
+  <action
+    android:id="@+id/addEventAction"
+    app:destination="@id/addEventFragment"
+    app:enterAnim="@anim/fade_in"
+    app:popEnterAnim="@anim/fade_in"/>
+
 
   <fragment
     android:id="@+id/homeFragment"
@@ -55,6 +59,12 @@
     android:label="MessagesFragment"
     android:name="com.lets.app.fragments.MessagesFragment"
     tools:layout="@layout/fragment_messages"/>
+
+  <fragment
+    android:id="@+id/addEventFragment"
+    android:label="AddEventFragment"
+    android:name="com.lets.app.fragments.AddEventFragment"
+    tools:layout="@layout/fragment_add_event"/>
 
 
 </navigation>

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import com.lets.app.activities.MainActivity
 
 
 abstract class BaseFragment : Fragment() {
@@ -19,6 +20,7 @@ abstract class BaseFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         (activity as? AppCompatActivity)?.setSupportActionBar(getToolbar())
         (activity as? AppCompatActivity)?.supportActionBar?.title = getToolbarTitle()
+        (activity as? MainActivity)?.toggleBottomNavBar(shouldBottomNavBeVisible())
     }
 
     abstract fun getLayoutId(): Int
@@ -26,5 +28,7 @@ abstract class BaseFragment : Fragment() {
     abstract fun getToolbar(): Toolbar
 
     abstract fun getToolbarTitle(): String
+
+    abstract fun shouldBottomNavBeVisible(): Boolean
 
 }
