@@ -37,6 +37,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
       android:id="@+id/menuBottomNav"
+      style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@drawable/botton_nav_bg"
@@ -45,10 +46,18 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
       app:menu="@menu/main_nav_menu"
-
       app:onNavigationItemSelectedListener="@{vm::onNavigationItemSelected}"/>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/fab"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="16dp"
+      android:visibility="invisible"
+      app:layout_constraintBottom_toTopOf="@id/menuBottomNav"
+      app:layout_constraintEnd_toEndOf="parent"/>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

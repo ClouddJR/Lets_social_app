@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.lets.app.R
 import com.lets.app.adapters.RVBigEventAdapter
 import com.lets.app.adapters.RVSmallEventAdapter
@@ -62,5 +63,13 @@ class HomeFragment : BaseFragment() {
 
     override fun shouldBottomNavBeVisible(): Boolean {
         return true
+    }
+
+    override fun getFAB(): FloatingActionButton? {
+        return null
+    }
+
+    override fun getFABAction(): () -> Unit {
+        return {}
     }
 }

@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.lets.app.R
 import com.lets.app.databinding.ActivityMainBinding
@@ -20,8 +21,8 @@ class MainActivity : AppCompatActivity() {
 
     val tag: String = MainActivity::class.java.simpleName
 
+    lateinit var navController: NavController
     private lateinit var viewModel: MainActivityViewModel
-    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,6 +110,19 @@ class MainActivity : AppCompatActivity() {
             View.VISIBLE
         } else {
             View.GONE
+        }
+    }
+
+    fun setUpFAB(passedFAB: FloatingActionButton?, function: () -> Unit) {
+        fab.hide()
+        passedFAB?.let {
+            fab.backgroundTintList = passedFAB.backgroundTintList
+            fab.setImageDrawable(passedFAB.drawable)
+            fab.show()
+            fab.setOnClickListener {
+                function.invoke()
+            }
+
         }
     }
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.lets.app.R
 import com.lets.app.adapters.RVBigEventAdapter
 import com.lets.app.model.Event
@@ -54,5 +55,13 @@ class ProfileFragment : BaseFragment() {
 
     override fun shouldBottomNavBeVisible(): Boolean {
         return true
+    }
+
+    override fun getFAB(): FloatingActionButton? {
+        return null
+    }
+
+    override fun getFABAction(): () -> Unit {
+        return {}
     }
 }

@@ -1,12 +1,15 @@
 package com.lets.app.fragments
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.lets.app.R
+import com.lets.app.activities.MainActivity
 import com.lets.app.adapters.RVBigEventAdapter
 import com.lets.app.model.Event
 import com.lets.app.viewmodels.EventsViewModel
@@ -26,11 +29,6 @@ class ExploreFragment : BaseFragment() {
         observeData()
     }
 
-    override fun onResume() {
-        super.onResume()
-        showFAB()
-    }
-
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(activity!!).get(EventsViewModel::class.java)
         viewModel.init()
@@ -40,13 +38,6 @@ class ExploreFragment : BaseFragment() {
         viewModel.nearbyEventsList.observe(this, Observer {
             setRV(it)
         })
-    }
-
-    private fun showFAB() {
-        switchFAB.show()
-        switchFAB.setOnClickListener {
-            it.findNavController().navigate(R.id.mapAction)
-        }
     }
 
     private fun setRV(list: List<Event>) {
@@ -67,5 +58,16 @@ class ExploreFragment : BaseFragment() {
 
     override fun shouldBottomNavBeVisible(): Boolean {
         return true
+    }
+
+    override fun getFAB(): FloatingActionButton? {
+        return FloatingActionButton(context).apply {
+            setImageResource(R.drawable.ic_map_search_white_24dp)
+            backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this.context, R.color.fabExploreFragmentColor))
+        }
+    }
+
+    override fun getFABAction(): () -> Unit {
+        return { (activity as? MainActivity)?.navController?.navigate(R.id.mapAction) }
     }
 }

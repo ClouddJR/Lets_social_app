@@ -41,15 +41,4 @@
     tools:itemCount="5"
     tools:listitem="@layout/big_event_card"/>
 
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/switchFAB"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:src="@drawable/ic_map_search_white_24dp"
-    android:visibility="invisible"
-    app:backgroundTint="#45D84F"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

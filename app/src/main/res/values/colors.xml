@@ -10,4 +10,6 @@
 
   <color name="bottomNavIconColorSelected">#2E8CEC</color>
 
+  <color name="fabExploreFragmentColor">#45D84F</color>
+
 </resources>
