@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearSnapHelper
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.lets.app.R
+import com.lets.app.adapters.RVBigEventMapAdapter
 import com.lets.app.model.Event
 import com.lets.app.viewmodels.EventsViewModel
 import com.mapbox.mapboxsdk.annotations.MarkerOptions
@@ -42,7 +44,15 @@ class MapFragment : BaseFragment() {
     private fun observeData() {
         viewModel.nearbyEventsList.observe(this, Observer {
             eventsList.addAll(it)
+            setRV(it)
         })
+    }
+
+    private fun setRV(eventsList: List<Event>) {
+        mapEventsRV.post {
+            mapEventsRV.adapter = RVBigEventMapAdapter(eventsList, (mapEventsRV.width * 0.85).toInt())
+        }
+        LinearSnapHelper().attachToRecyclerView(mapEventsRV)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,8 +60,9 @@ class MapFragment : BaseFragment() {
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
             mapBoxMap = it
-            addMarkersToMap()
             mapView.findViewById<ImageView>(R.id.logoView).imageAlpha = 0
+            mapView.findViewById<ImageView>(R.id.attributionView).imageAlpha = 0
+            addMarkersToMap()
 
         }
     }

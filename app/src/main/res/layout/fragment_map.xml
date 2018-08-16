@@ -38,4 +38,17 @@
     app:layout_constraintTop_toBottomOf="@id/appBarLayout"
     mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
 
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/mapEventsRV"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:orientation="horizontal"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    mapbox:listitem="@layout/big_event_card"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
