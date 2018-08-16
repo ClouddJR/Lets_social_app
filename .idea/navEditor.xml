@@ -25,6 +25,23 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="eventAction">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
+                  <entry key="eventFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-220" />
+                            <option name="y" value="363" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="exploreAction">
                     <value>
                       <LayoutPositions />

@@ -11,6 +11,7 @@ import com.lets.app.R
 import com.lets.app.adapters.RVBigEventAdapter
 import com.lets.app.adapters.RVSmallEventAdapter
 import com.lets.app.model.Event
+import com.lets.app.utils.StartLinearSnapHelper
 import com.lets.app.viewmodels.EventsViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -46,6 +47,12 @@ class HomeFragment : BaseFragment() {
         yourEventsRV.adapter = RVSmallEventAdapter(list)
         joinedEventsRV.adapter = RVSmallEventAdapter(list)
         nearbyEventsRV.adapter = RVBigEventAdapter(list)
+        attachSnapHelper()
+    }
+
+    private fun attachSnapHelper() {
+        StartLinearSnapHelper().attachToRecyclerView(yourEventsRV)
+        StartLinearSnapHelper().attachToRecyclerView(joinedEventsRV)
     }
 
 
