@@ -73,8 +73,11 @@ dependencies {
     implementation "android.arch.navigation:navigation-ui-ktx:$navigationComponentVersion"
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "com.github.tbruyelle:rxpermissions:$rxPermissionVersion"
     implementation "de.hdodenhof:circleimageview:$circularImageViewVersion"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
-    implementation "com.mapbox.mapboxsdk:mapbox-android-sdk:$mapBoxVersion"
+    implementation "com.google.android.gms:play-services-maps:$googlePlayServices"
+    implementation "com.google.android.gms:play-services-location:$googlePlayServices"
+    implementation "org.jetbrains.anko:anko-commons:$ankoVersion"
 }

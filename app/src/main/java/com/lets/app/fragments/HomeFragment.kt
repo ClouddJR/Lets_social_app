@@ -51,6 +51,8 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun attachSnapHelper() {
+        yourEventsRV.onFlingListener = null
+        joinedEventsRV.onFlingListener = null
         StartLinearSnapHelper().attachToRecyclerView(yourEventsRV)
         StartLinearSnapHelper().attachToRecyclerView(joinedEventsRV)
     }

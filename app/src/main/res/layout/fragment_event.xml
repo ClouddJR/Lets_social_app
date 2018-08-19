@@ -97,6 +97,8 @@
     app:layout_constraintTop_toBottomOf="@id/categoryIcon"/>
 
 
+
+
   <TextView
     android:id="@+id/aboutHeader"
     android:textStyle="bold"

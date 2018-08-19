@@ -16,6 +16,9 @@ buildscript {
         supportLibraryVersion = "1.0.0-beta01"
         constraintLayoutVersion = "1.1.2"
 
+        googlePlayServices = "15.0.1"
+        ankoVersion = "0.10.5"
+
         //Testing
         espressoCoreVersion = "3.1.0-alpha4"
         testRunnerVersion = "1.1.0-alpha4"
@@ -27,6 +30,7 @@ buildscript {
         navigationComponentVersion = "1.0.0-alpha04"
         rxJavaVersion = "2.1.16"
         rxAndroidVersion = "2.0.2"
+        rxPermissionVersion = "0.10.2"
         firebaseVersion = "17.0.4"
         firebaseAuthentication = "16.0.2"
         facebookLogin = "[4,5)"
@@ -53,6 +57,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
     }
 }
 
