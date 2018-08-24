@@ -1,239 +1,256 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+
+<androidx.core.widget.NestedScrollView
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
-  <com.google.android.material.appbar.AppBarLayout
-    android:id="@+id/appBarLayout"
+  <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:theme="@style/AppTheme.AppBarOverlay"
-    app:elevation="0dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    android:paddingBottom="24dp">
 
-    <androidx.appcompat.widget.Toolbar
-      android:id="@+id/toolbar"
+    <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/appBarLayout"
       android:layout_width="match_parent"
-      android:layout_height="?attr/actionBarSize"
-      android:background="@android:color/white"
-      android:theme="@style/Toolbar"
+      android:layout_height="wrap_content"
+      android:theme="@style/AppTheme.AppBarOverlay"
       app:elevation="0dp"
-      app:popupTheme="@style/AppTheme.PopupOverlay"
-      app:titleTextColor="#565656"/>
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
 
-  </com.google.android.material.appbar.AppBarLayout>
+      <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        android:theme="@style/Toolbar"
+        app:elevation="0dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:titleTextColor="#565656"/>
 
-  <ImageView
-    android:id="@+id/categoryIcon"
-    android:layout_width="35dp"
-    android:layout_height="35dp"
-    android:layout_marginTop="32dp"
-    android:layout_marginBottom="16dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
-    android:src="@drawable/ic_action_bike"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/appBarLayout"/>
+    </com.google.android.material.appbar.AppBarLayout>
 
-  <TextView
-    android:id="@+id/eventTitle"
-    android:textStyle="bold"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
-    android:text="Preparing for Tour de France"
-    android:textColor="#565656"
-    android:textSize="22sp"
-    app:layout_constraintBottom_toBottomOf="@+id/categoryIcon"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toEndOf="@+id/categoryIcon"
-    app:layout_constraintTop_toTopOf="@+id/categoryIcon"/>
+    <ImageView
+      android:id="@+id/categoryIcon"
+      android:layout_width="35dp"
+      android:layout_height="35dp"
+      android:layout_marginTop="32dp"
+      android:layout_marginBottom="16dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      android:src="@drawable/ic_action_bike"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/appBarLayout"/>
 
-  <ImageView
-    android:id="@+id/clockIcon"
-    android:layout_width="25dp"
-    android:layout_height="25dp"
-    android:layout_marginTop="32dp"
-    android:layout_marginStart="16dp"
-    android:src="@drawable/ic_action_cloc_grey"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/categoryIcon"/>
+    <TextView
+      android:id="@+id/eventTitle"
+      android:textStyle="bold"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      android:text="Preparing for Tour de France"
+      android:textColor="#565656"
+      android:textSize="22sp"
+      app:layout_constraintBottom_toBottomOf="@+id/categoryIcon"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/categoryIcon"
+      app:layout_constraintTop_toTopOf="@+id/categoryIcon"/>
 
-  <TextView
-    android:textStyle="bold"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:text="tomorrow, 9pm"
-    app:layout_constraintBottom_toTopOf="@id/clockIcon"
-    app:layout_constraintStart_toEndOf="@id/clockIcon"
-    app:layout_constraintTop_toBottomOf="@id/clockIcon"/>
+    <ImageView
+      android:id="@+id/clockIcon"
+      android:layout_width="25dp"
+      android:layout_height="25dp"
+      android:layout_marginTop="32dp"
+      android:layout_marginStart="16dp"
+      android:src="@drawable/ic_action_cloc_grey"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/categoryIcon"/>
 
-  <TextView
-    android:textStyle="bold"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="16dp"
-    android:text="Pilsudskiego 12"
-    app:layout_constraintBottom_toTopOf="@id/locationIcon"
-    app:layout_constraintEnd_toStartOf="@id/locationIcon"
-    app:layout_constraintTop_toBottomOf="@id/locationIcon"/>
+    <TextView
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:text="tomorrow, 9pm"
+      app:layout_constraintBottom_toTopOf="@id/clockIcon"
+      app:layout_constraintStart_toEndOf="@id/clockIcon"
+      app:layout_constraintTop_toBottomOf="@id/clockIcon"/>
 
-
-  <ImageView
-    android:id="@+id/locationIcon"
-    android:layout_width="25dp"
-    android:layout_height="25dp"
-    android:layout_marginTop="32dp"
-    android:layout_marginEnd="16dp"
-    android:src="@drawable/ic_map_marker_grey600_36dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/categoryIcon"/>
-
-
+    <TextView
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:text="Pilsudskiego 12"
+      app:layout_constraintBottom_toTopOf="@id/locationIcon"
+      app:layout_constraintEnd_toStartOf="@id/locationIcon"
+      app:layout_constraintTop_toBottomOf="@id/locationIcon"/>
 
 
-  <TextView
-    android:id="@+id/aboutHeader"
-    android:textStyle="bold"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="48dp"
-    android:layout_marginStart="16dp"
-    android:text="About"
-    android:textColor="@color/primaryText"
-    android:textSize="17sp"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/clockIcon"/>
+    <ImageView
+      android:id="@+id/locationIcon"
+      android:layout_width="25dp"
+      android:layout_height="25dp"
+      android:layout_marginTop="32dp"
+      android:layout_marginEnd="16dp"
+      android:src="@drawable/ic_map_marker_grey600_36dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/categoryIcon"/>
 
 
-  <TextView
-    android:id="@+id/aboutSectionTextView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:maxLines="4"
-    android:text="@string/lorem"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/aboutHeader"/>
-
-  <de.hdodenhof.circleimageview.CircleImageView
-    android:id="@+id/profile1"
-    android:layout_width="35dp"
-    android:layout_height="35dp"
-    android:layout_marginTop="32dp"
-    android:layout_marginStart="16dp"
-    android:src="@drawable/profile"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/aboutSectionTextView"/>
-
-  <de.hdodenhof.circleimageview.CircleImageView
-    android:id="@+id/profile2"
-    android:layout_width="35dp"
-    android:layout_height="35dp"
-    android:layout_marginTop="32dp"
-    android:layout_marginStart="36dp"
-    android:src="@drawable/profile"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/aboutSectionTextView"/>
-
-  <de.hdodenhof.circleimageview.CircleImageView
-    android:id="@+id/profile3"
-    android:layout_width="35dp"
-    android:layout_height="35dp"
-    android:layout_marginTop="32dp"
-    android:layout_marginStart="56dp"
-    android:src="@drawable/profile"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/aboutSectionTextView"/>
-
-  <de.hdodenhof.circleimageview.CircleImageView
-    android:id="@+id/profile4"
-    android:layout_width="35dp"
-    android:layout_height="35dp"
-    android:layout_marginTop="32dp"
-    android:layout_marginStart="76dp"
-    android:src="@drawable/profile"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/aboutSectionTextView"/>
-
-  <TextView
-    android:textStyle="bold"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="4dp"
-    android:text="+5"
-    android:textSize="12sp"
-    app:layout_constraintBottom_toTopOf="@id/profile4"
-    app:layout_constraintStart_toEndOf="@id/profile4"
-    app:layout_constraintTop_toBottomOf="@id/profile4"/>
-
-  <Button
-    android:id="@+id/inviteButton"
-    android:layout_width="95dp"
-    android:layout_height="35dp"
-    android:layout_marginEnd="16dp"
-    android:background="@drawable/profile_button"
-    android:backgroundTint="#45D84F"
-    android:text="INVITE"
-    android:textColor="#45D84F"
-    android:textSize="12sp"
-    app:layout_constraintBottom_toTopOf="@id/profile1"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/profile1"/>
-
-  <TextView
-    android:id="@+id/hostHeader"
-    android:textStyle="bold"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="24dp"
-    android:layout_marginStart="16dp"
-    android:text="Host"
-    android:textColor="@color/primaryText"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/profile1"/>
-
-  <de.hdodenhof.circleimageview.CircleImageView
-    android:id="@+id/hostProfile"
-    android:layout_width="35dp"
-    android:layout_height="35dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginStart="16dp"
-    android:src="@drawable/profile"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/hostHeader"/>
+    <com.google.android.gms.maps.MapView
+      android:id="@+id/mapView"
+      android:layout_width="match_parent"
+      android:layout_height="150dp"
+      android:layout_marginTop="24dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/clockIcon"
+      tools:liteMode="true"
+      tools:mapType="normal"/>
 
 
-  <TextView
-    android:textStyle="bold"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:text="Marcin Górski"
-    android:textColor="#8E8E8E"
-    app:layout_constraintStart_toEndOf="@id/hostProfile"
-    app:layout_constraintTop_toTopOf="@id/hostProfile"/>
-
-  <Button
-    android:id="@+id/messageButton"
-    android:layout_width="95dp"
-    android:layout_height="35dp"
-    android:layout_marginEnd="16dp"
-    android:background="@drawable/profile_button"
-    android:text="Profile"
-    android:textColor="#2E8CEC"
-    android:textSize="12sp"
-    app:layout_constraintBottom_toTopOf="@id/hostProfile"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/hostProfile"/>
+    <TextView
+      android:id="@+id/aboutHeader"
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="48dp"
+      android:layout_marginStart="16dp"
+      android:text="About"
+      android:textColor="@color/primaryText"
+      android:textSize="17sp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/mapView"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+      android:id="@+id/aboutSectionTextView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="16dp"
+      android:maxLines="4"
+      android:text="@string/lorem"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/aboutHeader"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+      android:id="@+id/profile1"
+      android:layout_width="35dp"
+      android:layout_height="35dp"
+      android:layout_marginTop="32dp"
+      android:layout_marginStart="16dp"
+      android:src="@drawable/profile"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/aboutSectionTextView"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+      android:id="@+id/profile2"
+      android:layout_width="35dp"
+      android:layout_height="35dp"
+      android:layout_marginTop="32dp"
+      android:layout_marginStart="36dp"
+      android:src="@drawable/profile"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/aboutSectionTextView"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+      android:id="@+id/profile3"
+      android:layout_width="35dp"
+      android:layout_height="35dp"
+      android:layout_marginTop="32dp"
+      android:layout_marginStart="56dp"
+      android:src="@drawable/profile"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/aboutSectionTextView"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+      android:id="@+id/profile4"
+      android:layout_width="35dp"
+      android:layout_height="35dp"
+      android:layout_marginTop="32dp"
+      android:layout_marginStart="76dp"
+      android:src="@drawable/profile"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/aboutSectionTextView"/>
+
+    <TextView
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="4dp"
+      android:text="+5"
+      android:textSize="12sp"
+      app:layout_constraintBottom_toTopOf="@id/profile4"
+      app:layout_constraintStart_toEndOf="@id/profile4"
+      app:layout_constraintTop_toBottomOf="@id/profile4"/>
+
+    <Button
+      android:id="@+id/inviteButton"
+      android:layout_width="95dp"
+      android:layout_height="35dp"
+      android:layout_marginEnd="16dp"
+      android:background="@drawable/profile_button"
+      android:backgroundTint="#45D84F"
+      android:text="INVITE"
+      android:textColor="#45D84F"
+      android:textSize="12sp"
+      app:layout_constraintBottom_toTopOf="@id/profile1"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/profile1"/>
+
+    <TextView
+      android:id="@+id/hostHeader"
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:layout_marginStart="16dp"
+      android:text="Host"
+      android:textColor="@color/primaryText"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/profile1"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+      android:id="@+id/hostProfile"
+      android:layout_width="35dp"
+      android:layout_height="35dp"
+      android:layout_marginTop="12dp"
+      android:layout_marginStart="16dp"
+      android:src="@drawable/profile"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/hostHeader"/>
+
+
+    <TextView
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="Marcin Górski"
+      android:textColor="#8E8E8E"
+      app:layout_constraintStart_toEndOf="@id/hostProfile"
+      app:layout_constraintTop_toTopOf="@id/hostProfile"/>
+
+    <Button
+      android:id="@+id/messageButton"
+      android:layout_width="95dp"
+      android:layout_height="35dp"
+      android:layout_marginEnd="16dp"
+      android:background="@drawable/profile_button"
+      android:text="Profile"
+      android:textColor="#2E8CEC"
+      android:textSize="12sp"
+      app:layout_constraintBottom_toTopOf="@id/hostProfile"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/hostProfile"/>
+
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
