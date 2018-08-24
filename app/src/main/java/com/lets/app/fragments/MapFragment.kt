@@ -50,6 +50,54 @@ class MapFragment : BaseFragment() {
         observeData()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mapView.onCreate(savedInstanceState)
+        mapView.getMapAsync {
+            googleMap = it
+            addMarkersToMap()
+            requestPermissionForLocationIfNeeded()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mapView.onStart()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mapView.onStop()
+        if (!permissionDisposable.isDisposed) {
+            permissionDisposable.dispose()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mapView.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mapView.onSaveInstanceState(outState)
+    }
+
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(activity!!).get(EventsViewModel::class.java)
         viewModel.init()
@@ -99,17 +147,6 @@ class MapFragment : BaseFragment() {
         snapHelper.attachToRecyclerView(mapEventsRV)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        mapView.onCreate(savedInstanceState)
-        mapView.getMapAsync {
-            googleMap = it
-            addMarkersToMap()
-            requestPermissionForLocationIfNeeded()
-        }
-    }
-
-
     private fun addMarkersToMap() {
         for (event in eventsList) {
             val marker = googleMap.addMarker(MarkerOptions()
@@ -119,8 +156,7 @@ class MapFragment : BaseFragment() {
         }
 
         googleMap.setOnMarkerClickListener {
-            val index = markersList.indexOf(it)
-            mapEventsRV.smoothScrollToPosition(index)
+            mapEventsRV.smoothScrollToPosition(markersList.indexOf(it))
             resetMarkerColors()
             changeMarkerColor(it)
             false
@@ -162,7 +198,7 @@ class MapFragment : BaseFragment() {
 
     private fun zoomToLocation(lanLng: LatLng) {
         googleMap.animateCamera(CameraUpdateFactory
-                .newLatLngZoom(lanLng, 11f))
+                .newLatLngZoom(lanLng, 12f))
     }
 
     private fun changeMarkerColor(marker: Marker) {
@@ -179,43 +215,6 @@ class MapFragment : BaseFragment() {
         context?.toast("You need to accept location permission")
     }
 
-    override fun onResume() {
-        super.onResume()
-        mapView.onResume()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        mapView.onStart()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        mapView.onPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        mapView.onStop()
-        if (!permissionDisposable.isDisposed) {
-            permissionDisposable.dispose()
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        mapView.onDestroy()
-    }
-
-    override fun onLowMemory() {
-        super.onLowMemory()
-        mapView.onLowMemory()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        mapView.onSaveInstanceState(outState)
-    }
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_map
