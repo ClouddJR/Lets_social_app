@@ -5,6 +5,8 @@
 /.idea/modules.xml
 /.idea/workspace.xml
 /.idea/caches
+/.idea/dictionaries
+/.idea/navEditor.xml
 .DS_Store
 /build
 /captures
