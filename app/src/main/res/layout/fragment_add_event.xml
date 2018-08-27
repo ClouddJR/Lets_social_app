@@ -55,18 +55,28 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <fragment
-      android:id="@+id/place_autocomplete_fragment"
+    <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/locationInputLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:layout_marginBottom="8dp"
+      android:layout_marginBottom="4dp"
       android:layout_marginStart="16dp"
       android:layout_marginEnd="16dp"
-      android:name="com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/titleInputLayout"/>
+      app:layout_constraintTop_toBottomOf="@id/titleInputLayout">
+
+      <EditText
+        android:id="@+id/locationEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:hint="Location"
+        android:focusable="false"
+        android:inputType="text"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.gms.maps.MapView
       android:id="@+id/mapView"
@@ -77,7 +87,7 @@
       android:visibility="gone"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/place_autocomplete_fragment"
+      app:layout_constraintTop_toBottomOf="@id/locationInputLayout"
       tools:liteMode="true"
       tools:mapType="normal"/>
 

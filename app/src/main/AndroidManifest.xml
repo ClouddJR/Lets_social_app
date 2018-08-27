@@ -15,7 +15,6 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme.NoActionBar"
     tools:ignore="GoogleAppIndexingWarning">
-
     <activity
       android:label="@string/title_activity_main"
       android:name=".activities.MainActivity"
@@ -30,7 +29,6 @@
     <meta-data
       android:name="preloaded_fonts"
       android:resource="@array/preloaded_fonts"/>
-
     <meta-data
       android:name="com.facebook.sdk.ApplicationId"
       android:value="@string/facebook_app_id"/>
@@ -39,12 +37,14 @@
       android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
       android:label="@string/app_name"
       android:name="com.facebook.FacebookActivity"/>
-
     <activity android:name=".activities.LoginActivity"/>
 
     <meta-data
       android:name="com.google.android.geo.API_KEY"
       android:value="AIzaSyDfLtNYEi5Wse9vGwi6kfclJd51qJJdib4"/>
+
+    <activity android:name=".activities.LocationPickerActivity">
+    </activity>
   </application>
 
 </manifest>

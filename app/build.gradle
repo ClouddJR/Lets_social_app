@@ -70,6 +70,8 @@ dependencies {
     implementation "com.facebook.android:facebook-login:$facebookLogin"
 
     //testing
+    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     testImplementation "junit:junit:$jUnitVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation 'org.mockito:mockito-inline:2.13.0'
