@@ -15,7 +15,6 @@ class EventsViewModel : ViewModel() {
 
     val nearbyEventsList = MutableLiveData<List<Event>>()
 
-
     fun init() {
         if (nearbyEventsList.value?.isEmpty() != false) {
             disposable = EventsRepository().getEventsNearby()
