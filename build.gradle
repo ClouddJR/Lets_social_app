@@ -35,8 +35,9 @@ buildscript {
         firebaseAuthentication = "16.0.2"
         facebookLogin = "[4,5)"
         glideVersion = "4.7.1"
-        circularImageViewVersion ="2.2.0"
+        circularImageViewVersion = "2.2.0"
         mapBoxVersion = "6.3.0"
+        materialRangeVersion = "1.4.3"
     }
 
     repositories {
