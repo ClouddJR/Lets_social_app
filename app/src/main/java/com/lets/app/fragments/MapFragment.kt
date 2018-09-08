@@ -150,8 +150,7 @@ class MapFragment : BaseFragment() {
     private fun addMarkersToMap() {
         for (event in eventsList) {
             val marker = googleMap.addMarker(MarkerOptions()
-                    .position(LatLng(event.location.latitude, event.location.longitude))
-                    .title(event.title))
+                    .position(LatLng(event.location.latitude, event.location.longitude)))
             markersList.add(marker)
         }
 
@@ -190,15 +189,20 @@ class MapFragment : BaseFragment() {
         fusedLocationClient.lastLocation.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 task.result?.let { location ->
-                    zoomToLocation(LatLng(location.latitude, location.longitude))
+                    setInitialLocation(LatLng(location.latitude, location.longitude))
                 }
             }
         }
     }
 
+    private fun setInitialLocation(lanLng: LatLng) {
+        googleMap.moveCamera(CameraUpdateFactory
+                .newLatLngZoom(lanLng, 12f))
+    }
+
     private fun zoomToLocation(lanLng: LatLng) {
         googleMap.animateCamera(CameraUpdateFactory
-                .newLatLngZoom(lanLng, 12f))
+                .newLatLng(lanLng))
     }
 
     private fun changeMarkerColor(marker: Marker) {
@@ -240,4 +244,6 @@ class MapFragment : BaseFragment() {
     override fun getFABAction(): () -> Unit {
         return {}
     }
+
+    override fun isUsingDataBinding() = false
 }

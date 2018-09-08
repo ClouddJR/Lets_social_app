@@ -1,182 +1,512 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:scrollbarThumbVertical="@null">
+<layout>
+
+  <data>
+    <variable
+      name="vm"
+      type="com.lets.app.viewmodels.AddEventFragmentViewModel"/>
+  </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:scrollbarThumbVertical="@null">
 
-    <com.google.android.material.appbar.AppBarLayout
-      android:id="@+id/appBarLayout"
+    <ScrollView
+      android:id="@+id/mainScrollView"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:theme="@style/AppTheme.AppBarOverlay"
-      app:elevation="0dp"
+      android:layout_height="0dp"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent">
 
-      <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/white"
-        android:theme="@style/Toolbar"
-        app:elevation="0dp"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:titleTextColor="#565656"/>
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-      android:id="@+id/titleInputLayout"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="4dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="16dp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/appBarLayout">
-
-      <EditText
-        android:id="@+id/titleEditText"
+      <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        android:hint="Event title"
-        android:inputType="text"/>
+        android:paddingBottom="30dp"
+        android:orientation="vertical">
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.appbar.AppBarLayout
+          android:id="@+id/appBarLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:theme="@style/AppTheme.AppBarOverlay"
+          app:elevation="0dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent">
 
+          <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/white"
+            android:theme="@style/Toolbar"
+            app:elevation="0dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextColor="#565656">
 
-    <com.google.android.material.textfield.TextInputLayout
-      android:id="@+id/locationInputLayout"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="4dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="16dp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/titleInputLayout">
+            <androidx.appcompat.widget.AppCompatImageButton
+              android:id="@+id/createButton"
+              style="@style/Base.Widget.AppCompat.Button.Borderless"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              android:layout_gravity="end"
+              android:onClick="@{() -> vm.addNewEvent()}"
+              android:src="@drawable/check"/>
 
-      <EditText
-        android:id="@+id/locationEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        android:hint="Location"
-        android:focusable="false"
-        android:inputType="text"/>
+          </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+          android:id="@+id/titleInputLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="4dp"
+          android:layout_marginStart="16dp"
+          android:layout_marginEnd="16dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
+          <EditText
+            android:id="@+id/titleEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:hint="Event title"
+            android:inputType="text"
+            android:text="@={vm.eventTitle}"/>
 
-    <com.google.android.gms.maps.MapView
-      android:id="@+id/mapView"
-      android:layout_width="match_parent"
-      android:layout_height="130dp"
-      android:layout_marginTop="16dp"
-      android:layout_marginBottom="16dp"
-      android:visibility="gone"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/locationInputLayout"
-      tools:liteMode="true"
-      tools:mapType="normal"/>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-      android:id="@+id/dateInputLayout"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="4dp"
-      android:layout_marginBottom="4dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="16dp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/mapView">
-
-      <EditText
-        android:id="@+id/dateEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        android:hint="Date"
-        android:inputType="date"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout
-      android:id="@+id/categoryInputLayout"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="4dp"
-      android:layout_marginBottom="4dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="16dp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/dateInputLayout">
+        <com.google.android.material.textfield.TextInputLayout
+          android:id="@+id/descInputLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="4dp"
+          android:layout_marginStart="16dp"
+          android:layout_marginEnd="16dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/titleInputLayout">
 
-      <EditText
-        android:id="@+id/categoryEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        android:hint="Category"
-        android:inputType="text"/>
+          <EditText
+            android:id="@+id/descEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:hint="Event description"
+            android:inputType="text"
+            android:text="@={vm.eventDesc}"/>
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-      android:id="@+id/tagInputLayout"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="4dp"
-      android:layout_marginBottom="4dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="16dp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/categoryInputLayout">
-
-      <EditText
-        android:id="@+id/tagEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        android:hint="Tags"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <Button
-      android:id="@+id/createButton"
-      android:textStyle="bold"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="16dp"
-      android:layout_marginBottom="16dp"
-      android:layout_marginStart="110dp"
-      android:layout_marginEnd="110dp"
-      android:background="@drawable/create_button"
-      android:elevation="10dp"
-      android:text="CREATE"
-      android:textColor="@android:color/white"
-      android:textSize="16sp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tagInputLayout"/>
+        <com.google.android.material.textfield.TextInputLayout
+          android:id="@+id/locationInputLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="4dp"
+          android:layout_marginStart="16dp"
+          android:layout_marginEnd="16dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/descInputLayout">
+
+          <EditText
+            android:id="@+id/locationEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:focusable="false"
+            android:hint="Location"
+            android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.gms.maps.MapView
+          android:id="@+id/mapView"
+          android:layout_width="match_parent"
+          android:layout_height="130dp"
+          android:layout_marginTop="16dp"
+          android:layout_marginBottom="16dp"
+          android:visibility="gone"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/locationInputLayout"
+          tools:liteMode="true"
+          tools:mapType="normal"/>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+          android:id="@+id/dateInputLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="4dp"
+          android:layout_marginBottom="4dp"
+          android:layout_marginStart="16dp"
+          android:layout_marginEnd="16dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/mapView">
+
+          <EditText
+            android:id="@+id/dateEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:enabled="true"
+            android:focusable="false"
+            android:hint="Date"
+            android:inputType="date"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+          android:id="@+id/publicCheckBox"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="24dp"
+          android:layout_marginStart="16dp"
+          android:checked="@{vm.isPublic}"
+          android:text="public event"
+          android:textColor="@color/secondaryText"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/dateInputLayout"/>
+
+
+        <TextView
+          android:id="@+id/categoryHeader"
+          android:textStyle="bold"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="36dp"
+          android:layout_marginStart="16dp"
+          android:text="Choose a category"
+          android:textSize="16sp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/publicCheckBox"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/sportImageView"
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:layout_marginTop="32dp"
+          android:layout_marginStart="32dp"
+          android:src="@drawable/bike"
+          android:tint="@color/secondaryText"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/categoryHeader"/>
+
+        <TextView
+          android:id="@+id/sportTextView"
+          android:textStyle="bold"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Sport"
+          app:layout_constraintEnd_toEndOf="@id/sportImageView"
+          app:layout_constraintStart_toStartOf="@id/sportImageView"
+          app:layout_constraintTop_toBottomOf="@id/sportImageView"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/cultureImageView"
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:layout_marginTop="32dp"
+          android:src="@drawable/guy_fawkes_mask"
+          android:tint="@color/secondaryText"
+          app:layout_constraintEnd_toStartOf="@id/entertainmentImageView"
+          app:layout_constraintStart_toEndOf="@id/sportImageView"
+          app:layout_constraintTop_toBottomOf="@id/categoryHeader"/>
+
+        <TextView
+          android:id="@+id/cultureTextView"
+          android:textStyle="bold"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Culture"
+          app:layout_constraintEnd_toEndOf="@id/cultureImageView"
+          app:layout_constraintStart_toStartOf="@id/cultureImageView"
+          app:layout_constraintTop_toBottomOf="@id/cultureImageView"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/entertainmentImageView"
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:layout_marginTop="32dp"
+          android:layout_marginEnd="32dp"
+          android:src="@drawable/city_variant_outline"
+          android:tint="@color/secondaryText"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/categoryHeader"/>
+
+
+        <TextView
+          android:id="@+id/entertainmentTextView"
+          android:textStyle="bold"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Entertainment"
+          app:layout_constraintEnd_toEndOf="@id/entertainmentImageView"
+          app:layout_constraintStart_toStartOf="@id/entertainmentImageView"
+          app:layout_constraintTop_toBottomOf="@id/entertainmentImageView"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/recreationImageView"
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:layout_marginTop="32dp"
+          android:layout_marginStart="32dp"
+          android:layout_marginEnd="24dp"
+          android:src="@drawable/pool"
+          android:tint="@color/secondaryText"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/sportImageView"/>
+
+
+        <TextView
+          android:id="@+id/recreationTextView"
+          android:textStyle="bold"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Recreation"
+          app:layout_constraintEnd_toEndOf="@id/recreationImageView"
+          app:layout_constraintStart_toStartOf="@id/recreationImageView"
+          app:layout_constraintTop_toBottomOf="@id/recreationImageView"/>
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/learnImageView"
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:layout_marginTop="32dp"
+          android:layout_marginStart="24dp"
+          android:layout_marginEnd="24dp"
+          android:src="@drawable/book_open_page_variant"
+          android:tint="@color/secondaryText"
+          app:layout_constraintEnd_toStartOf="@id/otherImageView"
+          app:layout_constraintStart_toEndOf="@id/recreationImageView"
+          app:layout_constraintTop_toBottomOf="@id/sportImageView"/>
+
+
+        <TextView
+          android:id="@+id/learnTextView"
+          android:textStyle="bold"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Learn"
+          app:layout_constraintEnd_toEndOf="@id/learnImageView"
+          app:layout_constraintStart_toStartOf="@id/learnImageView"
+          app:layout_constraintTop_toBottomOf="@id/learnImageView"/>
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/otherImageView"
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:layout_marginTop="32dp"
+          android:layout_marginStart="24dp"
+          android:layout_marginEnd="24dp"
+          android:src="@drawable/dots_horizontal"
+          android:tint="@color/secondaryText"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/sportImageView"/>
+
+
+        <TextView
+          android:id="@+id/otherTextView"
+          android:textStyle="bold"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Other"
+          app:layout_constraintEnd_toEndOf="@id/otherImageView"
+          app:layout_constraintStart_toStartOf="@id/otherImageView"
+          app:layout_constraintTop_toBottomOf="@id/otherImageView"/>
+
+
+        <TextView
+          android:id="@+id/sexHeader"
+          android:textStyle="bold"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="36dp"
+          android:layout_marginStart="16dp"
+          android:text="Sex"
+          android:textSize="16sp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/recreationTextView"/>
+
+        <RadioGroup
+          android:id="@+id/sexRadioGroup"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:checkedButton="@id/allRadioButton"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/sexHeader">
+
+          <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/femaleRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:text="Female"
+            android:textColor="@color/secondaryText"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+          <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/maleRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Male"
+            android:textColor="@color/secondaryText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/femaleRadioButton"/>
+
+
+          <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/allRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="All"
+            android:textColor="@color/secondaryText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/maleRadioButton"/>
+
+        </RadioGroup>
+
+        <TextView
+          android:id="@+id/maxPeopleHeader"
+          android:textStyle="bold"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="40dp"
+          android:layout_marginStart="16dp"
+          android:text="Max people"
+          android:textSize="16sp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/sexRadioGroup"/>
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+          android:id="@+id/maxPeopleCheckBox"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:checked="true"
+          android:onCheckedChanged="@{vm::onMaxPeopleCheckBoxClicked}"
+          android:text="unlimited"
+          android:textColor="@color/secondaryText"
+          app:layout_constraintBottom_toTopOf="@id/maxPeopleHeader"
+          app:layout_constraintStart_toEndOf="@id/maxPeopleHeader"
+          app:layout_constraintTop_toBottomOf="@id/maxPeopleHeader"/>
+
+        <com.appyvet.materialrangebar.RangeBar
+          xmlns:app="http://schemas.android.com/apk/res-auto"
+          android:id="@+id/maxPeopleRangeBar"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="4dp"
+          android:layout_marginStart="16dp"
+          android:layout_marginEnd="16dp"
+          android:visibility="gone"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/maxPeopleHeader"
+          app:mrb_barWeight="3dp"
+          app:mrb_connectingLineColor="@color/colorPrimary"
+          app:mrb_connectingLineWeight="3dp"
+          app:mrb_pinColor="@color/colorPrimary"
+          app:mrb_pinMaxFont="16sp"
+          app:mrb_pinRadius="16dp"
+          app:mrb_rangeBar="false"
+          app:mrb_selectorBoundaryColor="@color/colorPrimary"
+          app:mrb_selectorColor="@color/colorPrimary"
+          app:mrb_selectorSize="6dp"
+          app:mrb_tickColor="@android:color/transparent"
+          app:mrb_tickEnd="100"
+          app:mrb_tickStart="1"/>
+
+
+        <TextView
+          android:id="@+id/ageRangeHeader"
+          android:textStyle="bold"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="24dp"
+          android:layout_marginStart="16dp"
+          android:text="Specify age range"
+          android:textSize="16sp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/maxPeopleRangeBar"/>
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+          android:id="@+id/ageRangeCheckBox"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:checked="true"
+          android:onCheckedChanged="@{vm::onAgeCheckBoxClicked}"
+          android:text="not specified"
+          android:textColor="@color/secondaryText"
+          app:layout_constraintBottom_toTopOf="@id/ageRangeHeader"
+          app:layout_constraintStart_toEndOf="@id/ageRangeHeader"
+          app:layout_constraintTop_toBottomOf="@id/ageRangeHeader"/>
+
+        <com.appyvet.materialrangebar.RangeBar
+          xmlns:app="http://schemas.android.com/apk/res-auto"
+          android:id="@+id/ageRangeBar"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="4dp"
+          android:layout_marginStart="16dp"
+          android:layout_marginEnd="16dp"
+          android:visibility="gone"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/ageRangeHeader"
+          app:mrb_barWeight="3dp"
+          app:mrb_connectingLineColor="@color/colorPrimary"
+          app:mrb_connectingLineWeight="3dp"
+          app:mrb_pinColor="@color/colorPrimary"
+          app:mrb_pinMaxFont="16sp"
+          app:mrb_pinRadius="16dp"
+          app:mrb_selectorBoundaryColor="@color/colorPrimary"
+          app:mrb_selectorColor="@color/colorPrimary"
+          app:mrb_selectorSize="6dp"
+          app:mrb_tickColor="@android:color/transparent"
+          app:mrb_tickEnd="90"
+          app:mrb_tickStart="1"/>
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <!--<Button-->
+    <!--android:textStyle="bold"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="16dp"-->
+    <!--android:layout_marginBottom="16dp"-->
+    <!--android:layout_marginStart="110dp"-->
+    <!--android:layout_marginEnd="110dp"-->
+    <!--android:background="@drawable/create_button"-->
+    <!--android:elevation="10dp"-->
+    <!--android:text="CREATE"-->
+    <!--android:textColor="@android:color/white"-->
+    <!--android:textSize="16sp"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent"/>-->
 
   </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</layout>

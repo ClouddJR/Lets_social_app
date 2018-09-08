@@ -99,4 +99,9 @@ dependencies {
     implementation "com.google.android.gms:play-services-maps:$googlePlayServices"
     implementation "com.google.android.gms:play-services-location:$googlePlayServices"
     implementation "com.google.android.gms:play-services-places:$googlePlayServices"
+
+    //material range bar
+    implementation ("com.appyvet:materialrangebar:$materialRangeVersion") {
+        exclude module: 'support-compat'
+    }
 }

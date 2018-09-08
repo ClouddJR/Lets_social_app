@@ -14,7 +14,11 @@ import com.lets.app.activities.MainActivity
 abstract class BaseFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(getLayoutId(), container, false)
+        return if (!isUsingDataBinding()) {
+            inflater.inflate(getLayoutId(), container, false)
+        } else {
+            null
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -40,5 +44,7 @@ abstract class BaseFragment : Fragment() {
     abstract fun getFAB(): FloatingActionButton?
 
     abstract fun getFABAction(): () -> Unit
+
+    abstract fun isUsingDataBinding(): Boolean
 
 }

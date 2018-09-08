@@ -51,7 +51,6 @@ class LoginViewModel(private val userRepository: UserRepository = UserRepository
         }
     }
 
-
     fun loginWasSuccessful() {
         loginSucceed.value = MessageWrapper(true)
     }

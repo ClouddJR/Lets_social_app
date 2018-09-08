@@ -70,4 +70,6 @@ class ExploreFragment : BaseFragment() {
     override fun getFABAction(): () -> Unit {
         return { (activity as? MainActivity)?.navController?.navigate(R.id.mapAction) }
     }
+
+    override fun isUsingDataBinding() = false
 }

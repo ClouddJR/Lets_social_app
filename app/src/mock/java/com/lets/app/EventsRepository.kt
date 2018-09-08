@@ -13,8 +13,12 @@ class EventsRepository {
         return Observable.fromCallable { eventsList }
     }
 
+    fun addEvent(event: Event) {
+        eventsList.add(event)
+    }
 
-    private val eventsList = listOf(
+
+    private val eventsList = mutableListOf(
 
             Event(
                     owner = "Arkadiusz",
