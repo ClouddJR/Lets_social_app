@@ -25,18 +25,23 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var progressBarDialog: Dialog
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.init()
-        observeLoggedUser()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initDataBinding()
         styleLoginButton()
         initLogin()
         observeLoginEvents()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.init()
+        observeLoggedUser()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun observeLoggedUser() {
@@ -65,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
     private fun initLogin() {
         callbackManager = CallbackManager.Factory.create()
         with(loginButton) {
-            setReadPermissions("email", "public_profile")
+            setReadPermissions("email", "public_profile", "user_birthday")
             registerCallback(callbackManager, viewModel.facebookCallback)
         }
     }
@@ -97,11 +102,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun hideProgressBar() {
         progressBarDialog.hide()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        callbackManager.onActivityResult(requestCode, resultCode, data)
-        super.onActivityResult(requestCode, resultCode, data)
     }
 
 }
