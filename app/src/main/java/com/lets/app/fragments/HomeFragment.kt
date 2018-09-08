@@ -81,4 +81,6 @@ class HomeFragment : BaseFragment() {
     override fun getFABAction(): () -> Unit {
         return {}
     }
+
+    override fun isUsingDataBinding() = false
 }

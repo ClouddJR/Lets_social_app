@@ -80,4 +80,6 @@ class EventFragment : BaseFragment() {
     override fun getFAB(): FloatingActionButton? = null
 
     override fun getFABAction(): () -> Unit = {}
+
+    override fun isUsingDataBinding() = false
 }
