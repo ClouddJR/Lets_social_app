@@ -21,6 +21,7 @@ class LoginActivityViewModelTest {
     @Mock
     private lateinit var userRepository: UserRepository
 
+
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
