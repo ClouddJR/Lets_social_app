@@ -1,6 +1,6 @@
 package com.lets.app.utils
 
-class MessageWrapper<T>(private val value: T) {
+class SingleEvent<T>(private val value: T) {
 
     private var hasBeenHandled = false
 
