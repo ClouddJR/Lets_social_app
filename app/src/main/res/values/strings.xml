@@ -7,10 +7,6 @@
   <string name="facebook_app_id">2151734165073419</string>
   <string name="fb_login_protocol_scheme">fb2151734165073419</string>
 
-  <!--map box access token-->
-  <string name="mapbox_access_token">pk.eyJ1Ijoic21hbGxlbGVjdHJvbiIsImEiOiJjamtyNXE4aHEzMmJhM3FwMHg1b3NvdHZyIn0.pd-qeetet350UHvE8l8q5w</string>
-
-
   <string name="title_fragment_home">Home</string>
   <string name="title_fragment_explore">Explore</string>
   <string name="title_fragment_profile">Profile</string>
@@ -18,6 +14,24 @@
   <string name="title_fragment_add_event">New event</string>
   <string name="title_fragment_map">Map</string>
   <string name="title_fragment_event">Event</string>
+  <string name="title_fragment_filters">Filters</string>
+
+  <string-array name="sorting_types">
+    <item>From newest to oldest</item>
+    <item>From oldest to newest</item>
+    <item>From closest to farthest</item>
+    <item>From farthest to closest</item>
+  </string-array>
+
+  <string-array name="event_categories">
+    <item>All</item>
+    <item>Sport</item>
+    <item>Culture</item>
+    <item>Entertainment</item>
+    <item>Recreation</item>
+    <item>Learn</item>
+    <item>Other</item>
+  </string-array>
 
   <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eleifend vel lacus sodales porta. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut dapibus sapien eget ligula maximus, at efficitur nulla volutpat. Pellentesque blandit at metus ac pharetra. Nullam diam diam, laoreet ac metus vitae, ullamcorper euismod risus. Proin pretium porta tristique. In egestas accumsan neque, et accumsan dolor tristique vitae.</string>
 

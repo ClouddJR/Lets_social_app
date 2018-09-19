@@ -47,6 +47,12 @@
     app:enterAnim="@anim/fade_in"
     app:popEnterAnim="@anim/fade_in"/>
 
+  <action
+    android:id="@+id/filtersAction"
+    app:destination="@id/filtersFragment"
+    app:enterAnim="@anim/fade_in"
+    app:popEnterAnim="@anim/fade_in"/>
+
 
   <fragment
     android:id="@+id/homeFragment"
@@ -89,6 +95,12 @@
     android:label="EventFragment"
     android:name="com.lets.app.fragments.EventFragment"
     tools:layout="@layout/fragment_event"/>
+
+  <fragment
+    android:id="@+id/filtersFragment"
+    android:label="FiltersFragment"
+    android:name="com.lets.app.fragments.FiltersFragment"
+    tools:layout="@layout/fragment_filters"/>
 
 
 </navigation>

@@ -4,15 +4,15 @@ import android.view.MenuItem
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lets.app.R
-import com.lets.app.utils.MessageWrapper
+import com.lets.app.utils.SingleEvent
 
 
 class MainActivityViewModel : ViewModel() {
 
-    val homeButtonClick = MutableLiveData<MessageWrapper<Boolean>>()
-    val exploreButtonClick = MutableLiveData<MessageWrapper<Boolean>>()
-    val profileButtonClick = MutableLiveData<MessageWrapper<Boolean>>()
-    val messagesButtonClick = MutableLiveData<MessageWrapper<Boolean>>()
+    val homeButtonClick = MutableLiveData<SingleEvent<Boolean>>()
+    val exploreButtonClick = MutableLiveData<SingleEvent<Boolean>>()
+    val profileButtonClick = MutableLiveData<SingleEvent<Boolean>>()
+    val messagesButtonClick = MutableLiveData<SingleEvent<Boolean>>()
 
     fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -25,18 +25,18 @@ class MainActivityViewModel : ViewModel() {
     }
 
     fun homeButtonClicked() {
-        homeButtonClick.value = MessageWrapper(true)
+        homeButtonClick.value = SingleEvent(true)
     }
 
     fun exploreButtonClicked() {
-        exploreButtonClick.value = MessageWrapper(true)
+        exploreButtonClick.value = SingleEvent(true)
     }
 
     fun profileButtonClicked() {
-        profileButtonClick.value = MessageWrapper(true)
+        profileButtonClick.value = SingleEvent(true)
     }
 
     fun messagesButtonClick() {
-        messagesButtonClick.value = MessageWrapper(true)
+        messagesButtonClick.value = SingleEvent(true)
     }
 }

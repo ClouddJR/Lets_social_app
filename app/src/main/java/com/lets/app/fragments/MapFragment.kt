@@ -1,6 +1,5 @@
 package com.lets.app.fragments
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
@@ -9,10 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -24,8 +22,6 @@ import com.lets.app.R
 import com.lets.app.adapters.RVBigEventMapAdapter
 import com.lets.app.model.Event
 import com.lets.app.viewmodels.EventsViewModel
-import com.tbruyelle.rxpermissions2.RxPermissions
-import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_map.*
 import org.jetbrains.anko.toast
 
@@ -37,17 +33,9 @@ class MapFragment : BaseFragment() {
     private lateinit var viewModel: EventsViewModel
     private lateinit var googleMap: GoogleMap
 
-    private lateinit var permissionDisposable: Disposable
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         initViewModel()
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        observeData()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,9 +43,12 @@ class MapFragment : BaseFragment() {
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
             googleMap = it
+            getUserLocation()
+            observeLocationUpdate()
+            observeData()
             addMarkersToMap()
-            requestPermissionForLocationIfNeeded()
         }
+        initFilterButton()
     }
 
     override fun onResume() {
@@ -78,9 +69,6 @@ class MapFragment : BaseFragment() {
     override fun onStop() {
         super.onStop()
         mapView.onStop()
-        if (!permissionDisposable.isDisposed) {
-            permissionDisposable.dispose()
-        }
     }
 
     override fun onDestroyView() {
@@ -104,10 +92,28 @@ class MapFragment : BaseFragment() {
     }
 
     private fun observeData() {
-        viewModel.nearbyEventsList.observe(this, Observer {
+        viewModel.filteredEventsList.observe(this, Observer {
+            eventsList.removeAll(eventsList)
             eventsList.addAll(it)
             setRV(it)
         })
+    }
+
+    private fun observeLocationUpdate() {
+        viewModel.userLocation.observe(this, Observer {
+            setInitialLocation(LatLng(it.latitude, it.longitude))
+            initLocationButton()
+        })
+
+        viewModel.locationError.observe(this, Observer {
+            displayWarningToast()
+        })
+    }
+
+    private fun initFilterButton() {
+        filtersButton.setOnClickListener {
+            it.findNavController().navigate(R.id.filtersAction)
+        }
     }
 
     private fun setRV(eventsList: List<Event>) {
@@ -155,45 +161,27 @@ class MapFragment : BaseFragment() {
         }
 
         googleMap.setOnMarkerClickListener {
-            mapEventsRV.smoothScrollToPosition(markersList.indexOf(it))
-            resetMarkerColors()
+            mapEventsRV.post {
+                mapEventsRV.smoothScrollToPosition(markersList.indexOf(it))
+            }
+            resetMarkerColors(it)
             changeMarkerColor(it)
-            false
+            true
         }
     }
 
-    private fun resetMarkerColors() {
+    private fun resetMarkerColors(previousMarker: Marker) {
         for (marker in markersList) {
-            marker.setIcon(BitmapDescriptorFactory.defaultMarker())
-        }
-
-    }
-
-    private fun requestPermissionForLocationIfNeeded() {
-        permissionDisposable = RxPermissions(this)
-                .request(Manifest.permission.ACCESS_FINE_LOCATION)
-                .subscribe { granted ->
-                    if (granted) {
-                        getUserLocation()
-                        initLocationButton()
-                    } else {
-                        displayWarningToast()
-                    }
-                }
-    }
-
-
-    @SuppressLint("MissingPermission")
-    private fun getUserLocation() {
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
-        fusedLocationClient.lastLocation.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                task.result?.let { location ->
-                    setInitialLocation(LatLng(location.latitude, location.longitude))
-                }
+            if (marker != previousMarker) {
+                marker.setIcon(BitmapDescriptorFactory.defaultMarker())
             }
         }
     }
+
+    private fun getUserLocation() {
+        viewModel.requestLocation(activity)
+    }
+
 
     private fun setInitialLocation(lanLng: LatLng) {
         googleMap.moveCamera(CameraUpdateFactory
@@ -206,7 +194,7 @@ class MapFragment : BaseFragment() {
     }
 
     private fun changeMarkerColor(marker: Marker) {
-        resetMarkerColors()
+        resetMarkerColors(marker)
         marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
     }
 
