@@ -8,24 +8,24 @@ import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import com.google.android.gms.tasks.OnCompleteListener
 import com.lets.app.repositories.UserRepository
-import com.lets.app.utils.MessageWrapper
+import com.lets.app.utils.SingleEvent
 
 class LoginViewModel(private val userRepository: UserRepository = UserRepository()) : ViewModel() {
 
-    val userAlreadyLoggedIn = MutableLiveData<MessageWrapper<Boolean>>()
-    val loginSucceed = MutableLiveData<MessageWrapper<Boolean>>()
-    val loginProcess = MutableLiveData<MessageWrapper<Boolean>>()
-    val loginError = MutableLiveData<MessageWrapper<Boolean>>()
+    val userAlreadyLoggedIn = MutableLiveData<SingleEvent<Boolean>>()
+    val loginSucceed = MutableLiveData<SingleEvent<Boolean>>()
+    val loginProcess = MutableLiveData<SingleEvent<Boolean>>()
+    val loginError = MutableLiveData<SingleEvent<Boolean>>()
 
     fun init() {
         if (userRepository.isUserLoggedIn()) {
-            userAlreadyLoggedIn.value = MessageWrapper(true)
+            userAlreadyLoggedIn.value = SingleEvent(true)
         }
     }
 
     val facebookCallback = object : FacebookCallback<LoginResult> {
         override fun onSuccess(result: LoginResult?) {
-            loginProcess.value = MessageWrapper(true)
+            loginProcess.value = SingleEvent(true)
             handleAccessToken(result?.accessToken)
         }
 
@@ -34,7 +34,7 @@ class LoginViewModel(private val userRepository: UserRepository = UserRepository
         }
 
         override fun onError(error: FacebookException?) {
-            loginError.value = MessageWrapper(true)
+            loginError.value = SingleEvent(true)
         }
     }
 
@@ -52,11 +52,11 @@ class LoginViewModel(private val userRepository: UserRepository = UserRepository
     }
 
     fun loginWasSuccessful() {
-        loginSucceed.value = MessageWrapper(true)
+        loginSucceed.value = SingleEvent(true)
     }
 
     fun loginFailed() {
-        loginError.value = MessageWrapper(true)
+        loginError.value = SingleEvent(true)
     }
 
 }
