@@ -56,7 +56,7 @@ class AddEventFragmentViewModel : ViewModel() {
     private lateinit var geocodingDisposable: Disposable
 
     fun setEventCategory(view: ImageView) {
-        val eventCategory = CategoriesUtils.getEventCategory(view.id)
+        val eventCategory = CategoriesUtils.getEventCategoryFromImage(view.id)
         category = eventCategory.id
     }
 
