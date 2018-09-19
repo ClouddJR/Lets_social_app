@@ -3,10 +3,12 @@ package com.lets.app.fragments
 import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.lets.app.R
 import com.lets.app.activities.MainActivity
@@ -29,15 +31,26 @@ class ExploreFragment : BaseFragment() {
         observeData()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initFiltersButton()
+    }
+
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(activity!!).get(EventsViewModel::class.java)
         viewModel.init()
     }
 
     private fun observeData() {
-        viewModel.nearbyEventsList.observe(this, Observer {
+        viewModel.filteredEventsList.observe(this, Observer {
             setRV(it)
         })
+    }
+
+    private fun initFiltersButton() {
+        filtersButton.setOnClickListener {
+            it.findNavController().navigate(R.id.filtersAction)
+        }
     }
 
     private fun setRV(list: List<Event>) {
