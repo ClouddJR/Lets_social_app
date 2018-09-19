@@ -1,15 +1,17 @@
 package com.lets.app.utils
 
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import com.lets.app.R
 import com.lets.app.activities.MainActivity
+import com.lets.app.utils.ExtFunctions.moveYBy
+import com.lets.app.utils.ExtFunctions.resize
+import com.lets.app.utils.ExtFunctions.setColorText
+import com.lets.app.utils.ExtFunctions.setImageColor
 
 object CategoriesUtils {
 
-    fun getEventCategory(viewId: Int): EventCategory {
+    fun getEventCategoryFromImage(viewId: Int): EventCategory {
         return when (viewId) {
             R.id.otherImageView -> EventCategory.OTHER
             R.id.sportImageView -> EventCategory.SPORT
@@ -17,6 +19,19 @@ object CategoriesUtils {
             R.id.entertainmentImageView -> EventCategory.ENTERTAINMENT
             R.id.recreationImageView -> EventCategory.RECREATION
             R.id.learnImageView -> EventCategory.LEARN
+            else -> EventCategory.OTHER
+        }
+    }
+
+    fun getEventCategoryFromSpinner(index: Int): EventCategory {
+        return when (index) {
+            0 -> EventCategory.ALL
+            1 -> EventCategory.SPORT
+            2 -> EventCategory.CULTURE
+            3 -> EventCategory.ENTERTAINMENT
+            4 -> EventCategory.RECREATION
+            5 -> EventCategory.LEARN
+            6 -> EventCategory.OTHER
             else -> EventCategory.OTHER
         }
     }
@@ -32,7 +47,6 @@ object CategoriesUtils {
             else -> R.id.otherTextView
         }
     }
-
 
     fun animateCategoryView(imageView: ImageView) {
         imageView.setImageColor(R.color.colorPrimary)
@@ -55,33 +69,14 @@ object CategoriesUtils {
     }
 
 
-    fun ImageView.hasImageColor(color: Int): Boolean {
-        return this.imageTintList.defaultColor == ContextCompat.getColor(context!!, color)
-    }
-
-    private fun ImageView.setImageColor(color: Int) {
-        this.imageTintList = ContextCompat.getColorStateList(context!!, color)
-    }
-
-    private fun TextView.setColorText(color: Int) {
-        return this.setTextColor(ContextCompat.getColor(context!!, color))
-    }
-
-    private fun View.resize(scale: Float) {
-        this.animate().scaleXBy(scale).setDuration(100).start()
-        this.animate().scaleYBy(scale).setDuration(100).start()
-    }
-
-    private fun View.moveYBy(distance: Float) {
-        this.animate().translationYBy(distance).setDuration(100).start()
-    }
-
     enum class EventCategory(val id: Int) {
         OTHER(0),
         SPORT(1),
         CULTURE(2),
         ENTERTAINMENT(3),
         RECREATION(4),
-        LEARN(5)
+        LEARN(5),
+        ALL(6)
     }
+
 }

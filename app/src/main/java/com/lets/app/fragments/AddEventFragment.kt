@@ -26,10 +26,10 @@ import com.lets.app.R
 import com.lets.app.activities.LocationPickerActivity
 import com.lets.app.databinding.FragmentAddEventBinding
 import com.lets.app.utils.CategoriesUtils.animateCategoryView
-import com.lets.app.utils.CategoriesUtils.hasImageColor
 import com.lets.app.utils.CategoriesUtils.revertCategoryViewAnimation
 import com.lets.app.utils.DateUtils.formatDate
 import com.lets.app.utils.DateUtils.formatTime
+import com.lets.app.utils.ExtFunctions.hasImageColor
 import com.lets.app.viewmodels.AddEventFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_add_event.*
 import java.util.*
