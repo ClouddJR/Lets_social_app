@@ -43,7 +43,9 @@ class ExploreFragment : BaseFragment() {
 
     private fun observeData() {
         viewModel.filteredEventsList.observe(this, Observer {
-            setRV(it)
+            it?.let {
+                setRV(it)
+            }
         })
     }
 

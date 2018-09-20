@@ -93,9 +93,11 @@ class MapFragment : BaseFragment() {
 
     private fun observeData() {
         viewModel.filteredEventsList.observe(this, Observer {
-            eventsList.removeAll(eventsList)
-            eventsList.addAll(it)
-            setRV(it)
+            it?.let {
+                eventsList.removeAll(eventsList)
+                eventsList.addAll(it)
+                setRV(it)
+            }
         })
     }
 
