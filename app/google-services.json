@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "763065051774-vllg9a56094macltjkaqpfr9oljs6mg4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lets.app",
+            "certificate_hash": "46a7bde9ed30a7e5c1546ad4e78f342111aca880"
+          }
+        },
+        {
           "client_id": "763065051774-cd26h8ti9v9c1j2h4fab8acaa8jhb8be.apps.googleusercontent.com",
           "client_type": 3
         }
