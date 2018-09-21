@@ -126,6 +126,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="16dp"
             android:focusable="false"
+            android:text="@={vm.addressName}"
             android:hint="Location"
             android:inputType="text"/>
 
