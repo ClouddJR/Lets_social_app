@@ -1,5 +1,9 @@
 package com.lets.app.utils
 
+import android.annotation.SuppressLint
+import java.text.SimpleDateFormat
+import java.util.*
+
 object DateUtils {
 
     fun formatDate(year: Int, month: Int, day: Int): String {
@@ -32,6 +36,12 @@ object DateUtils {
         }
 
         return "$formattedHour:$formattedMinutes"
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun getDateFromString(dateString: String): Date {
+        val df = SimpleDateFormat("MM/dd/yyyy")
+        return df.parse(dateString)
     }
 
 }
