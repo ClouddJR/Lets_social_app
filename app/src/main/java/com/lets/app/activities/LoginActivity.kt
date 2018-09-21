@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.facebook.CallbackManager
+import com.facebook.login.widget.LoginButton
 import com.lets.app.R
 import com.lets.app.databinding.ActivityLoginBinding
 import com.lets.app.utils.ProgressDialog
@@ -69,8 +70,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initLogin() {
         callbackManager = CallbackManager.Factory.create()
-        with(loginButton) {
-            setReadPermissions("email", "public_profile", "user_birthday")
+        with(loginButton as LoginButton) {
+            setReadPermissions("public_profile", "email", "user_birthday", "user_gender")
             registerCallback(callbackManager, viewModel.facebookCallback)
         }
     }
