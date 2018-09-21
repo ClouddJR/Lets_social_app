@@ -11,6 +11,7 @@ data class Event(
         var description: String = "",
         var timestamp: Timestamp = Timestamp(Date()),
         var location: GeoPoint = GeoPoint(0.0, 0.0),
+        var addressName: String = "",
         var isPublic: Boolean = true,
         var maxPeople: Int = 0,
         var ageFrom: Int = 0,
