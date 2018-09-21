@@ -91,7 +91,7 @@ class AddEventFragmentViewModel : ViewModel() {
         val location = GeoPoint(chosenEventLocation.value?.latitude ?: 0.0,
                 chosenEventLocation.value?.longitude ?: 0.0)
 
-        val eventToBeAdded = Event(ownerId, eventTitle, eventDesc, eventTimestamp, location
+        val eventToBeAdded = Event("", ownerId, eventTitle, eventDesc, eventTimestamp, location
                 , isPublic, maxPeople, ageFrom, ageTo, selectedSex, type, category, false)
 
         eventsRepository.addEvent(eventToBeAdded)
