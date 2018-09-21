@@ -43,6 +43,7 @@ class LoginViewModel(private val userRepository: UserRepository = UserRepository
         token?.let {
             userRepository.login(it, OnCompleteListener {
                 if (it.isSuccessful) {
+                    userRepository.saveUser(token)
                     loginWasSuccessful()
                 } else {
                     loginFailed()

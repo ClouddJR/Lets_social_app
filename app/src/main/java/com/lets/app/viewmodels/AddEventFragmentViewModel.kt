@@ -2,12 +2,10 @@ package com.lets.app.viewmodels
 
 import android.content.Context
 import android.location.Address
-import android.util.Log
 import android.widget.CompoundButton
 import android.widget.ImageView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.facebook.AccessToken
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.GeoPoint
@@ -15,6 +13,7 @@ import com.lets.app.EventsRepository
 import com.lets.app.R
 import com.lets.app.model.Event
 import com.lets.app.repositories.GeocodingRepository
+import com.lets.app.repositories.UserRepository
 import com.lets.app.utils.CategoriesUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -28,6 +27,7 @@ class AddEventFragmentViewModel : ViewModel() {
 
     var eventTitle = ""
     var eventDesc = ""
+    var addressName = ""
     var year = 0
     var month = 0
     var day = 0
@@ -84,19 +84,16 @@ class AddEventFragmentViewModel : ViewModel() {
     }
 
     fun addNewEvent() {
-        val ownerId = AccessToken.getCurrentAccessToken().userId
-        val calendar = Calendar.getInstance()
-        calendar.set(year, month - 1, day, hour, minute)
+        val ownerId = UserRepository.getUserId()
+        val calendar = Calendar.getInstance().also { it.set(year, month - 1, day, hour, minute, 0) }
         val eventTimestamp = Timestamp(calendar.time)
         val location = GeoPoint(chosenEventLocation.value?.latitude ?: 0.0,
                 chosenEventLocation.value?.longitude ?: 0.0)
 
-        val eventToBeAdded = Event(ownerId, eventTitle, eventDesc, eventTimestamp, location
-                , isPublic, maxPeople, ageFrom, ageTo, selectedSex, type, category, false)
+        val eventToBeAdded = Event("", ownerId, eventTitle, eventDesc, eventTimestamp, location,
+                addressName, isPublic, maxPeople, ageFrom, ageTo, selectedSex, type, category, false)
 
         eventsRepository.addEvent(eventToBeAdded)
-
-        Log.d("AddEventViewModel", eventToBeAdded.toString())
     }
 
     fun onMaxPeopleCheckBoxClicked(buttonView: CompoundButton, isChecked: Boolean) {

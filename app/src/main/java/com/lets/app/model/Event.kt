@@ -5,19 +5,21 @@ import com.google.firebase.firestore.GeoPoint
 import java.util.*
 
 data class Event(
-        val owner: String = "",
-        val title: String = "",
-        val description: String = "",
-        val timestamp: Timestamp = Timestamp(Date()),
-        val location: GeoPoint = GeoPoint(0.0, 0.0),
-        val isPublic: Boolean = true,
-        val maxPeople: Int = 0,
-        val ageFrom: Int = 0,
-        val ageTo: Int = 0,
-        val sex: Int = 0,
-        val type: Int = 0,
-        val category: Int = 0,
-        val isBlocked: Boolean = false,
-        val joined: List<User> = listOf(),
-        val request: List<Request> = listOf()
+        var id: String = "",
+        var owner: String = "",
+        var title: String = "",
+        var description: String = "",
+        var timestamp: Timestamp = Timestamp(Date()),
+        var location: GeoPoint = GeoPoint(0.0, 0.0),
+        var addressName: String = "",
+        var isPublic: Boolean = true,
+        var maxPeople: Int = 0,
+        var ageFrom: Int = 0,
+        var ageTo: Int = 0,
+        var sex: Int = 0,
+        var type: Int = 0,
+        var category: Int = 0,
+        var isBlocked: Boolean = false,
+        var joined: List<User> = listOf(),
+        var request: List<Request> = listOf()
 )

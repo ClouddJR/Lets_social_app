@@ -107,20 +107,22 @@ class EventsViewModel : ViewModel() {
         sortSpinnerSelection = sortingSpinnerIndex
 
         val sortType = getSortTypeFromSpinner(sortingSpinnerIndex)
-        val eventsList = filteredEventsList.value!!
+        val eventsList = filteredEventsList.value
 
-        filteredEventsList.value = when (sortType) {
-            SortType.DATE_DESCENDING -> {
-                sortByDateDescending(eventsList)
-            }
-            SortType.DATE_ASCENDING -> {
-                sortByDateAscending(eventsList)
-            }
-            SortType.FARTHEST_TO_CLOSEST -> {
-                sortFarthestToClosest(eventsList, userLocation.value!!)
-            }
-            SortType.CLOSEST_TO_FARTHEST -> {
-                sortClosestToFarthest(eventsList, userLocation.value!!)
+        eventsList?.let {
+            filteredEventsList.value = when (sortType) {
+                SortType.DATE_DESCENDING -> {
+                    sortByDateDescending(eventsList)
+                }
+                SortType.DATE_ASCENDING -> {
+                    sortByDateAscending(eventsList)
+                }
+                SortType.FARTHEST_TO_CLOSEST -> {
+                    sortFarthestToClosest(eventsList, userLocation.value!!)
+                }
+                SortType.CLOSEST_TO_FARTHEST -> {
+                    sortClosestToFarthest(eventsList, userLocation.value!!)
+                }
             }
         }
     }
