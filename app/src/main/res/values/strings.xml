@@ -11,6 +11,7 @@
   <string name="title_fragment_explore">Explore</string>
   <string name="title_fragment_profile">Profile</string>
   <string name="title_fragment_messages">Messages</string>
+  <string name="title_fragment_event_messages">Event Messages</string>
   <string name="title_fragment_add_event">New event</string>
   <string name="title_fragment_map">Map</string>
   <string name="title_fragment_event">Event</string>

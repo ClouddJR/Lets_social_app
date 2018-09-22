@@ -68,6 +68,7 @@ dependencies {
     implementation "com.google.firebase:firebase-firestore:$firebaseVersion"
     implementation "com.google.firebase:firebase-auth:$firebaseAuthentication"
     implementation "com.facebook.android:facebook-login:$facebookLogin"
+    implementation "com.google.firebase:firebase-database:16.0.1"
 
     //testing
     implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
