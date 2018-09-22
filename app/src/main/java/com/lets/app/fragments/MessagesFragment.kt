@@ -1,13 +1,23 @@
 package com.lets.app.fragments
 
 import android.content.res.ColorStateList
+import android.os.Bundle
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.lets.app.R
 import kotlinx.android.synthetic.main.fragment_messages.*
 
 class MessagesFragment : BaseFragment() {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        messagesButton.setOnClickListener {
+            it.findNavController().navigate(R.id.eventMessagesAction)
+        }
+    }
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_messages
