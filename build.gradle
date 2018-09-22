@@ -23,7 +23,7 @@ buildscript {
         espressoCoreVersion = "3.1.0-alpha4"
         testRunnerVersion = "1.1.0-alpha4"
         jUnitVersion = "4.12"
-        mockitoVersion = "1.10.19"
+        mockitoVersion = "2.22.0"
 
         //Additional
         architectureComponentsVersion = "2.0.0-beta01"
