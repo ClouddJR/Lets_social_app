@@ -3,6 +3,7 @@ package com.lets.app
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.GeoPoint
 import com.lets.app.model.Event
+import com.lets.app.model.User
 import io.reactivex.Observable
 import java.util.*
 
@@ -17,10 +18,15 @@ class EventsRepository {
         eventsList.add(event)
     }
 
+    //TODO
+//    fun getUsersForEvent( eventId: String ): List<User> {
+//
+//    }
 
     private val eventsList = mutableListOf(
 
             Event(
+                    id = "1",
                     owner = "Arkadiusz",
                     title = "Preparing for half Marathon in Poznan",
                     description = "I am looking for a person to train with. " +
@@ -39,6 +45,7 @@ class EventsRepository {
                     isBlocked = false),
 
             Event(
+                    id = "2",
                     owner = "Korneliusz",
                     title = "Star Wars premiere",
                     description = "Anyone interested?",
@@ -56,6 +63,7 @@ class EventsRepository {
                     isBlocked = false),
 
             Event(
+                    id = "3",
                     owner = "Tymon",
                     title = "Overwatch game companion",
                     description = "Looking for someone available every Friday to play some Overwatch games",
@@ -73,6 +81,7 @@ class EventsRepository {
                     isBlocked = false),
 
             Event(
+                    id = "4",
                     owner = "Marcin",
                     title = "Date",
                     description = "Some female hotties nearby?",
@@ -90,6 +99,7 @@ class EventsRepository {
                     isBlocked = false),
 
             Event(
+                    id = "5",
                     owner = "Piotr",
                     title = "Opel Astra rally",
                     description = "Rally for Opel Astra fans from all over the world will be hosted in Poznan!",
@@ -106,6 +116,5 @@ class EventsRepository {
                     request = listOf(),
                     isBlocked = false)
     )
-
 
 }

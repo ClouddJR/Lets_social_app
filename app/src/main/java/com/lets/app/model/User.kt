@@ -4,6 +4,7 @@ import com.google.firebase.Timestamp
 import java.util.*
 
 data class User(
+        var id: String = "",
         var fullName: String = "",
         var birthDate: Timestamp = Timestamp(Date()),
         var sex: Int = 0,
