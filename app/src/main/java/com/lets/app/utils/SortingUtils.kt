@@ -22,12 +22,12 @@ object SortingUtils {
         }
     }
 
-    fun sortByDateAscending(list: List<Event>): List<Event> {
-        return list.sortedWith(dateAscendingSort)
+    fun sortByDateAscending(list: MutableList<Event>): MutableList<Event> {
+        return list.sortedWith(dateAscendingSort).toMutableList()
     }
 
-    fun sortByDateDescending(list: List<Event>): List<Event> {
-        return list.sortedWith(dateDescendingSort)
+    fun sortByDateDescending(list: MutableList<Event>): MutableList<Event> {
+        return list.sortedWith(dateDescendingSort).toMutableList()
     }
 
     private val dateAscendingSort = Comparator<Event> { event1, event2 ->
@@ -46,7 +46,7 @@ object SortingUtils {
         }
     }
 
-    fun sortClosestToFarthest(list: List<Event>, userLocation: Location): List<Event> {
+    fun sortClosestToFarthest(list: MutableList<Event>, userLocation: Location): MutableList<Event> {
 
         return list.sortedWith(Comparator { event1, event2 ->
             val event1Location = Location("")
@@ -62,11 +62,11 @@ object SortingUtils {
                 userLocation.distanceTo(event1Location) > userLocation.distanceTo(event2Location) -> 1
                 else -> -1
             }
-        })
+        }).toMutableList()
     }
 
 
-    fun sortFarthestToClosest(list: List<Event>, userLocation: Location): List<Event> {
+    fun sortFarthestToClosest(list: List<Event>, userLocation: Location): MutableList<Event> {
 
         return list.sortedWith(Comparator { event1, event2 ->
             val event1Location = Location("")
@@ -82,6 +82,6 @@ object SortingUtils {
                 userLocation.distanceTo(event1Location) > userLocation.distanceTo(event2Location) -> -1
                 else -> 1
             }
-        })
+        }).toMutableList()
     }
 }

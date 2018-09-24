@@ -20,6 +20,7 @@ import com.lets.app.utils.SortingUtils.sortByDateDescending
 import com.lets.app.utils.SortingUtils.sortClosestToFarthest
 import com.lets.app.utils.SortingUtils.sortFarthestToClosest
 import com.tbruyelle.rxpermissions2.RxPermissions
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -34,9 +35,10 @@ class EventsViewModel : ViewModel() {
     val userLocation = MutableLiveData<Location>()
     val locationError = MutableLiveData<Boolean>()
 
-    val nearbyEventsList = MutableLiveData<List<Event>>()
+    private val eventsList = mutableListOf<Event>()
+    val nearbyEventsList = MutableLiveData<MutableList<Event>>()
 
-    val filteredEventsList = MutableLiveData<List<Event>>()
+    val filteredEventsList = MutableLiveData<MutableList<Event>>()
 
     var categorySpinnerSelection = 0
     var sortSpinnerSelection = 0
@@ -47,12 +49,34 @@ class EventsViewModel : ViewModel() {
 
 
     fun init() {
-        if (nearbyEventsList.value?.isEmpty() != false) {
-            eventsDisposable = EventsRepository().getEventsNearby()
+
+        if (eventsList.isEmpty()) {
+            eventsDisposable = Observable
+                    .merge(EventsRepository().getEventsNearby())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
-                        nearbyEventsList.value = it
+                        it.forEach { passedEvent ->
+
+                            var alreadyStored = false
+                            var eventToBeEditedIndex = 0
+
+                            eventsList.forEach { storedEvent ->
+                                if (storedEvent.id == passedEvent.id) {
+                                    eventToBeEditedIndex = eventsList.indexOf(storedEvent)
+                                    alreadyStored = true
+                                }
+                            }
+
+                            if (!alreadyStored) {
+                                eventsList.add(0, passedEvent)
+                            } else {
+                                eventsList[eventToBeEditedIndex] = passedEvent.copy()
+                            }
+
+                        }
+
+                        nearbyEventsList.value = eventsList
                         filteredEventsList.value = nearbyEventsList.value?.toMutableList()
                         filterAndSort()
                     }
@@ -88,7 +112,7 @@ class EventsViewModel : ViewModel() {
             eventCalendar.get(Calendar.YEAR) == year
                     && eventCalendar.get(Calendar.MONTH) == month - 1
                     && eventCalendar.get(Calendar.DAY_OF_MONTH) == day
-        }
+        }?.toMutableList()
 
     }
 
@@ -99,7 +123,7 @@ class EventsViewModel : ViewModel() {
         if (category != EventCategory.ALL) {
             filteredEventsList.value = filteredEventsList.value?.filter {
                 it.category == category.id
-            }
+            }?.toMutableList()
         }
     }
 

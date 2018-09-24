@@ -1,7 +1,9 @@
 package com.lets.app
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.GeoPoint
 import com.lets.app.model.Event
+import com.lets.app.utils.ChunkUtils
 import io.reactivex.Observable
 
 class EventsRepository {
@@ -9,10 +11,36 @@ class EventsRepository {
     private val eventsCollectionPath = "a-events"
     private var firestoreDatabase: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    fun getEventsNearby(): Observable<List<Event>> {
+    fun getEventsNearby(): List<Observable<MutableList<Event>>> {
+
+        val location = GeoPoint(52.379227, 16.970248)
+        val chunkPaths = ChunkUtils.getAllChunkNearby(location)
+
+        val observablesList = mutableListOf<Observable<MutableList<Event>>>()
+
+        chunkPaths.forEach {
+            observablesList.add(getObservableFromChunk(it))
+        }
+
+        return observablesList
+    }
+
+    fun addEvent(eventToBeAdded: Event) {
+        val eventRef = firestoreDatabase.collection(eventsCollectionPath)
+                .document(ChunkUtils.getChunkFromLocation(eventToBeAdded.location))
+                .collection("events")
+                .document()
+
+        eventToBeAdded.id = eventRef.id
+        eventRef.set(eventToBeAdded)
+    }
+
+    private fun getObservableFromChunk(path: String): Observable<MutableList<Event>> {
 
         return Observable.create { emitter ->
             firestoreDatabase.collection(eventsCollectionPath)
+                    .document(path)
+                    .collection("events")
                     .addSnapshotListener { querySnapshot, e ->
                         e?.let {
                             emitter.onError(it)
@@ -29,9 +57,5 @@ class EventsRepository {
         }
     }
 
-    fun addEvent(eventToBeAdded: Event) {
-        val eventRef = firestoreDatabase.collection(eventsCollectionPath).document()
-        eventToBeAdded.id = eventRef.id
-        eventRef.set(eventToBeAdded)
-    }
+
 }
