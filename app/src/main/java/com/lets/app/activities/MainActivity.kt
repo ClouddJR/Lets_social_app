@@ -14,6 +14,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.lets.app.R
 import com.lets.app.databinding.ActivityMainBinding
+import com.lets.app.viewmodels.EventsViewModel
 import com.lets.app.viewmodels.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -26,7 +27,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //navigateToLogin()
+        navigateToLogin()
+        initLocation()
         initDataBinding()
         initNavController()
         observeBottomViewClicks()
@@ -40,6 +42,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+    }
+
+    private fun initLocation() {
+        ViewModelProviders.of(this).get(EventsViewModel::class.java).requestLocation(this)
     }
 
     private fun initDataBinding() {
