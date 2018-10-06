@@ -4,8 +4,7 @@ import com.google.firebase.Timestamp
 import java.util.*
 
 data class Message(
-        var id: String = "",
         var text: String = "",
-        var datetime: Timestamp = Timestamp(Date()),
+        var datetime: Long = System.currentTimeMillis(),
         var author: String = ""
 )

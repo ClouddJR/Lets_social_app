@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_event_messages.*
 
 class EventMessagesFragment : BaseFragment() {
 
-    val eventId = 0
+    val eventId = "key1"
 
     private lateinit var viewModel: MessagesViewModel
 
@@ -29,10 +29,17 @@ class EventMessagesFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         observeData()
+
+
+        sendButton.setOnClickListener {
+            viewModel.addNewMessage(messageET.text.toString())
+            messageET.setText("")
+        }
     }
 
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(activity!!).get(MessagesViewModel::class.java)
+        viewModel.setChatId(eventId)
         viewModel.init()
     }
 

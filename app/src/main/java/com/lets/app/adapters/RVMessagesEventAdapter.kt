@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.lets.app.R
 import com.lets.app.model.MessagePack
+import com.lets.app.repositories.UserRepository
 
 class RVMessagesEventAdapter(private val messagesList: List<MessagePack>) : RecyclerView.Adapter<RVMessagesEventAdapter.MessageViewHolder>() {
 
@@ -31,8 +32,7 @@ class RVMessagesEventAdapter(private val messagesList: List<MessagePack>) : Recy
     override fun getItemViewType(position: Int): Int {
         val messagePack = messagesList.get(position)
 
-        //TODO Change it to current user id
-        return if (messagePack.authorId == "3") {
+        return if (messagePack.authorId == UserRepository.getUserId()) {
             VIEW_TYPE_MESSAGE_SENT
         } else {
             VIEW_TYPE_MESSAGE_RECEIVED

@@ -32,69 +32,69 @@ class MessagesRepository {
         return Observable.fromCallable { packs }
     }
 
-    private val messagesList = mutableListOf(
-
-            Message(
-                    text = "Hi, where do you meet",
-                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 0, 0)),
-                    author = "1"
-            ),
-            Message(
-                    text = "Hi, we will met at centrum",
-                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 0, 10)),
-                    author = "2"
-            ),
-            Message(
-                    text = "how far is it from trains?",
-                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 0, 20)),
-                    author = "1"
-            ),
-            Message(
-                    text = "because i will walk",
-                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 0, 25)),
-                    author = "1"
-            ),
-            Message(
-                    text = "and i have no leg",
-                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 0, 30)),
-                    author = "1"
-            ),
-            Message(
-                    text = "it is close ;)",
-                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 1, 0)),
-                    author = "3"
-            ),
-            Message(
-                    text = "cya later",
-                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 1, 10)),
-                    author = "1"
-            ),
-            Message(
-                    text = "hello, can i bring friend?",
-                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 10, 30)),
-                    author = "4"
-            ),
-            Message(
-                    text = "No.",
-                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 10, 32)),
-                    author = "3"
-            ),
-            Message(
-                    text = "xd",
-                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 10, 35)),
-                    author = "3"
-            ),
-            Message(
-                    text = "I don't think so...",
-                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 10, 59)),
-                    author = "3"
-            ),
-            Message(
-                    text = "He is very young, productive and strong man, he will help us in that very hard task. he is my best friend and i think he is the best man in the world. \nhe has blue blood, he is the prince of our nation!",
-                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 12, 30)),
-                    author = "4"
-            )
-    )
+//    private val messagesList = mutableListOf(
+//
+//            Message(
+//                    text = "Hi, where do you meet",
+//                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 0, 0)),
+//                    author = "1"
+//            ),
+//            Message(
+//                    text = "Hi, we will met at centrum",
+//                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 0, 10)),
+//                    author = "2"
+//            ),
+//            Message(
+//                    text = "how far is it from trains?",
+//                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 0, 20)),
+//                    author = "1"
+//            ),
+//            Message(
+//                    text = "because i will walk",
+//                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 0, 25)),
+//                    author = "1"
+//            ),
+//            Message(
+//                    text = "and i have no leg",
+//                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 0, 30)),
+//                    author = "1"
+//            ),
+//            Message(
+//                    text = "it is close ;)",
+//                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 1, 0)),
+//                    author = "3"
+//            ),
+//            Message(
+//                    text = "cya later",
+//                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 1, 10)),
+//                    author = "1"
+//            ),
+//            Message(
+//                    text = "hello, can i bring friend?",
+//                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 10, 30)),
+//                    author = "4"
+//            ),
+//            Message(
+//                    text = "No.",
+//                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 10, 32)),
+//                    author = "3"
+//            ),
+//            Message(
+//                    text = "xd",
+//                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 10, 35)),
+//                    author = "3"
+//            ),
+//            Message(
+//                    text = "I don't think so...",
+//                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 10, 59)),
+//                    author = "3"
+//            ),
+//            Message(
+//                    text = "He is very young, productive and strong man, he will help us in that very hard task. he is my best friend and i think he is the best man in the world. \nhe has blue blood, he is the prince of our nation!",
+//                    datetime = Timestamp(DateUtils.createDate(2018, 9, 23, 20, 12, 30)),
+//                    author = "4"
+//            )
+//    )
 
 
     private val usersInEvent = mutableListOf(
