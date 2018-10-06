@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.lets.app.R
 import com.lets.app.adapters.RVMessagesEventAdapter
@@ -50,7 +51,10 @@ class EventMessagesFragment : BaseFragment() {
     }
 
     private fun setRV(list: List<MessagePack>) {
+        var llm = LinearLayoutManager(this.context)
+        messagesRV.layoutManager = llm
         messagesRV.adapter = RVMessagesEventAdapter(list)
+        llm.scrollToPosition(list.size-1)
     }
 
 
