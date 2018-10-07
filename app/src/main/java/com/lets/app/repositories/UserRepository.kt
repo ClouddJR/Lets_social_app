@@ -10,6 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.lets.app.model.User
 import com.lets.app.utils.DateUtils.getDateFromString
 import com.lets.app.utils.FacebookUserGraph
+import io.reactivex.Observable
 
 class UserRepository {
 
@@ -26,6 +27,10 @@ class UserRepository {
 
         fun buildUserImageURL(): String {
             return "http://graph.facebook.com/${getUserId()}/picture?type=large"
+        }
+
+        fun buildCustomUserImageURL(userId: String): String {
+            return "http://graph.facebook.com/$userId/picture?type=large"
         }
 
     }
@@ -56,4 +61,16 @@ class UserRepository {
 
     }
 
+    fun getUserFromId(userId: String): Observable<User> {
+        return Observable.create { emitter ->
+            firestoreDatabase.collection(usersCollectionPath)
+                    .document(userId)
+                    .get()
+                    .addOnCompleteListener {
+                        it.result?.toObject(User::class.java)?.let {
+                            emitter.onNext(it)
+                        }
+                    }
+        }
+    }
 }
