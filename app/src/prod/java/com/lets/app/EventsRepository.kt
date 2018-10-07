@@ -8,8 +8,11 @@ import io.reactivex.Observable
 
 class EventsRepository {
 
-    private val eventsCollectionPath = "a-events"
     private var firestoreDatabase: FirebaseFirestore = FirebaseFirestore.getInstance()
+
+    companion object {
+        const val eventsCollectionPath = "a-events"
+    }
 
     fun getEventsNearby(): List<Observable<MutableList<Event>>> {
 
@@ -33,6 +36,26 @@ class EventsRepository {
 
         eventToBeAdded.id = eventRef.id
         eventRef.set(eventToBeAdded)
+    }
+
+    fun getEvent(eventId: String, eventLocation: GeoPoint): Observable<Event> {
+        return Observable.create { emitter ->
+            val chunk = ChunkUtils.getChunkFromLocation(eventLocation)
+            firestoreDatabase.collection(eventsCollectionPath)
+                    .document(chunk)
+                    .collection("events")
+                    .document(eventId)
+                    .addSnapshotListener { documentSnapshot, exception ->
+                        exception?.let {
+                            emitter.onError(it)
+                            return@addSnapshotListener
+                        }
+
+                        documentSnapshot?.toObject(Event::class.java)?.let {
+                            emitter.onNext(it)
+                        }
+                    }
+        }
     }
 
     private fun getObservableFromChunk(path: String): Observable<MutableList<Event>> {

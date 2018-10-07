@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
@@ -15,6 +16,9 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.GeoPoint
 import com.lets.app.R
+import com.lets.app.model.Event
+import com.lets.app.model.User
+import com.lets.app.repositories.UserRepository
 import com.lets.app.viewmodels.EventFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_event.*
 
@@ -22,20 +26,18 @@ class EventFragment : BaseFragment() {
 
     private lateinit var viewModel: EventFragmentViewModel
     private lateinit var googleMap: GoogleMap
+    private lateinit var eventId: String
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         initViewModel()
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        observeGeocoding()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mapView.onCreate(savedInstanceState)
+        receiveEventInfo()
+        getEventFromPassedInfo()
         initMapView()
     }
 
@@ -46,15 +48,42 @@ class EventFragment : BaseFragment() {
 
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(activity!!).get(EventFragmentViewModel::class.java)
-        viewModel.init(GeoPoint(52.2919238, 16.7315878), context!!)
     }
 
-    private fun observeGeocoding() {
-        viewModel.addressOfLocation.observe(this, Observer {
-            for (address in it) {
-                Log.d("locationInfo", "${address.featureName}, ${address.locality}")
-            }
+    private fun receiveEventInfo() {
+        eventId = arguments?.getString("eventId") ?: ""
+        val eventLat = arguments?.getString("eventLat")?.toDouble() ?: 0.0
+        val eventLon = arguments?.getString("eventLon")?.toDouble() ?: 0.0
+
+        val eventLocation = GeoPoint(eventLat, eventLon)
+
+        viewModel.init(eventId, eventLocation)
+    }
+
+    private fun getEventFromPassedInfo() {
+        viewModel.event.observe(this, Observer {
+            fillUiWithEventData(it)
         })
+
+        viewModel.user.observe(this, Observer {
+            fillUiWithUserData(it)
+        })
+    }
+
+    private fun fillUiWithEventData(event: Event) {
+        eventTitle.text = event.title
+        eventDateTextView.text = event.timestamp.toDate().toString()
+        eventAddressNameTextView.text = event.addressName
+        aboutSectionTextView.text = event.description
+
+        Log.d("joinedUsers", event.joined.toString())
+    }
+
+    private fun fillUiWithUserData(user: User) {
+        hostNameTextView.text = user.fullName
+        Glide.with(this)
+                .load(UserRepository.buildUserImageURL())
+                .into(hostProfile)
     }
 
     private fun initMapView() {

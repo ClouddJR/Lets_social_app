@@ -36,8 +36,8 @@
 
     <ImageView
       android:id="@+id/categoryIcon"
-      android:layout_width="35dp"
-      android:layout_height="35dp"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
       android:layout_marginTop="32dp"
       android:layout_marginBottom="16dp"
       android:layout_marginStart="16dp"
@@ -65,13 +65,14 @@
       android:id="@+id/clockIcon"
       android:layout_width="25dp"
       android:layout_height="25dp"
-      android:layout_marginTop="32dp"
+      android:layout_marginTop="36dp"
       android:layout_marginStart="16dp"
       android:src="@drawable/ic_action_cloc_grey"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/categoryIcon"/>
 
     <TextView
+      android:id="@+id/eventDateTextView"
       android:textStyle="bold"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -82,13 +83,15 @@
       app:layout_constraintTop_toBottomOf="@id/clockIcon"/>
 
     <TextView
+      android:id="@+id/eventAddressNameTextView"
       android:textStyle="bold"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="16dp"
+      android:layout_marginStart="16dp"
       android:text="Pilsudskiego 12"
       app:layout_constraintBottom_toTopOf="@id/locationIcon"
-      app:layout_constraintEnd_toStartOf="@id/locationIcon"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@id/locationIcon"
       app:layout_constraintTop_toBottomOf="@id/locationIcon"/>
 
 
@@ -96,11 +99,11 @@
       android:id="@+id/locationIcon"
       android:layout_width="25dp"
       android:layout_height="25dp"
-      android:layout_marginTop="32dp"
-      android:layout_marginEnd="16dp"
+      android:layout_marginTop="16dp"
+      android:layout_marginStart="16dp"
       android:src="@drawable/ic_map_marker_grey600_36dp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/categoryIcon"/>
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/clockIcon"/>
 
 
     <com.google.android.gms.maps.MapView
@@ -110,7 +113,7 @@
       android:layout_marginTop="24dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/clockIcon"
+      app:layout_constraintTop_toBottomOf="@id/locationIcon"
       tools:liteMode="true"
       tools:mapType="normal"/>
 
@@ -229,14 +232,16 @@
 
 
     <TextView
+      android:id="@+id/hostNameTextView"
       android:textStyle="bold"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
       android:text="Marcin Górski"
       android:textColor="#8E8E8E"
+      app:layout_constraintBottom_toTopOf="@id/hostProfile"
       app:layout_constraintStart_toEndOf="@id/hostProfile"
-      app:layout_constraintTop_toTopOf="@id/hostProfile"/>
+      app:layout_constraintTop_toBottomOf="@id/hostProfile"/>
 
     <Button
       android:id="@+id/messageButton"
