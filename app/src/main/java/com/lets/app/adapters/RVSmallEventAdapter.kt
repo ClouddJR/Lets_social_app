@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.lets.app.R
 import com.lets.app.model.Event
+import org.jetbrains.anko.bundleOf
 
 class RVSmallEventAdapter(private val eventsList: List<Event>) : RecyclerView.Adapter<RVSmallEventAdapter.ViewHolder>() {
 
@@ -29,7 +30,10 @@ class RVSmallEventAdapter(private val eventsList: List<Event>) : RecyclerView.Ad
         fun bind(event: Event) {
 
             itemView.setOnClickListener {
-                it.findNavController().navigate(R.id.eventAction)
+                val bundle = bundleOf("eventId" to event.id,
+                        "eventLat" to event.location.latitude.toString(),
+                        "eventLon" to event.location.longitude.toString())
+                it.findNavController().navigate(R.id.eventAction, bundle)
             }
 
             itemView.findViewById<TextView>(R.id.eventTitle).text = event.title

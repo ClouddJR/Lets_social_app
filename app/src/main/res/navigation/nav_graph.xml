@@ -70,7 +70,20 @@
     android:id="@+id/profileFragment"
     android:label="ProfileFragment"
     android:name="com.lets.app.fragments.ProfileFragment"
-    tools:layout="@layout/fragment_profile"/>
+    tools:layout="@layout/fragment_profile">
+    <argument
+      android:defaultValue="0"
+      android:name="eventId"/>
+
+    <argument
+      android:defaultValue="0"
+      android:name="eventLon"/>
+
+    <argument
+      android:defaultValue="0"
+      android:name="eventLat"/>
+
+  </fragment>
 
   <fragment
     android:id="@+id/exploreFragment"

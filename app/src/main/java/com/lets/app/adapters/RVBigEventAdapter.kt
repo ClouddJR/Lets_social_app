@@ -4,10 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.lets.app.R
 import com.lets.app.model.Event
+import com.lets.app.repositories.UserRepository
+import org.jetbrains.anko.bundleOf
 
 class RVBigEventAdapter(private val eventsList: List<Event>) : RecyclerView.Adapter<RVBigEventAdapter.ViewHolder>() {
 
@@ -21,20 +25,36 @@ class RVBigEventAdapter(private val eventsList: List<Event>) : RecyclerView.Adap
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(eventsList[position])
-
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(event: Event) {
 
             itemView.setOnClickListener {
-                it.findNavController().navigate(R.id.eventAction)
+                openEventDetailFragment(it.findNavController(), event)
             }
 
-            itemView.findViewById<TextView>(R.id.hostName).text = event.owner
+            itemView.findViewById<TextView>(R.id.hostName).text = event.ownerName
             itemView.findViewById<TextView>(R.id.eventTitle).text = event.title
-            itemView.findViewById<TextView>(R.id.peopleRemaining).text = "3/${event.maxPeople}"
+
+            Glide.with(itemView.context)
+                    .load(UserRepository.buildCustomUserImageURL(event.owner))
+                    .into(itemView.findViewById(R.id.profile_image))
+
+            itemView.findViewById<TextView>(R.id.peopleRemaining).text = if (event.maxPeople != 0) {
+                val remainingPeopleText = "${event.joined.size}/${event.maxPeople}"
+                remainingPeopleText
+            } else {
+                "unlimited"
+            }
+        }
+
+        private fun openEventDetailFragment(navController: NavController, event: Event) {
+            val bundle = bundleOf("eventId" to event.id,
+                    "eventLat" to event.location.latitude.toString(),
+                    "eventLon" to event.location.longitude.toString())
+            navController.navigate(R.id.eventAction, bundle)
         }
 
     }
