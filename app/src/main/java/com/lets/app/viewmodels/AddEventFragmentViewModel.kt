@@ -54,6 +54,7 @@ class AddEventFragmentViewModel : ViewModel() {
     val ageCheckboxClick = MutableLiveData<Boolean>()
 
     private lateinit var geocodingDisposable: Disposable
+    private lateinit var userDisposable: Disposable
 
     fun setEventCategory(view: ImageView) {
         val eventCategory = CategoriesUtils.getEventCategoryFromImage(view.id)
@@ -84,16 +85,22 @@ class AddEventFragmentViewModel : ViewModel() {
     }
 
     fun addNewEvent() {
+        val userRepository = UserRepository()
+
         val ownerId = UserRepository.getUserId()
         val calendar = Calendar.getInstance().also { it.set(year, month - 1, day, hour, minute, 0) }
         val eventTimestamp = Timestamp(calendar.time)
         val location = GeoPoint(chosenEventLocation.value?.latitude ?: 0.0,
                 chosenEventLocation.value?.longitude ?: 0.0)
 
-        val eventToBeAdded = Event("", ownerId, eventTitle, eventDesc, eventTimestamp, location,
-                addressName, isPublic, maxPeople, ageFrom, ageTo, selectedSex, type, category, false)
+        userDisposable = userRepository.getUserFromId(ownerId)
+                .subscribe {
+                    val eventToBeAdded = Event("", ownerId, it.fullName, eventTitle, eventDesc, eventTimestamp, location,
+                            addressName, isPublic, maxPeople, ageFrom, ageTo, selectedSex, type, category, false)
 
-        eventsRepository.addEvent(eventToBeAdded)
+                    eventsRepository.addEvent(eventToBeAdded)
+                }
+
     }
 
     fun onMaxPeopleCheckBoxClicked(buttonView: CompoundButton, isChecked: Boolean) {
@@ -110,6 +117,10 @@ class AddEventFragmentViewModel : ViewModel() {
         super.onCleared()
         if (::geocodingDisposable.isInitialized && !geocodingDisposable.isDisposed) {
             geocodingDisposable.dispose()
+        }
+
+        if (::userDisposable.isInitialized && !userDisposable.isDisposed) {
+            userDisposable.dispose()
         }
     }
 }

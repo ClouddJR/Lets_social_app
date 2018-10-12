@@ -7,6 +7,7 @@ import java.util.*
 data class Event(
         var id: String = "",
         var owner: String = "",
+        var ownerName: String = "",
         var title: String = "",
         var description: String = "",
         var timestamp: Timestamp = Timestamp(Date()),

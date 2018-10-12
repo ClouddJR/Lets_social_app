@@ -33,6 +33,8 @@ class MapFragment : BaseFragment() {
     private lateinit var viewModel: EventsViewModel
     private lateinit var googleMap: GoogleMap
 
+    private var currentEventRVPosition = -1
+
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         initViewModel()
@@ -44,9 +46,11 @@ class MapFragment : BaseFragment() {
         mapView.getMapAsync {
             googleMap = it
             getUserLocation()
-            observeLocationUpdate()
-            observeData()
-            addMarkersToMap()
+            observeLocationUpdates()
+            observeEventsData()
+            if (isComingFromDetailsFragment()) {
+                setPreviousSelections()
+            }
         }
         initFilterButton()
     }
@@ -91,25 +95,39 @@ class MapFragment : BaseFragment() {
         viewModel.init()
     }
 
-    private fun observeData() {
-        viewModel.filteredEventsList.observe(this, Observer {
-            it?.let {
-                eventsList.removeAll(eventsList)
-                eventsList.addAll(it)
-                setRV(it)
-            }
-        })
-    }
-
-    private fun observeLocationUpdate() {
+    private fun observeLocationUpdates() {
         viewModel.userLocation.observe(this, Observer {
-            setInitialLocation(LatLng(it.latitude, it.longitude))
+            if (!isComingFromDetailsFragment()) {
+                setInitialLocation(LatLng(it.latitude, it.longitude))
+            }
             initLocationButton()
         })
 
         viewModel.locationError.observe(this, Observer {
             displayWarningToast()
         })
+    }
+
+    private fun observeEventsData() {
+        viewModel.filteredEventsList.observe(this, Observer {
+            it?.let {
+                markersList.removeAll(markersList)
+                eventsList.removeAll(eventsList)
+                eventsList.addAll(it)
+                setRV(it)
+                addMarkersToMap()
+            }
+        })
+    }
+
+    private fun setPreviousSelections() {
+        val selectedMarker = markersList[currentEventRVPosition]
+        markerClicked(selectedMarker)
+        setInitialLocation(selectedMarker.position)
+    }
+
+    private fun isComingFromDetailsFragment(): Boolean {
+        return currentEventRVPosition != -1
     }
 
     private fun initFilterButton() {
@@ -143,6 +161,7 @@ class MapFragment : BaseFragment() {
                             val selectedEvent = eventsList[position]
                             zoomToLocation(LatLng(selectedEvent.location.latitude, selectedEvent.location.longitude))
                             changeMarkerColor(markersList[position])
+                            currentEventRVPosition = position
                         }
                         previousPosition = position ?: -1
                     }
@@ -163,13 +182,17 @@ class MapFragment : BaseFragment() {
         }
 
         googleMap.setOnMarkerClickListener {
-            mapEventsRV.post {
-                mapEventsRV.smoothScrollToPosition(markersList.indexOf(it))
-            }
-            resetMarkerColors(it)
-            changeMarkerColor(it)
+            markerClicked(it)
             true
         }
+    }
+
+    private fun markerClicked(marker: Marker) {
+        mapEventsRV.post {
+            mapEventsRV.smoothScrollToPosition(markersList.indexOf(marker))
+        }
+        resetMarkerColors(marker)
+        changeMarkerColor(marker)
     }
 
     private fun resetMarkerColors(previousMarker: Marker) {
