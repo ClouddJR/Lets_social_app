@@ -49,6 +49,7 @@ class UserRepository {
         facebookGraph.getUserData(token) {
             val userData = it
             val user = User().apply {
+                id = token.userId
                 fullName = userData["name"] as String
                 sex = if ((userData["gender"] as String) == "male") 2 else 1
                 birthDate = Timestamp(getDateFromString(userData["birthday"] as String))
