@@ -31,8 +31,7 @@ class RVSmallEventAdapter(private val eventsList: List<Event>) : RecyclerView.Ad
 
             itemView.setOnClickListener {
                 val bundle = bundleOf("eventId" to event.id,
-                        "eventLat" to event.location.latitude.toString(),
-                        "eventLon" to event.location.longitude.toString())
+                        "eventOwner" to event.owner)
                 it.findNavController().navigate(R.id.eventAction, bundle)
             }
 

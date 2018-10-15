@@ -21,6 +21,6 @@ data class Event(
         var type: Int = 0,
         var category: Int = 0,
         var isBlocked: Boolean = false,
-        var joined: List<User> = listOf(),
-        var request: List<Request> = listOf()
+        var joined: List<String> = listOf(),
+        var request: List<String> = listOf()
 )

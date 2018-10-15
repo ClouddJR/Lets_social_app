@@ -2,6 +2,7 @@ package com.lets.app
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
+import com.lets.app.model.Chunk
 import com.lets.app.model.Event
 import com.lets.app.utils.ChunkUtils
 import io.reactivex.Observable
@@ -12,14 +13,15 @@ class EventsRepository {
 
     companion object {
         const val eventsCollectionPath = "a-events"
+        const val chunksCollectionPath = "a-chunks"
     }
 
-    fun getEventsNearby(): List<Observable<MutableList<Event>>> {
+    fun getEventsNearby(): List<Observable<Event>> {
 
         val location = GeoPoint(52.379227, 16.970248)
         val chunkPaths = ChunkUtils.getAllChunkNearby(location)
 
-        val observablesList = mutableListOf<Observable<MutableList<Event>>>()
+        val observablesList = mutableListOf<Observable<Event>>()
 
         chunkPaths.forEach {
             observablesList.add(getObservableFromChunk(it))
@@ -30,20 +32,41 @@ class EventsRepository {
 
     fun addEvent(eventToBeAdded: Event) {
         val eventRef = firestoreDatabase.collection(eventsCollectionPath)
-                .document(ChunkUtils.getChunkFromLocation(eventToBeAdded.location))
-                .collection("events")
                 .document()
 
         eventToBeAdded.id = eventRef.id
         eventRef.set(eventToBeAdded)
+
+        val chunkId = ChunkUtils.getChunkFromLocation(eventToBeAdded.location)
+        updateChunkRef(chunkId, eventToBeAdded.id)
     }
 
-    fun getEvent(eventId: String, eventLocation: GeoPoint): Observable<Event> {
+    private fun updateChunkRef(chunkId: String, eventId: String) {
+        firestoreDatabase.collection(chunksCollectionPath)
+                .document(chunkId)
+                .get()
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+
+                        val chunk = if (!it.result.exists()) {
+                            Chunk(id = chunkId, eventsIds = mutableListOf(eventId))
+                        } else {
+                            val existingChunk = it.result.toObject(Chunk::class.java) as Chunk
+                            existingChunk.eventsIds.add(eventId)
+                            existingChunk
+                        }
+
+                        firestoreDatabase.collection(chunksCollectionPath)
+                                .document(chunkId)
+                                .set(chunk)
+                    }
+                }
+
+    }
+
+    fun getEvent(eventId: String): Observable<Event> {
         return Observable.create { emitter ->
-            val chunk = ChunkUtils.getChunkFromLocation(eventLocation)
             firestoreDatabase.collection(eventsCollectionPath)
-                    .document(chunk)
-                    .collection("events")
                     .document(eventId)
                     .addSnapshotListener { documentSnapshot, exception ->
                         exception?.let {
@@ -58,27 +81,31 @@ class EventsRepository {
         }
     }
 
-    private fun getObservableFromChunk(path: String): Observable<MutableList<Event>> {
+    private fun getObservableFromChunk(chunkId: String): Observable<Event> {
 
         return Observable.create { emitter ->
-            firestoreDatabase.collection(eventsCollectionPath)
-                    .document(path)
-                    .collection("events")
-                    .addSnapshotListener { querySnapshot, e ->
-                        e?.let {
-                            emitter.onError(it)
-                            return@addSnapshotListener
-                        }
+            firestoreDatabase.collection(chunksCollectionPath)
+                    .document(chunkId)
+                    .addSnapshotListener { snapshot, e ->
+                        if (snapshot?.exists() == true) {
+                            val chunk = snapshot.toObject(Chunk::class.java) as Chunk
 
-                        val list = mutableListOf<Event>()
-                        querySnapshot?.forEach {
-                            list.add(it.toObject(Event::class.java))
-                        }
+                            for (eventId in chunk.eventsIds) {
+                                firestoreDatabase.collection(eventsCollectionPath)
+                                        .document(eventId)
+                                        .addSnapshotListener { documentSnapshot, exception ->
 
-                        emitter.onNext(list)
+                                            exception?.let {
+                                                emitter.onError(exception)
+                                            }
+
+                                            documentSnapshot?.toObject(Event::class.java)?.let {
+                                                emitter.onNext(it)
+                                            }
+                                        }
+                            }
+                        }
                     }
         }
     }
-
-
 }

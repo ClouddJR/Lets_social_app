@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.location.Location
+import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,6 +22,7 @@ import com.lets.app.utils.SortingUtils.sortClosestToFarthest
 import com.lets.app.utils.SortingUtils.sortFarthestToClosest
 import com.tbruyelle.rxpermissions2.RxPermissions
 import io.reactivex.Observable
+import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -51,13 +53,12 @@ class EventsViewModel : ViewModel() {
     fun init() {
 
         if (eventsList.isEmpty()) {
-            eventsDisposable = Observable
+            Observable
                     .merge(EventsRepository().getEventsNearby())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe {
-                        it.forEach { passedEvent ->
-
+                    .subscribe(object : Observer<Event> {
+                        override fun onNext(passedEvent: Event) {
                             var alreadyStored = false
                             var eventToBeEditedIndex = 0
 
@@ -74,12 +75,25 @@ class EventsViewModel : ViewModel() {
                                 eventsList[eventToBeEditedIndex] = passedEvent.copy()
                             }
 
+
+                            nearbyEventsList.value = eventsList
+                            filteredEventsList.value = nearbyEventsList.value?.toMutableList()
+                            filterAndSort()
                         }
 
-                        nearbyEventsList.value = eventsList
-                        filteredEventsList.value = nearbyEventsList.value?.toMutableList()
-                        filterAndSort()
-                    }
+                        override fun onError(e: Throwable) {
+                            Log.d("firebaseError", "elo")
+                            Log.d("firebaseError", e.message)
+                        }
+
+                        override fun onComplete() {
+                            //nothing
+                        }
+
+                        override fun onSubscribe(d: Disposable) {
+                            eventsDisposable = d
+                        }
+                    })
         }
     }
 
