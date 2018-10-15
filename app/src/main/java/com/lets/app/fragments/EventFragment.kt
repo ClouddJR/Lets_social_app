@@ -2,7 +2,6 @@ package com.lets.app.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -14,7 +13,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.firestore.GeoPoint
 import com.lets.app.R
 import com.lets.app.model.Event
 import com.lets.app.model.User
@@ -27,18 +25,20 @@ class EventFragment : BaseFragment() {
     private lateinit var viewModel: EventFragmentViewModel
     private lateinit var googleMap: GoogleMap
     private lateinit var eventId: String
+    private lateinit var eventOwnerId: String
+    private lateinit var eventLocation: LatLng
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         initViewModel()
+        receiveEventInfo()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mapView.onCreate(savedInstanceState)
-        receiveEventInfo()
-        getEventFromPassedInfo()
         initMapView()
+        getEventFromPassedInfo()
     }
 
     override fun onResume() {
@@ -46,18 +46,53 @@ class EventFragment : BaseFragment() {
         mapView.onResume()
     }
 
+    override fun onStart() {
+        super.onStart()
+        mapView.onStart()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mapView.onStop()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mapView.onDestroy()
+        viewModel.clear()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mapView.onSaveInstanceState(outState)
+    }
+
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(activity!!).get(EventFragmentViewModel::class.java)
     }
 
+    private fun initMapView() {
+        mapView.getMapAsync {
+            googleMap = it
+            it.uiSettings.setAllGesturesEnabled(false)
+        }
+        mapView.isClickable = true
+    }
+
     private fun receiveEventInfo() {
         eventId = arguments?.getString("eventId") ?: ""
-        val eventLat = arguments?.getString("eventLat")?.toDouble() ?: 0.0
-        val eventLon = arguments?.getString("eventLon")?.toDouble() ?: 0.0
-
-        val eventLocation = GeoPoint(eventLat, eventLon)
-
-        viewModel.init(eventId, eventLocation)
+        eventOwnerId = arguments?.getString("eventOwner") ?: ""
+        viewModel.init(eventId, eventOwnerId)
     }
 
     private fun getEventFromPassedInfo() {
@@ -76,23 +111,19 @@ class EventFragment : BaseFragment() {
         eventAddressNameTextView.text = event.addressName
         aboutSectionTextView.text = event.description
 
-        Log.d("joinedUsers", event.joined.toString())
+        eventLocation = LatLng(event.location.latitude, event.location.longitude)
+
+        if (::googleMap.isInitialized) {
+            googleMap.addMarker(MarkerOptions().position(eventLocation))
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(eventLocation, 11.5f))
+        }
     }
 
     private fun fillUiWithUserData(user: User) {
         hostNameTextView.text = user.fullName
         Glide.with(this)
-                .load(UserRepository.buildUserImageURL())
+                .load(UserRepository.buildCustomUserImageURL(user.id))
                 .into(hostProfile)
-    }
-
-    private fun initMapView() {
-        mapView.getMapAsync {
-            it.addMarker(MarkerOptions().position(LatLng(52.2919238, 16.7315878)))
-            it.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(52.2919238, 16.7315878), 10.5f))
-            it.uiSettings.setAllGesturesEnabled(false)
-        }
-        mapView.isClickable = true
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_event
