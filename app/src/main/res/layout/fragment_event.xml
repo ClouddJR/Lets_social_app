@@ -201,7 +201,7 @@
       android:layout_marginEnd="16dp"
       android:background="@drawable/profile_button"
       android:backgroundTint="#45D84F"
-      android:text="INVITE"
+      android:text="VIEW ALL"
       android:textColor="#45D84F"
       android:textSize="12sp"
       app:layout_constraintBottom_toTopOf="@id/profile1"
@@ -226,7 +226,6 @@
       android:layout_height="35dp"
       android:layout_marginTop="12dp"
       android:layout_marginStart="16dp"
-      android:src="@drawable/profile"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/hostHeader"/>
 
@@ -237,7 +236,6 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
-      android:text="Marcin Górski"
       android:textColor="#8E8E8E"
       app:layout_constraintBottom_toTopOf="@id/hostProfile"
       app:layout_constraintStart_toEndOf="@id/hostProfile"

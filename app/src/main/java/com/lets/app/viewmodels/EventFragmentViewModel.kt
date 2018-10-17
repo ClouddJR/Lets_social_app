@@ -2,7 +2,6 @@ package com.lets.app.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.firestore.GeoPoint
 import com.lets.app.EventsRepository
 import com.lets.app.model.Event
 import com.lets.app.model.User
@@ -16,19 +15,23 @@ class EventFragmentViewModel : ViewModel() {
     private val eventsRepository = EventsRepository()
     private val userRepository = UserRepository()
 
-    private lateinit var disposable: Disposable
+    private lateinit var eventDisposable: Disposable
+    private lateinit var userDisposable: Disposable
 
-    val event = MutableLiveData<Event>()
-    val user = MutableLiveData<User>()
+    var event = MutableLiveData<Event>()
+    var user = MutableLiveData<User>()
 
-    fun init(eventId: String, eventLocation: GeoPoint) {
-        disposable = eventsRepository.getEvent(eventId, eventLocation)
+    fun init(eventId: String, eventOwnerId: String) {
+        eventDisposable = eventsRepository.getEvent(eventId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .flatMap {
+                .subscribe {
                     event.value = it
-                    userRepository.getUserFromId(it.owner)
                 }
+
+        userDisposable = userRepository.getUserFromId(eventOwnerId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     user.value = it
                 }
@@ -36,8 +39,17 @@ class EventFragmentViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        if (!disposable.isDisposed) {
-            disposable.dispose()
+        if (::eventDisposable.isInitialized && !eventDisposable.isDisposed) {
+            eventDisposable.dispose()
         }
+
+        if (::userDisposable.isInitialized && !userDisposable.isDisposed) {
+            userDisposable.dispose()
+        }
+    }
+
+    fun clear() {
+        event = MutableLiveData()
+        user = MutableLiveData()
     }
 }

@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigateTo(resourceId: Int) {
 
-        if (!navController.popBackStack(resourceId, false) && navController.currentDestination.id != resourceId) {
+        if (!navController.popBackStack(resourceId, false) && navController.currentDestination?.id != resourceId) {
             navController.navigate(getActionId(resourceId))
         }
 
