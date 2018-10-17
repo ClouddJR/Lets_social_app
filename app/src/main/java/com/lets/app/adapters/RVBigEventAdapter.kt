@@ -52,8 +52,7 @@ class RVBigEventAdapter(private val eventsList: List<Event>) : RecyclerView.Adap
 
         private fun openEventDetailFragment(navController: NavController, event: Event) {
             val bundle = bundleOf("eventId" to event.id,
-                    "eventLat" to event.location.latitude.toString(),
-                    "eventLon" to event.location.longitude.toString())
+                    "eventOwner" to event.owner)
             navController.navigate(R.id.eventAction, bundle)
         }
 
