@@ -4,6 +4,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
 import com.lets.app.model.Chunk
 import com.lets.app.model.Event
+import com.lets.app.repositories.UserRepository
 import com.lets.app.utils.ChunkUtils
 import io.reactivex.Observable
 
@@ -79,6 +80,33 @@ class EventsRepository {
                         }
                     }
         }
+    }
+
+    fun getEvents(userId: String): MutableList<Observable<Event>> {
+
+        val observablesList = mutableListOf<Observable<Event>>()
+
+        observablesList.add(Observable.create { emitter ->
+            UserRepository().getUserFromId(userId)
+                    .subscribe {
+                        for (eventId in it.joined) {
+                            firestoreDatabase.collection(eventsCollectionPath)
+                                    .document(eventId)
+                                    .addSnapshotListener { documentSnapshot, exception ->
+
+                                        exception?.let {
+                                            emitter.onError(exception)
+                                        }
+
+                                        documentSnapshot?.toObject(Event::class.java)?.let {
+                                            emitter.onNext(it)
+                                        }
+                                    }
+                        }
+                    }
+        })
+
+        return observablesList
     }
 
     private fun getObservableFromChunk(chunkId: String): Observable<Event> {
