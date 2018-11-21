@@ -5,7 +5,7 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
 
-    compileSdkVersion androidCompileSdkVersion
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.lets.app"
         minSdkVersion androidMinSdkVersion
@@ -68,7 +68,8 @@ dependencies {
     implementation "com.google.firebase:firebase-firestore:$firebaseVersion"
     implementation "com.google.firebase:firebase-auth:$firebaseAuthentication"
     implementation "com.facebook.android:facebook-login:$facebookLogin"
-    implementation "com.google.firebase:firebase-database:16.0.1"
+    implementation 'com.google.firebase:firebase-database:16.0.1'
+    implementation 'com.google.firebase:firebase-core:16.0.3'
 
     //testing
     implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
@@ -102,7 +103,7 @@ dependencies {
     implementation "com.google.android.gms:play-services-places:$googlePlayServices"
 
     //material range bar
-    implementation ("com.appyvet:materialrangebar:$materialRangeVersion") {
+    implementation("com.appyvet:materialrangebar:$materialRangeVersion") {
         exclude module: 'support-compat'
     }
 }

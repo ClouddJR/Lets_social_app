@@ -1,25 +1,62 @@
 package com.lets.app.fragments
 
+import android.content.Context
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.lets.app.R
-import com.lets.app.repositories.MessagesRepository
+import com.lets.app.adapters.RVMessagesEventAdapter
+import com.lets.app.model.Event
+import com.lets.app.model.Message
+import com.lets.app.model.MessagePack
+import com.lets.app.viewmodels.MessagesViewModel
 import kotlinx.android.synthetic.main.fragment_event_messages.*
 
-//kiedy potrzebujesz ID uzytkownika- UserRepository.getUserId()
-//narazie na sztywno przypisz sobie id jakiegos wydarzenia
 
 class EventMessagesFragment : BaseFragment() {
 
-    val messagesRepository: MessagesRepository = MessagesRepository()
-    val eventId = 0
+    val eventId = "key1"
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        //w tym miejscu mozna uzywac UI
+    private lateinit var viewModel: MessagesViewModel
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        initViewModel()
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        observeData()
+
+
+        sendButton.setOnClickListener {
+            viewModel.addNewMessage(messageET.text.toString())
+            messageET.setText("")
+        }
+    }
+
+    private fun initViewModel() {
+        viewModel = ViewModelProviders.of(activity!!).get(MessagesViewModel::class.java)
+        viewModel.setChatId(eventId)
+        viewModel.init()
+    }
+
+    private fun observeData() {
+        viewModel.messagesList.observe(this, Observer {
+            setRV(it)
+        })
+    }
+
+    private fun setRV(list: List<MessagePack>) {
+        var llm = LinearLayoutManager(this.context)
+        messagesRV.layoutManager = llm
+        messagesRV.adapter = RVMessagesEventAdapter(list)
+        llm.scrollToPosition(list.size-1)
+    }
+
 
     override fun getLayoutId() = R.layout.fragment_event_messages
 
