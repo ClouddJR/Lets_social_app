@@ -66,7 +66,7 @@ class MessagesFragment : BaseFragment() {
     }
 
     override fun getFAB(): FloatingActionButton? {
-        return FloatingActionButton(context).apply {
+        return FloatingActionButton(activity).apply {
             setImageResource(R.drawable.ic_map_search_white_24dp)
             backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this.context, R.color.colorAccent))
         }

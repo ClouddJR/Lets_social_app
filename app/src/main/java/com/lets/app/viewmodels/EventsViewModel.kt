@@ -1,11 +1,9 @@
 package com.lets.app.viewmodels
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.location.Location
 import android.util.Log
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -20,7 +18,6 @@ import com.lets.app.utils.SortingUtils.sortByDateAscending
 import com.lets.app.utils.SortingUtils.sortByDateDescending
 import com.lets.app.utils.SortingUtils.sortClosestToFarthest
 import com.lets.app.utils.SortingUtils.sortFarthestToClosest
-import com.tbruyelle.rxpermissions2.RxPermissions
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -31,7 +28,6 @@ import java.util.*
 class EventsViewModel : ViewModel() {
 
     private lateinit var eventsDisposable: Disposable
-    private lateinit var permissionDisposable: Disposable
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     val userLocation = MutableLiveData<Location>()
@@ -165,20 +161,8 @@ class EventsViewModel : ViewModel() {
         }
     }
 
-    fun requestLocation(activity: Activity?) {
-        permissionDisposable = RxPermissions(activity as FragmentActivity)
-                .request(Manifest.permission.ACCESS_FINE_LOCATION)
-                .subscribe { granted ->
-                    if (granted) {
-                        getUserLocation(activity)
-                    } else {
-                        errorWhileGettingLocation()
-                    }
-                }
-    }
-
     @SuppressLint("MissingPermission")
-    private fun getUserLocation(activity: Activity?) {
+    fun getUserLocation(activity: Activity?) {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
         fusedLocationClient.lastLocation.addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -193,7 +177,7 @@ class EventsViewModel : ViewModel() {
         userLocation.value = location
     }
 
-    private fun errorWhileGettingLocation() {
+    fun errorWhileGettingLocation() {
         locationError.value = true
     }
 
@@ -201,10 +185,6 @@ class EventsViewModel : ViewModel() {
         super.onCleared()
         if (::eventsDisposable.isInitialized && !eventsDisposable.isDisposed) {
             eventsDisposable.dispose()
-        }
-
-        if (::permissionDisposable.isInitialized && !permissionDisposable.isDisposed) {
-            permissionDisposable.dispose()
         }
     }
 }

@@ -16,7 +16,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.lets.app.R
 import com.lets.app.databinding.ActivityMainBinding
-import com.lets.app.viewmodels.EventsViewModel
 import com.lets.app.viewmodels.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -31,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Log.d("FacebookSdk()", FacebookSdk.getApplicationSignature(this))
         navigateToLogin()
-        initLocation()
+        //initLocation()
         initDataBinding()
         initNavController()
         observeBottomViewClicks()
@@ -47,9 +46,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initLocation() {
-        ViewModelProviders.of(this).get(EventsViewModel::class.java).requestLocation(this)
-    }
+//    private fun initLocation() {
+//        ViewModelProviders.of(this).get(EventsViewModel::class.java).requestLocation(this)
+//    }
 
     private fun initDataBinding() {
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
