@@ -78,6 +78,21 @@ class AddEventFragment : BaseFragment() {
         mapView.onResume()
     }
 
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mapView.onStop()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mapView.onDestroy()
+    }
+
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(AddEventFragmentViewModel::class.java)
     }

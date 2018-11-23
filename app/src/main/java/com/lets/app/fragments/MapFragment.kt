@@ -1,11 +1,13 @@
 package com.lets.app.fragments
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
@@ -22,6 +24,8 @@ import com.lets.app.R
 import com.lets.app.adapters.RVBigEventMapAdapter
 import com.lets.app.model.Event
 import com.lets.app.viewmodels.EventsViewModel
+import com.tbruyelle.rxpermissions2.RxPermissions
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_map.*
 import org.jetbrains.anko.toast
 
@@ -30,6 +34,7 @@ class MapFragment : BaseFragment() {
     private val eventsList = arrayListOf<Event>()
     private val markersList = arrayListOf<Marker>()
 
+    private lateinit var permissionDisposable: Disposable
     private lateinit var viewModel: EventsViewModel
     private lateinit var googleMap: GoogleMap
 
@@ -75,9 +80,14 @@ class MapFragment : BaseFragment() {
         mapView.onStop()
     }
 
+    @SuppressLint("MissingPermission")
     override fun onDestroyView() {
         super.onDestroyView()
         mapView.onDestroy()
+        googleMap.isMyLocationEnabled = false
+        if (::permissionDisposable.isInitialized && !permissionDisposable.isDisposed) {
+            permissionDisposable.dispose()
+        }
     }
 
     override fun onLowMemory() {
@@ -204,7 +214,15 @@ class MapFragment : BaseFragment() {
     }
 
     private fun getUserLocation() {
-        viewModel.requestLocation(activity)
+        permissionDisposable = RxPermissions(activity as FragmentActivity)
+                .request(Manifest.permission.ACCESS_FINE_LOCATION)
+                .subscribe { granted ->
+                    if (granted) {
+                        viewModel.getUserLocation(activity)
+                    } else {
+                        viewModel.errorWhileGettingLocation()
+                    }
+                }
     }
 
 

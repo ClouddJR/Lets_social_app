@@ -4,11 +4,16 @@ import android.app.Application
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
+import com.squareup.leakcanary.LeakCanary
 
 class LetsApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return
+        }
+        LeakCanary.install(this)
         initFirestoreSettings()
     }
 
@@ -21,4 +26,6 @@ class LetsApplication : Application() {
 
         FirebaseDatabase.getInstance().setPersistenceEnabled(true)
     }
+
+
 }
