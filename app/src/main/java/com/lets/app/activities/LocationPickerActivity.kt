@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -32,6 +33,11 @@ class LocationPickerActivity : AppCompatActivity() {
         setUpLocationPickedButton()
     }
 
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        mapView.onSaveInstanceState(outState)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             android.R.id.home -> finish()
@@ -39,9 +45,36 @@ class LocationPickerActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onStart() {
+        super.onStart()
+        mapView.onStart()
+    }
+
     override fun onResume() {
         super.onResume()
         mapView.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mapView.onStop()
+    }
+
+    @SuppressLint("MissingPermission")
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
+        googleMap.isMyLocationEnabled = false
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -128,9 +161,9 @@ class LocationPickerActivity : AppCompatActivity() {
     private fun setUpLocationPickedButton() {
         pickButton.setOnClickListener {
             val resultIntent = Intent()
-            resultIntent.putExtra("lat",googleMap.cameraPosition.target.latitude)
-            resultIntent.putExtra("lng",googleMap.cameraPosition.target.longitude)
-            setResult(Activity.RESULT_OK,resultIntent)
+            resultIntent.putExtra("lat", googleMap.cameraPosition.target.latitude)
+            resultIntent.putExtra("lng", googleMap.cameraPosition.target.longitude)
+            setResult(Activity.RESULT_OK, resultIntent)
             finish()
         }
     }

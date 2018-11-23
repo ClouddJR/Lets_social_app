@@ -123,6 +123,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setUpFAB(passedFAB: FloatingActionButton?, function: () -> Unit) {
         fab.hide()
+        fab.setOnClickListener(null)
         passedFAB?.let {
             fab.backgroundTintList = passedFAB.backgroundTintList
             fab.setImageDrawable(passedFAB.drawable)

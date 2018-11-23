@@ -80,9 +80,11 @@ class MapFragment : BaseFragment() {
         mapView.onStop()
     }
 
+    @SuppressLint("MissingPermission")
     override fun onDestroyView() {
         super.onDestroyView()
         mapView.onDestroy()
+        googleMap.isMyLocationEnabled = false
         if (::permissionDisposable.isInitialized && !permissionDisposable.isDisposed) {
             permissionDisposable.dispose()
         }
