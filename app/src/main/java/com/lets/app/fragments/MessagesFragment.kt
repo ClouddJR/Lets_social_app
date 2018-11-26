@@ -3,7 +3,6 @@ package com.lets.app.fragments
 import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -41,7 +40,7 @@ class MessagesFragment : BaseFragment() {
             setRV(it)
         })
 
-        EventsRepository().getEvents(UserRepository.getUserId()).
+        EventsRepository().getEvents(UserRepository.getUserId())
     }
 
     private fun setRV(list: List<Event>) {
