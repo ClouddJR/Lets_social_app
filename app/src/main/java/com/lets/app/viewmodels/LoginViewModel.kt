@@ -18,7 +18,7 @@ class LoginViewModel(private val userRepository: UserRepository = UserRepository
     val loginError = MutableLiveData<SingleEvent<Boolean>>()
 
     fun init() {
-        if (userRepository.isUserLoggedIn()) {
+        if (UserRepository.isUserLoggedIn()) {
             userAlreadyLoggedIn.value = SingleEvent(true)
         }
     }

@@ -13,9 +13,9 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.facebook.FacebookSdk
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.auth.FirebaseAuth
 import com.lets.app.R
 import com.lets.app.databinding.ActivityMainBinding
+import com.lets.app.repositories.UserRepository
 import com.lets.app.viewmodels.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun navigateToLogin() {
-        if (FirebaseAuth.getInstance().currentUser == null) {
+        if (!UserRepository.isUserLoggedIn()) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
