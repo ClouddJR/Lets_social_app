@@ -21,8 +21,12 @@ class UserRepository {
 
     companion object {
 
+        fun isUserLoggedIn(): Boolean {
+            return UserRepository.getUserId().isNotEmpty()
+        }
+
         fun getUserId(): String {
-            return AccessToken.getCurrentAccessToken().userId
+            return AccessToken.getCurrentAccessToken()?.userId ?: ""
         }
 
         fun buildUserImageURL(): String {
@@ -35,9 +39,6 @@ class UserRepository {
 
     }
 
-    fun isUserLoggedIn(): Boolean {
-        return firebaseAuth.currentUser != null
-    }
 
     fun login(token: AccessToken, listener: OnCompleteListener<AuthResult>) {
         val credential = FacebookAuthProvider.getCredential(token.token)
