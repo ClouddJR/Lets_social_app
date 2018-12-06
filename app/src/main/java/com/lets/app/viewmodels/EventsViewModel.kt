@@ -3,7 +3,6 @@ package com.lets.app.viewmodels
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.location.Location
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -78,12 +77,11 @@ class EventsViewModel : ViewModel() {
                         }
 
                         override fun onError(e: Throwable) {
-                            Log.d("firebaseError", "elo")
-                            Log.d("firebaseError", e.message)
+                            //not used
                         }
 
                         override fun onComplete() {
-                            //nothing
+                            //not used
                         }
 
                         override fun onSubscribe(d: Disposable) {
