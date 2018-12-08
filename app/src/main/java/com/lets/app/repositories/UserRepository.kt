@@ -11,15 +11,16 @@ import com.lets.app.model.User
 import com.lets.app.utils.DateUtils.getDateFromString
 import com.lets.app.utils.FacebookUserGraph
 import io.reactivex.Observable
+import javax.inject.Inject
 
-class UserRepository {
-
-    private val usersCollectionPath = "a-users"
-    private val firebaseAuth = FirebaseAuth.getInstance()
-    private var firestoreDatabase: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private val facebookGraph: FacebookUserGraph = FacebookUserGraph()
+class UserRepository @Inject constructor(
+        private val firebaseAuth: FirebaseAuth,
+        private val firestoreDatabase: FirebaseFirestore,
+        private val facebookGraph: FacebookUserGraph) {
 
     companion object {
+
+        const val usersCollectionPath = "a-users"
 
         fun isUserLoggedIn(): Boolean {
             return UserRepository.getUserId().isNotEmpty()
@@ -68,8 +69,8 @@ class UserRepository {
             firestoreDatabase.collection(usersCollectionPath)
                     .document(userId)
                     .get()
-                    .addOnCompleteListener {
-                        it.result?.toObject(User::class.java)?.let {
+                    .addOnCompleteListener { task ->
+                        task.result?.toObject(User::class.java)?.let {
                             emitter.onNext(it)
                         }
                     }

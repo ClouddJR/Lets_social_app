@@ -4,13 +4,13 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
 import com.lets.app.model.Chunk
 import com.lets.app.model.Event
+import com.lets.app.model.User
 import com.lets.app.repositories.UserRepository
 import com.lets.app.utils.ChunkUtils
 import io.reactivex.Observable
+import javax.inject.Inject
 
-class EventsRepository {
-
-    private var firestoreDatabase: FirebaseFirestore = FirebaseFirestore.getInstance()
+class EventsRepository @Inject constructor(private val firestoreDatabase: FirebaseFirestore) {
 
     companion object {
         const val eventsCollectionPath = "a-events"
@@ -82,31 +82,25 @@ class EventsRepository {
         }
     }
 
-    fun getEvents(userId: String): MutableList<Observable<Event>> {
-
-        val observablesList = mutableListOf<Observable<Event>>()
-
-        observablesList.add(Observable.create { emitter ->
-            UserRepository().getUserFromId(userId)
-                    .subscribe {
-                        for (eventId in it.joined) {
-                            firestoreDatabase.collection(eventsCollectionPath)
-                                    .document(eventId)
-                                    .addSnapshotListener { documentSnapshot, exception ->
-
-                                        exception?.let {
-                                            emitter.onError(exception)
+    fun getEventsForUser(userId: String): Observable<Event> {
+        return Observable.create { emitter ->
+            firestoreDatabase.collection(UserRepository.usersCollectionPath)
+                    .document(userId)
+                    .addSnapshotListener { documentSnapshot, _ ->
+                        if (documentSnapshot?.exists() == true) {
+                            val user = documentSnapshot.toObject(User::class.java) as User
+                            user.joined.forEach { eventId ->
+                                firestoreDatabase.collection(eventsCollectionPath)
+                                        .document(eventId)
+                                        .addSnapshotListener { documentSnapshot, exception ->
+                                            documentSnapshot?.toObject(Event::class.java)?.let { event ->
+                                                emitter.onNext(event)
+                                            }
                                         }
-
-                                        documentSnapshot?.toObject(Event::class.java)?.let {
-                                            emitter.onNext(it)
-                                        }
-                                    }
+                            }
                         }
                     }
-        })
-
-        return observablesList
+        }
     }
 
     private fun getObservableFromChunk(chunkId: String): Observable<Event> {
