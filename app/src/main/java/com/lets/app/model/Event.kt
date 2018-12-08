@@ -23,4 +23,14 @@ data class Event(
         var isBlocked: Boolean = false,
         var joined: List<String> = listOf(),
         var request: List<String> = listOf()
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        return if (other is Event) {
+            this.id == other.id
+        } else {
+            false
+        }
+    }
+}
+
+
