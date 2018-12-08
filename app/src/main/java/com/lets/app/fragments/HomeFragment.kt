@@ -26,6 +26,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         observeData()
         plusIcon.setOnClickListener {
             it.findNavController().navigate(R.id.addEventAction)
@@ -33,7 +34,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProviders.of(activity!!).get(EventsViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!, viewModelFactory)[EventsViewModel::class.java]
         viewModel.init()
     }
 

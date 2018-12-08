@@ -8,17 +8,15 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.lets.app.EventsRepository
 import com.lets.app.R
 import com.lets.app.adapters.RVMessagesAdapter
 import com.lets.app.model.Event
-import com.lets.app.repositories.UserRepository
-import com.lets.app.viewmodels.EventsViewModel
+import com.lets.app.viewmodels.MessagesFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_messages.*
 
 class MessagesFragment : BaseFragment() {
 
-    private lateinit var viewModel: EventsViewModel
+    private lateinit var viewModel: MessagesFragmentViewModel
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -31,16 +29,14 @@ class MessagesFragment : BaseFragment() {
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProviders.of(activity!!).get(EventsViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!, viewModelFactory)[MessagesFragmentViewModel::class.java]
         viewModel.init()
     }
 
     private fun observeData() {
-        viewModel.nearbyEventsList.observe(this, Observer {
+        viewModel.joinedEvents.observe(this, Observer {
             setRV(it)
         })
-
-        EventsRepository().getEvents(UserRepository.getUserId())
     }
 
     private fun setRV(list: List<Event>) {

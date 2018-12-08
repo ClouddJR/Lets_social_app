@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.lets.app.R
 import com.lets.app.adapters.RVMessagesEventAdapter
-import com.lets.app.model.Event
-import com.lets.app.model.Message
 import com.lets.app.model.MessagePack
 import com.lets.app.viewmodels.MessagesViewModel
 import kotlinx.android.synthetic.main.fragment_event_messages.*
@@ -39,7 +37,7 @@ class EventMessagesFragment : BaseFragment() {
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProviders.of(activity!!).get(MessagesViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!, viewModelFactory)[MessagesViewModel::class.java]
         viewModel.setChatId(eventId)
         viewModel.init()
     }
@@ -54,7 +52,7 @@ class EventMessagesFragment : BaseFragment() {
         var llm = LinearLayoutManager(this.context)
         messagesRV.layoutManager = llm
         messagesRV.adapter = RVMessagesEventAdapter(list)
-        llm.scrollToPosition(list.size-1)
+        llm.scrollToPosition(list.size - 1)
     }
 
 

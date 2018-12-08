@@ -31,6 +31,10 @@ class EventFragment : BaseFragment() {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         initViewModel()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         receiveEventInfo()
     }
 
@@ -78,7 +82,7 @@ class EventFragment : BaseFragment() {
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProviders.of(activity!!).get(EventFragmentViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!, viewModelFactory)[EventFragmentViewModel::class.java]
     }
 
     private fun initMapView() {

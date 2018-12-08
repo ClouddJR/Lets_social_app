@@ -51,8 +51,8 @@ class FiltersFragment : BaseFragment() {
     }
 
     private fun initViewModel() {
-        filtersViewModel = ViewModelProviders.of(this).get(FiltersFragmentViewModel::class.java)
-        eventsViewModel = ViewModelProviders.of(activity!!).get(EventsViewModel::class.java)
+        filtersViewModel = ViewModelProviders.of(this, viewModelFactory)[FiltersFragmentViewModel::class.java]
+        eventsViewModel = ViewModelProviders.of(activity!!, viewModelFactory)[EventsViewModel::class.java]
     }
 
     private fun initDateEditText() {
