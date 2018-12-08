@@ -3,6 +3,7 @@ package com.lets.app.fragments
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -48,8 +49,8 @@ class AddEventFragment : BaseFragment() {
     private var wasTimePickerAlreadyDisplayed = false
     private var reminderDate = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
         initViewModel()
     }
 
@@ -94,7 +95,7 @@ class AddEventFragment : BaseFragment() {
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProviders.of(this).get(AddEventFragmentViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)[AddEventFragmentViewModel::class.java]
     }
 
     private fun setUpEditTexts() {
@@ -211,7 +212,7 @@ class AddEventFragment : BaseFragment() {
                         it.getDoubleExtra("lng", 0.0)
                 )
                 viewModel.setEventLocation(chosenLatLnG)
-                viewModel.getReadableInfoAboutLocation(context!!)
+                viewModel.getReadableInfoAboutLocation()
             }
         }
     }

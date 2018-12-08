@@ -5,9 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lets.app.R
 import com.lets.app.utils.SingleEvent
+import javax.inject.Inject
 
 
-class MainActivityViewModel : ViewModel() {
+class MainActivityViewModel @Inject constructor() : ViewModel() {
 
     val homeButtonClick = MutableLiveData<SingleEvent<Boolean>>()
     val exploreButtonClick = MutableLiveData<SingleEvent<Boolean>>()

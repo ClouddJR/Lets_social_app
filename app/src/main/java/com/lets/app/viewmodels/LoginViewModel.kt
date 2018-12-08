@@ -9,8 +9,9 @@ import com.facebook.login.LoginResult
 import com.google.android.gms.tasks.OnCompleteListener
 import com.lets.app.repositories.UserRepository
 import com.lets.app.utils.SingleEvent
+import javax.inject.Inject
 
-class LoginViewModel(private val userRepository: UserRepository = UserRepository()) : ViewModel() {
+class LoginViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
 
     val userAlreadyLoggedIn = MutableLiveData<SingleEvent<Boolean>>()
     val loginSucceed = MutableLiveData<SingleEvent<Boolean>>()
@@ -40,8 +41,8 @@ class LoginViewModel(private val userRepository: UserRepository = UserRepository
 
 
     fun handleAccessToken(token: AccessToken?) {
-        token?.let {
-            userRepository.login(it, OnCompleteListener {
+        token?.let { accessToken ->
+            userRepository.login(accessToken, OnCompleteListener {
                 if (it.isSuccessful) {
                     userRepository.saveUser(token)
                     loginWasSuccessful()

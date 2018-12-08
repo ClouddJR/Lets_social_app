@@ -19,12 +19,11 @@ import com.lets.app.utils.SortingUtils.sortClosestToFarthest
 import com.lets.app.utils.SortingUtils.sortFarthestToClosest
 import io.reactivex.Observable
 import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import java.util.*
+import javax.inject.Inject
 
-class EventsViewModel : ViewModel() {
+class EventsViewModel @Inject constructor(private val eventsRepository: EventsRepository) : ViewModel() {
 
     private lateinit var eventsDisposable: Disposable
 
@@ -46,33 +45,23 @@ class EventsViewModel : ViewModel() {
 
 
     fun init() {
+        getEventsNearby()
+    }
 
+    private fun getEventsNearby() {
         if (eventsList.isEmpty()) {
             Observable
-                    .merge(EventsRepository().getEventsNearby())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .merge(eventsRepository.getEventsNearby())
                     .subscribe(object : Observer<Event> {
                         override fun onNext(passedEvent: Event) {
-                            var alreadyStored = false
-                            var eventToBeEditedIndex = 0
-
-                            eventsList.forEach { storedEvent ->
-                                if (storedEvent.id == passedEvent.id) {
-                                    eventToBeEditedIndex = eventsList.indexOf(storedEvent)
-                                    alreadyStored = true
-                                }
-                            }
-
-                            if (!alreadyStored) {
+                            if (passedEvent !in eventsList) {
                                 eventsList.add(0, passedEvent)
                             } else {
-                                eventsList[eventToBeEditedIndex] = passedEvent.copy()
+                                eventsList[eventsList.indexOf(passedEvent)] = passedEvent.copy()
                             }
 
-
                             nearbyEventsList.value = eventsList
-                            filteredEventsList.value = nearbyEventsList.value?.toMutableList()
+                            filteredEventsList.value = eventsList
                             filterAndSort()
                         }
 

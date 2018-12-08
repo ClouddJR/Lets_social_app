@@ -42,7 +42,7 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProviders.of(activity!!).get(EventsViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!, viewModelFactory)[EventsViewModel::class.java]
         viewModel.init()
     }
 

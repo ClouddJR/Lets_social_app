@@ -11,14 +11,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.facebook.CallbackManager
 import com.facebook.login.widget.LoginButton
+import com.lets.app.LetsApplication
 import com.lets.app.R
 import com.lets.app.databinding.ActivityLoginBinding
 import com.lets.app.utils.ProgressDialog
 import com.lets.app.viewmodels.LoginViewModel
+import com.lets.app.viewmodels.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_login.*
+import javax.inject.Inject
 
 
 class LoginActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     private lateinit var viewModel: LoginViewModel
 
@@ -28,10 +34,15 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        injectDependencies()
         initDataBinding()
         styleLoginButton()
         initLogin()
         observeLoginEvents()
+    }
+
+    private fun injectDependencies() {
+        (application as LetsApplication).component.inject(this)
     }
 
     override fun onStart() {
@@ -53,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initDataBinding() {
         val binding: ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-        viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)[LoginViewModel::class.java]
         binding.vm = viewModel
     }
 
