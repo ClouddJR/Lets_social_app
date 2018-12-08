@@ -2,7 +2,6 @@ package com.lets.app.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -11,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import com.facebook.FacebookSdk
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.lets.app.R
 import com.lets.app.databinding.ActivityMainBinding
@@ -21,14 +19,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    val tag: String = MainActivity::class.java.simpleName
-
     lateinit var navController: NavController
     private lateinit var viewModel: MainActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("FacebookSdk()", FacebookSdk.getApplicationSignature(this))
         navigateToLogin()
         //initLocation()
         initDataBinding()
