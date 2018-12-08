@@ -2,7 +2,6 @@ package com.lets.app.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.Timestamp
 import com.lets.app.MessagesRepository
 import com.lets.app.model.Message
 import com.lets.app.model.MessagePack
@@ -10,10 +9,9 @@ import com.lets.app.repositories.UserRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import java.time.LocalDateTime
-import java.util.*
+import javax.inject.Inject
 
-class MessagesViewModel : ViewModel() {
+class MessagesViewModel @Inject constructor(private val messagesRepository: MessagesRepository) : ViewModel() {
 
     private lateinit var messagesDisposable: Disposable
 
@@ -23,7 +21,7 @@ class MessagesViewModel : ViewModel() {
 
     fun init() {
         if (messagesList.value?.isEmpty() != false) {
-            messagesDisposable = MessagesRepository().getMessages(chatId)
+            messagesDisposable = messagesRepository.getMessages(chatId)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
@@ -39,7 +37,11 @@ class MessagesViewModel : ViewModel() {
                 UserRepository.getUserId()
         )
 
-        MessagesRepository().addMessage(chatId, message)
+        messagesRepository.addMessage(chatId, message)
+    }
+
+    fun setChatId(eventId: String) {
+        chatId = eventId
     }
 
     override fun onCleared() {
@@ -49,7 +51,4 @@ class MessagesViewModel : ViewModel() {
         }
     }
 
-    fun setChatId( eventId: String ){
-        chatId = eventId
-    }
 }

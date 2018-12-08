@@ -6,14 +6,11 @@ import com.lets.app.EventsRepository
 import com.lets.app.model.Event
 import com.lets.app.model.User
 import com.lets.app.repositories.UserRepository
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class EventFragmentViewModel : ViewModel() {
-
-    private val eventsRepository = EventsRepository()
-    private val userRepository = UserRepository()
+class EventFragmentViewModel @Inject constructor(private val userRepository: UserRepository,
+                                                 private val eventsRepository: EventsRepository) : ViewModel() {
 
     private lateinit var eventDisposable: Disposable
     private lateinit var userDisposable: Disposable
@@ -23,15 +20,11 @@ class EventFragmentViewModel : ViewModel() {
 
     fun init(eventId: String, eventOwnerId: String) {
         eventDisposable = eventsRepository.getEvent(eventId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     event.value = it
                 }
 
         userDisposable = userRepository.getUserFromId(eventOwnerId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     user.value = it
                 }

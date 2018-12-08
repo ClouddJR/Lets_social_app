@@ -1,6 +1,5 @@
 package com.lets.app.viewmodels
 
-import android.content.Context
 import android.location.Address
 import android.widget.CompoundButton
 import android.widget.ImageView
@@ -19,11 +18,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.util.*
+import javax.inject.Inject
 
-class AddEventFragmentViewModel : ViewModel() {
-
-    private val eventsRepository = EventsRepository()
-    private val geocodingRepository = GeocodingRepository()
+class AddEventFragmentViewModel @Inject constructor(private val userRepository: UserRepository,
+                                                    private val eventsRepository: EventsRepository,
+                                                    private val geocodingRepository: GeocodingRepository) : ViewModel() {
 
     var eventTitle = ""
     var eventDesc = ""
@@ -73,8 +72,8 @@ class AddEventFragmentViewModel : ViewModel() {
         chosenEventLocation.value = chosenLocation
     }
 
-    fun getReadableInfoAboutLocation(context: Context) {
-        geocodingDisposable = geocodingRepository.getAddressOfLocation(context,
+    fun getReadableInfoAboutLocation() {
+        geocodingDisposable = geocodingRepository.getAddressOfLocation(
                 GeoPoint(chosenEventLocation.value?.latitude ?: 0.0,
                         chosenEventLocation.value?.longitude ?: 0.0))
                 .subscribeOn(Schedulers.io())
@@ -85,7 +84,6 @@ class AddEventFragmentViewModel : ViewModel() {
     }
 
     fun addNewEvent() {
-        val userRepository = UserRepository()
 
         val ownerId = UserRepository.getUserId()
         val calendar = Calendar.getInstance().also { it.set(year, month - 1, day, hour, minute, 0) }

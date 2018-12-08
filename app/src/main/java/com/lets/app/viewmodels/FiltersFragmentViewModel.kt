@@ -8,8 +8,9 @@ import com.lets.app.databinding.FragmentFiltersBinding
 import com.lets.app.utils.DateUtils.formatDate
 import com.lets.app.utils.ExtFunctions.reset
 import com.lets.app.utils.SingleEvent
+import javax.inject.Inject
 
-class FiltersFragmentViewModel : BaseViewModel() {
+class FiltersFragmentViewModel @Inject constructor() : BaseViewModel() {
 
     val applyButtonClick = MutableLiveData<SingleEvent<Boolean>>()
 
