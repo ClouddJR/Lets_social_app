@@ -29,18 +29,6 @@ android {
 
     }
 
-    flavorDimensions "dataProvider"
-
-    productFlavors {
-        mock {
-            dimension "dataProvider"
-        }
-
-        prod {
-            dimension "dataProvider"
-        }
-    }
-
     dataBinding {
         enabled = true
     }
